@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Pravda Last News",
+  "description": "This extension shows last news from web page - pravda.com.ua",
+  "version": "1.0",
+
+  "permissions": [
+    "http://www.pravda.com.ua/rss/view_news/"
+  ],
+  "browser_action": {
+    "default_icon": "favicon.png",
+    "default_popup": "popup.html"
+  }
+}
