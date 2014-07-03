@@ -9,8 +9,26 @@
  */
 var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
 
+/**
+ * Global variable with extension storage key
+ *
+ * @type {string}
+ */
+var STORAGE_LOCAL_KEY = 'pravda-last-news';
+
 var newsGenerator = {
-  
+
+    /* work with local storage
+        if key exist then do nothing
+        if key not exist then add them
+     */
+    mergeToStorage: function(key) {
+
+    },
+
+
+
+
   /**
    * Sends an XHR GET request to grab last new from RSS feed of pravda.com.ua. The
    * XHR's 'onload' event is hooks up to the 'showNews_' method.
@@ -37,16 +55,13 @@ var newsGenerator = {
 
     var newsitems = e.target.responseXML.querySelectorAll('item');
 
-     var storedItems = new Array();
-
-     //rename for proper name
-     tmp_arr = JSON.parse(localStorage.getItem("pravda-last-news"));
-     //console.log(tmp_arr);
+     storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
      for (var i = 0; i < newsitems.length; i++) {
 
 
-        if (tmp_arr.indexOf(newsitems[i].querySelector('title').textContent)==0)
+         // show only unread news items
+        if (storedNewsItems.indexOf(newsitems[i].querySelector('title').textContent)==0)
         {
             var li  = document.createElement('li');
 
@@ -68,7 +83,7 @@ var newsGenerator = {
             document.getElementById("content").appendChild(li);
         }
 
-        //storedItems.push(newsitems[i].querySelector('title').textContent);
+        forStoreItems.push(newsitems[i].querySelector('title').textContent);
 
     }
 
@@ -83,7 +98,7 @@ var newsGenerator = {
 
 };
 
-// Run our kitten generation script as soon as the document's DOM is ready.
+// Run our news generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
   newsGenerator.requestNews();
 });
