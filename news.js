@@ -57,8 +57,8 @@ var newsGenerator = {
         document.getElementById("content").appendChild(li);
     }
 
-     var currentdate = new Date();
-     document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
+     //var currentdate = new Date();
+     //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
 
 };

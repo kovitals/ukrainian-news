@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="64a091d5-52ad-4b9a-8f67-d6fa2b44f8bb" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/news.js" afterPath="$PROJECT_DIR$/news.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/popup.html" afterPath="$PROJECT_DIR$/popup.html" />
     </list>
@@ -43,8 +41,8 @@
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/test.js" />
         <option value="$PROJECT_DIR$/manifest.json" />
-        <option value="$PROJECT_DIR$/popup.html" />
         <option value="$PROJECT_DIR$/news.js" />
+        <option value="$PROJECT_DIR$/popup.html" />
       </list>
     </option>
   </component>
@@ -181,40 +179,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/popup.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1513">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="49" selection-start="329" selection-end="329" vertical-scroll-proportion="0.19936034" vertical-offset="0" max-vertical-offset="938">
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="87" selection-start="67" selection-end="150" vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="272">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/jquery.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="925">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="3" selection-start="324" selection-end="324" vertical-scroll-proportion="0.24232456" vertical-offset="0" max-vertical-offset="912">
@@ -222,9 +186,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/news.js">
+    <entry file="file://$PROJECT_DIR$/popup.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="3" selection-start="1985" selection-end="1985" vertical-scroll-proportion="0.7516854" vertical-offset="368" max-vertical-offset="1258">
+        <state line="14" column="0" selection-start="348" selection-end="914" vertical-scroll-proportion="0.25373134" vertical-offset="0" max-vertical-offset="1513">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -233,8 +197,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/popup.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="19" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.5839822" vertical-offset="376" max-vertical-offset="1275">
+        <state line="7" column="26" selection-start="122" selection-end="122" vertical-scroll-proportion="0.13048245" vertical-offset="0" max-vertical-offset="1258">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/news.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="53" column="28" selection-start="1735" selection-end="1735" vertical-scroll-proportion="0.619403" vertical-offset="320" max-vertical-offset="1258">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
