@@ -12,8 +12,8 @@ var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
 var newsGenerator = {
   
   /**
-   * Sends an XHR GET request to grab photos of lots and lots of kittens. The
-   * XHR's 'onload' event is hooks up to the 'showPhotos_' method.
+   * Sends an XHR GET request to grab last new from RSS feed of pravda.com.ua. The
+   * XHR's 'onload' event is hooks up to the 'showNews_' method.
    *
    * @public
    */
@@ -34,29 +34,49 @@ var newsGenerator = {
    * @private
    */
   showNews_: function (e) {
+
     var newsitems = e.target.responseXML.querySelectorAll('item');
-    for (var i = 0; i < newsitems.length; i++) {
 
-        var li  = document.createElement('li');
+     var storedItems = new Array();
 
-        var chk = document.createElement('input');
-        chk.setAttribute('type','checkbox');
-        chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
+     //rename for proper name
+     tmp_arr = JSON.parse(localStorage.getItem("pravda-last-news"));
+     //console.log(tmp_arr);
 
-        var spn = document.createElement('span');
-        spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+     for (var i = 0; i < newsitems.length; i++) {
 
-        var a = document.createElement('a');
-        a.innerHTML = newsitems[i].querySelector('title').textContent;
-        a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
 
-        li.appendChild(chk);
-        li.appendChild(spn);
-        li.appendChild(a);
+        if (tmp_arr.indexOf(newsitems[i].querySelector('title').textContent)==0)
+        {
+            var li  = document.createElement('li');
 
-        document.getElementById("content").appendChild(li);
+            var chk = document.createElement('input');
+            chk.setAttribute('type','checkbox');
+            chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
+
+            var spn = document.createElement('span');
+            spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+
+            var a = document.createElement('a');
+            a.innerHTML = newsitems[i].querySelector('title').textContent;
+            a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
+
+            li.appendChild(chk);
+            li.appendChild(spn);
+            li.appendChild(a);
+
+            document.getElementById("content").appendChild(li);
+        }
+
+        //storedItems.push(newsitems[i].querySelector('title').textContent);
+
     }
 
+     //console.log(storedItems);
+
+     localStorage.setItem("pravda-last-news",JSON.stringify(storedItems));
+
+     //localStorage.
      //var currentdate = new Date();
      //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
