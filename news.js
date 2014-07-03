@@ -10,7 +10,7 @@
 var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
 
 var newsGenerator = {
-  
+
   /**
    * Sends an XHR GET request to grab photos of lots and lots of kittens. The
    * XHR's 'onload' event is hooks up to the 'showPhotos_' method.
@@ -24,7 +24,6 @@ var newsGenerator = {
     req.send(null);
   },
 
-
  /**
    * Handle the 'onload' event of our kitten XHR request, generated in
    * 'requestKittens', by generating 'img' elements, and stuffing them into
@@ -37,21 +36,36 @@ var newsGenerator = {
     var newsitems = e.target.responseXML.querySelectorAll('item');
     for (var i = 0; i < newsitems.length; i++) {
 
+        var id  = newsitems[i].querySelector('guid').textContent;
+
         var li  = document.createElement('li');
+        li.setAttribute('id', 'li['+id+']');
+
+
+        var img = document.createElement('img');
+        img.src = "favicon.png";
 
         var chk = document.createElement('input');
         chk.setAttribute('type','checkbox');
-        chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
+        chk.setAttribute('id',''+newsitems[i].querySelector('guid').textContent);
+        chk.addEventListener('click', function() {
+            document.getElementById('li['+this.id+']').remove();
+        });
 
         var spn = document.createElement('span');
         spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
         var a = document.createElement('a');
+        if (newsitems[i].querySelector('title').textContent.length > 60) {
+            newsitems[i].querySelector('title').textContent.substr(0,60).concat('...');
+        }
         a.innerHTML = newsitems[i].querySelector('title').textContent;
+        a.setAttribute('title', newsitems[i].querySelector('title').textContent);
         a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
 
         li.appendChild(chk);
         li.appendChild(spn);
+        li.appendChild(img);
         li.appendChild(a);
 
         document.getElementById("content").appendChild(li);
@@ -67,3 +81,5 @@ var newsGenerator = {
 document.addEventListener('DOMContentLoaded', function () {
   newsGenerator.requestNews();
 });
+
+
