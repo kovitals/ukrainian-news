@@ -9,6 +9,13 @@
  */
 var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
 
+/**
+ * Global variable withe max string length for news items in popup window
+ *
+ * @type {number}
+ */
+var NEWS_ROW_MAX_LENGTH = 60;
+
 var newsGenerator = {
 
   /**
@@ -33,14 +40,15 @@ var newsGenerator = {
    * @private
    */
   showNews_: function (e) {
+
     var newsitems = e.target.responseXML.querySelectorAll('item');
+
     for (var i = 0; i < newsitems.length; i++) {
 
         var id  = newsitems[i].querySelector('guid').textContent;
 
         var li  = document.createElement('li');
         li.setAttribute('id', 'li['+id+']');
-
 
         var img = document.createElement('img');
         img.src = "favicon.png";
@@ -56,11 +64,11 @@ var newsGenerator = {
         spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
         var a = document.createElement('a');
-        if (newsitems[i].querySelector('title').textContent.length > 60) {
-            newsitems[i].querySelector('title').textContent.substr(0,60).concat('...');
+        a.setAttribute('title', newsitems[i].querySelector('title').textContent);
+        if (newsitems[i].querySelector('title').textContent.length > NEWS_ROW_MAX_LENGTH) {
+            newsitems[i].querySelector('title').textContent.substr(0, NEWS_ROW_MAX_LENGTH).concat('...');
         }
         a.innerHTML = newsitems[i].querySelector('title').textContent;
-        a.setAttribute('title', newsitems[i].querySelector('title').textContent);
         a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
 
         li.appendChild(chk);
