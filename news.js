@@ -25,7 +25,7 @@ var newsGenerator = {
   },
 
 
-  /**
+ /**
    * Handle the 'onload' event of our kitten XHR request, generated in
    * 'requestKittens', by generating 'img' elements, and stuffing them into
    * the document for display.
@@ -36,14 +36,30 @@ var newsGenerator = {
   showNews_: function (e) {
     var newsitems = e.target.responseXML.querySelectorAll('item');
     for (var i = 0; i < newsitems.length; i++) {
-    	console.log(newsitems[i]);
-      var p = document.createElement('p');
-      p.innerHTML = newsitems[i][title];
-      //img.src = this.constructKittenURL_(kittens[i]);
-      //img.setAttribute('alt', kittens[i].getAttribute('title'));
-      document.body.appendChild(p);
+
+        var li  = document.createElement('li');
+
+        var chk = document.createElement('input');
+        chk.setAttribute('type','checkbox');
+        chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
+
+        var spn = document.createElement('span');
+        spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+
+        var a = document.createElement('a');
+        a.innerHTML = newsitems[i].querySelector('title').textContent;
+        a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
+
+        li.appendChild(chk);
+        li.appendChild(spn);
+        li.appendChild(a);
+
+        document.getElementById("content").appendChild(li);
     }
-  },
+
+     var currentdate = new Date();
+     document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
+  }
 
 };
 
