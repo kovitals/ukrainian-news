@@ -82,7 +82,7 @@ var newsGenerator = {
    *
    * @param news
    */
-  cleanUpStorage: function(news) {
+  cleanUpStoredNews: function(news) {
     var storedNews = this.getStoredNews();
     for (var i = 0; storedNews.length > i; i++) {
       if (news.indexOf(storedNews[i]) == 0) {
@@ -117,9 +117,9 @@ var newsGenerator = {
    */
   showNews_: function (e) {
 
-    this.cleanUpStorage(e.target.responseXML.querySelectorAll('title'));
+    this.cleanUpStoredNews(e.target.responseXML.querySelectorAll('guid'));
 
-    var feedNewsItems = e.target.responseXML.querySelectorAll('guid');
+    var feedNewsItems = e.target.responseXML.querySelectorAll('item');
 
     for (var i = 0; i < feedNewsItems.length; i++) {
         var id  = feedNewsItems[i].querySelector('guid').textContent;
