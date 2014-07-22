@@ -108,6 +108,12 @@ var newsGenerator = {
   },
 
 
+
+    markAsRead: function() {
+        console.log(this.getAttribute('name'));
+        this.parentNode.remove();
+    },
+
  /**
    * Handle the 'onload' event of our kitten XHR request, generated in
    * 'requestKittens', by generating 'img' elements, and stuffing them into
@@ -118,54 +124,52 @@ var newsGenerator = {
    */
   showNews_: function (e) {
 
-    this.cleanUpStoredNews(e.target.responseXML.querySelectorAll('guid'));
+    var newsitems = e.target.responseXML.querySelectorAll('item');
 
-    var feedNewsItems = e.target.responseXML.querySelectorAll('item');
+     storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
-    for (var i = 0; i < feedNewsItems.length; i++) {
-        var id  = feedNewsItems[i].querySelector('guid').textContent;
+     for (var i = 0; i < newsitems.length; i++) {
 
-        if (!this.hasStoredNews(id))
+
+         // show only unread news items
+        if (storedNewsItems.indexOf(newsitems[i].querySelector('title').textContent)==0)
         {
             var li  = document.createElement('li');
-            li.setAttribute('id', 'li['+id+']');
-
-            var img = document.createElement('img');
-            img.src = "favicon.png";
 
             var chk = document.createElement('input');
             chk.setAttribute('type','checkbox');
-            chk.setAttribute('id',''+feedNewsItems[i].querySelector('guid').textContent);
-            chk.addEventListener('click', function() {
-                document.getElementById('li['+this.id+']').remove();
-                newsGenerator.addStoredNews(this.id);
-            });
+            chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
 
             var spn = document.createElement('span');
-            spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+            spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
             var a = document.createElement('a');
-            a.setAttribute('title', feedNewsItems[i].querySelector('title').textContent);
-            if (feedNewsItems[i].querySelector('title').textContent.length > NEWS_ROW_MAX_LENGTH) {
-                feedNewsItems[i].querySelector('title').textContent.substr(0, NEWS_ROW_MAX_LENGTH).concat('...');
-            }
-            a.innerHTML = feedNewsItems[i].querySelector('title').textContent;
-            a.setAttribute('href',feedNewsItems[i].querySelector('guid').textContent);
+            a.innerHTML = newsitems[i].querySelector('title').textContent;
+            a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
 
             li.appendChild(chk);
             li.appendChild(spn);
-            li.appendChild(img);
             li.appendChild(a);
 
             document.getElementById("content").appendChild(li);
         }
+
+        forStoreItems.push(newsitems[i].querySelector('title').textContent);
+
     }
+
+     //console.log(storedItems);
+
+     localStorage.setItem("pravda-last-news",JSON.stringify(storedItems));
+
+     //localStorage.
+     //var currentdate = new Date();
+     //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
+
 };
 
 // Run our news generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
   newsGenerator.requestNews();
 });
-
-
