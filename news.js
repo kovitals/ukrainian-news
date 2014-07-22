@@ -29,7 +29,7 @@ var NEWS_ROW_MAX_LENGTH = 60;
  *
  * @type {array}
  */
-var LOCAL_STORAGE_CACHE = Array();
+var LOCAL_STORAGE_CACHE;
 
 var newsGenerator = {
 
@@ -39,9 +39,9 @@ var newsGenerator = {
    * @returns {*}
    */
   getStoredNews: function() {
-    if (!LOCAL_STORAGE_CACHE) {
+    //if (!LOCAL_STORAGE_CACHE) {
       LOCAL_STORAGE_CACHE = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    }
+    //}
     return LOCAL_STORAGE_CACHE;
   },
 
@@ -52,9 +52,9 @@ var newsGenerator = {
    * @param news
    */
   setStoredNews: function(news) {
-    if (LOCAL_STORAGE_CACHE) {
+    //if (LOCAL_STORAGE_CACHE) {
       LOCAL_STORAGE_CACHE = news;
-    }
+    //}
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(news));
   },
 
@@ -64,6 +64,7 @@ var newsGenerator = {
    * @param newsitem
    */
   addStoredNews: function(newsitem) {
+    console.log(newsitem);
     this.setStoredNews(this.getStoredNews().push(newsitem));
   },
 
@@ -137,7 +138,7 @@ var newsGenerator = {
             chk.setAttribute('id',''+feedNewsItems[i].querySelector('guid').textContent);
             chk.addEventListener('click', function() {
                 document.getElementById('li['+this.id+']').remove();
-                this.addStoredNews(this.id);
+                newsGenerator.addStoredNews(this.id);
             });
 
             var spn = document.createElement('span');
