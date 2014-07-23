@@ -6,6 +6,7 @@
   "version": "1.0",
 
   "permissions": [
+    //"http://localhost/pravda.xml"
     "http://www.pravda.com.ua/rss/view_news/"
   ],
   "browser_action": {

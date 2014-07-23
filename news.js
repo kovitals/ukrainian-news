@@ -8,28 +8,14 @@
  * @type {string}
  */
 var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
+//var HTTP_SOURCE_NEWS = 'http://localhost/pravda.xml';
 
 /**
  * Global variable with news provider
  *
  * @type {string}
  */
-var LOCAL_STORAGE_KEY = 'last-news';
-
-/**
- * Global variable wit the max string length for news items in popup window
- *
- * @type {number}
- */
-var NEWS_ROW_MAX_LENGTH = 60;
-
-
-/**
- * Global variable for store loaded data from local storage
- *
- * @type {array}
- */
-var LOCAL_STORAGE_CACHE;
+var LOCAL_STORAGE_KEY = 'pravda-last-news';
 
 var newsGenerator = {
 
@@ -38,42 +24,28 @@ var newsGenerator = {
    *
    * @returns {*}
    */
-  getStoredNews: function() {
-
-    //if (!LOCAL_STORAGE_CACHE) {
-      LOCAL_STORAGE_CACHE = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    //}
-
-    if (LOCAL_STORAGE_CACHE == null) {
-      LOCAL_STORAGE_CACHE = [];
-      newsGenerator.setStoredNews(LOCAL_STORAGE_CACHE);
-    }
-
-    return LOCAL_STORAGE_CACHE;
-  },
-
-  /**
-   * Save have read news to local storage
-   *
-   * @param news
-   */
-  setStoredNews: function(news) {
-    //if (LOCAL_STORAGE_CACHE) {
-      LOCAL_STORAGE_CACHE = news;
-    //}
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(news));
+    getStoredNews: function() {
+        if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+            //console.log(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)));
+            return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+        }
+        return false;
   },
 
   /**
    * Save one news item to local storage as have read
    *
-   * @param newsitem
+   * @param newsItem
    */
-  addStoredNews: function(newsitem) {
-    console.log(newsitem);
-    this.setStoredNews(this.getStoredNews().push(newsitem));
+  addStoredNews: function(newsItem) {
+      if (newsGenerator.getStoredNews() == false) {
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(new Array(newsItem)));
+      } else {
+          var arr = newsGenerator.getStoredNews();
+          arr.push(newsItem);
+          localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(arr));
+      }
   },
-
 
   /**
    * Check if provided news item have already read and exist in local storage
@@ -81,10 +53,10 @@ var newsGenerator = {
    * @param newsitem
    */
   hasStoredNews: function(newsitem) {
-    if (this.getStoredNews() == null) {
-      return false;
+    if (this.getStoredNews()) {
+        return (this.getStoredNews().indexOf(newsitem) > -1);
     }
-    return this.getStoredNews().indexOf(newsitem) > -1;
+    return false;
   },
 
   /**
@@ -109,17 +81,17 @@ var newsGenerator = {
    *
    * @public
    */
-  requestNews: function() {
-    var req = new XMLHttpRequest();
-    req.open("GET", HTTP_SOURCE_NEWS, true);
-    req.onload = this.showNews_.bind(this);
-    req.send(null);
-  },
+    requestNews: function() {
+        var req = new XMLHttpRequest();
+        req.open("GET", HTTP_SOURCE_NEWS, true);
+        req.onload = this.showNews_.bind(this);
+        req.send(null);
+    },
 
 
     markAsRead: function() {
-      newsGenerator.addStoredNews(this.getAttribute('name'));
-      this.parentNode.remove();
+        newsGenerator.addStoredNews(this.getAttribute('name'));
+        this.parentNode.remove();
     },
 
  /**
@@ -130,48 +102,44 @@ var newsGenerator = {
    * @param {ProgressEvent} e The XHR ProgressEvent.
    * @private
    */
-  showNews_: function (e) {
+    showNews_: function (e) {
 
-    var feedNewsItems = e.target.responseXML.querySelectorAll('item');
+        // get fresh newfrom from RSS feed
+        var feedNewsItems = e.target.responseXML.querySelectorAll('item');
 
-    var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
+        // load have read news from local storage
+        var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
-     for (var i = 0; i < feedNewsItems.length; i++) {
+        for (var i = 0; i < feedNewsItems.length; i++) {
 
-         // show only unread news items
-        if (!this.hasStoredNews(feedNewsItems[i].querySelector('title').textContent))
-        {
-            var li  = document.createElement('li');
+            // get title of each news
+            var newsTitle = feedNewsItems[i].querySelector('title').textContent;
 
-            var chk = document.createElement('input');
-            chk.setAttribute('type','checkbox');
-            chk.setAttribute('id',''+feedNewsItems[i].querySelector('guid').textContent);
-            chk.addEventListener('click', this.markAsRead);
+             // show only unread news items
+            if (!newsGenerator.hasStoredNews(newsTitle))
+            {
+                var li  = document.createElement('li');
 
-            var spn = document.createElement('span');
-            spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+                var chk = document.createElement('input');
+                chk.setAttribute('type','checkbox');
+                chk.setAttribute('name', newsTitle);
+                chk.addEventListener('click', newsGenerator.markAsRead);
 
-            var a = document.createElement('a');
-            a.innerHTML = feedNewsItems[i].querySelector('title').textContent;
-            a.setAttribute('href',feedNewsItems[i].querySelector('guid').textContent);
+                var spn = document.createElement('span');
+                spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
-            li.appendChild(chk);
-            li.appendChild(spn);
-            li.appendChild(a);
+                var a = document.createElement('a');
+                a.innerHTML = newsTitle;
+                a.setAttribute('href',feedNewsItems[i].querySelector('guid').textContent);
 
-            document.getElementById("content").appendChild(li);
+                li.appendChild(chk);
+                li.appendChild(spn);
+                li.appendChild(a);
+
+                document.getElementById("content").appendChild(li);
+            }
         }
-
-        //forStoreItems.push(feedNewsItems[i].querySelector('title').textContent);
-
-    }
-
-     //console.log(storedItems);
-
-     //localStorage.setItem("pravda-last-news",JSON.stringify(storedItems));
-
-     //localStorage.
-     //var currentdate = new Date();
+  //var currentdate = new Date();
      //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
 
