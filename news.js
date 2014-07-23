@@ -39,12 +39,18 @@ var newsGenerator = {
    * @returns {*}
    */
   getStoredNews: function() {
+
     //if (!LOCAL_STORAGE_CACHE) {
       LOCAL_STORAGE_CACHE = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     //}
+
+    if (LOCAL_STORAGE_CACHE == null) {
+      LOCAL_STORAGE_CACHE = [];
+      newsGenerator.setStoredNews(LOCAL_STORAGE_CACHE);
+    }
+
     return LOCAL_STORAGE_CACHE;
   },
-
 
   /**
    * Save have read news to local storage
@@ -75,7 +81,10 @@ var newsGenerator = {
    * @param newsitem
    */
   hasStoredNews: function(newsitem) {
-    return this.getStoredNews().indexOf(newsitem) > 0;
+    if (this.getStoredNews() == null) {
+      return false;
+    }
+    return this.getStoredNews().indexOf(newsitem) > -1;
   },
 
   /**
@@ -86,7 +95,7 @@ var newsGenerator = {
   cleanUpStoredNews: function(news) {
     var storedNews = this.getStoredNews();
     for (var i = 0; storedNews.length > i; i++) {
-      if (news.indexOf(storedNews[i]) == 0) {
+      if (news.indexOf(storedNews[i]) == -1) {
         storedNews.remove();
       }
     }
@@ -108,10 +117,9 @@ var newsGenerator = {
   },
 
 
-
     markAsRead: function() {
-        console.log(this.getAttribute('name'));
-        this.parentNode.remove();
+      newsGenerator.addStoredNews(this.getAttribute('name'));
+      this.parentNode.remove();
     },
 
  /**
@@ -124,28 +132,28 @@ var newsGenerator = {
    */
   showNews_: function (e) {
 
-    var newsitems = e.target.responseXML.querySelectorAll('item');
+    var feedNewsItems = e.target.responseXML.querySelectorAll('item');
 
-     storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
+    var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
-     for (var i = 0; i < newsitems.length; i++) {
-
+     for (var i = 0; i < feedNewsItems.length; i++) {
 
          // show only unread news items
-        if (storedNewsItems.indexOf(newsitems[i].querySelector('title').textContent)==0)
+        if (!this.hasStoredNews(feedNewsItems[i].querySelector('title').textContent))
         {
             var li  = document.createElement('li');
 
             var chk = document.createElement('input');
             chk.setAttribute('type','checkbox');
-            chk.setAttribute('name','hide[http://www.pravda.com.ua/news/2014/07/3/7030881/]');
+            chk.setAttribute('id',''+feedNewsItems[i].querySelector('guid').textContent);
+            chk.addEventListener('click', this.markAsRead);
 
             var spn = document.createElement('span');
-            spn.innerText = newsitems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+            spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
             var a = document.createElement('a');
-            a.innerHTML = newsitems[i].querySelector('title').textContent;
-            a.setAttribute('href',newsitems[i].querySelector('guid').textContent);
+            a.innerHTML = feedNewsItems[i].querySelector('title').textContent;
+            a.setAttribute('href',feedNewsItems[i].querySelector('guid').textContent);
 
             li.appendChild(chk);
             li.appendChild(spn);
@@ -154,13 +162,13 @@ var newsGenerator = {
             document.getElementById("content").appendChild(li);
         }
 
-        forStoreItems.push(newsitems[i].querySelector('title').textContent);
+        //forStoreItems.push(feedNewsItems[i].querySelector('title').textContent);
 
     }
 
      //console.log(storedItems);
 
-     localStorage.setItem("pravda-last-news",JSON.stringify(storedItems));
+     //localStorage.setItem("pravda-last-news",JSON.stringify(storedItems));
 
      //localStorage.
      //var currentdate = new Date();
