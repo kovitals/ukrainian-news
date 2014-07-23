@@ -9,6 +9,7 @@
             overflow-x: hidden;
             font-family: arial, helvetica, sans-serif;
             color: darkred;
+            overflow: hidden;
         }
 
         a {
@@ -29,6 +30,21 @@
         ul {
             list-style: none;
             padding: 0px;
+            overflow-y: scroll;
+        }
+
+        #popup ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        #popup ::-webkit-scrollbar-track-piece {
+            background-color: lavender;
+        }
+
+        #popup ::-webkit-scrollbar-thumb {
+            background-color: lavender;
+            height: 36px;
         }
 
         li {
@@ -57,7 +73,7 @@
     </style>
     <script src="news.js"></script>
   </head>
-  <body>
+  <body id="popup">
   <img src="favicon.png">
   <h3>Pravda Last News</h3>
   <ul id="content">

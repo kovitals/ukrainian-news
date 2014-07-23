@@ -8,12 +8,11 @@
   "options_page": "options.html",
 
   "permissions": [
-    //"http://localhost/pravda.xml"
     "http://www.pravda.com.ua/rss/view_news/",
     "tabs"
   ],
   "browser_action": {
-    "default_icon": "favicon.png",
+    "default_icon": "ukraine.png",
     "default_popup": "popup.html"
   }
 }
