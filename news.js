@@ -8,7 +8,6 @@
  * @type {string}
  */
 var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
-//var HTTP_SOURCE_NEWS = 'http://localhost/pravda.xml';
 
 /**
  * Global variable with news provider
@@ -147,6 +146,7 @@ var newsGenerator = {
                 document.getElementById("content").appendChild(li);
             }
         }
+
   //var currentdate = new Date();
      //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
