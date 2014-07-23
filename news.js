@@ -26,7 +26,6 @@ var newsGenerator = {
    */
     getStoredNews: function() {
         if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
-            //console.log(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY)));
             return JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
         }
         return false;
@@ -89,9 +88,13 @@ var newsGenerator = {
     },
 
 
-    markAsRead: function() {
-        newsGenerator.addStoredNews(this.getAttribute('name'));
-        this.parentNode.remove();
+    markAsRead: function(title) {
+        if (typeof title == 'string' || title instanceof String) {
+            newsGenerator.addStoredNews(title);
+        } else {
+            newsGenerator.addStoredNews(this.getAttribute('name'));
+            this.parentNode.remove();
+        }
     },
 
  /**
@@ -130,7 +133,12 @@ var newsGenerator = {
 
                 var a = document.createElement('a');
                 a.innerHTML = newsTitle;
-                a.setAttribute('href',feedNewsItems[i].querySelector('guid').textContent);
+                a.setAttribute("href",feedNewsItems[i].querySelector('guid').textContent);
+                //a.setAttribute("href", "http://www.pravda.com.ua/rss/view_news/");
+                a.addEventListener('click', function(){
+                    newsGenerator.markAsRead(this.innerHTML);
+                    chrome.tabs.create({ url: this.getAttribute("href") });
+                });
 
                 li.appendChild(chk);
                 li.appendChild(spn);
@@ -148,4 +156,17 @@ var newsGenerator = {
 // Run our news generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
   newsGenerator.requestNews();
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    var links = document.getElementsByTagName("a");
+    for (var i = 0; i < links.length; i++) {
+        (function () {
+            var ln = links[i];
+            var location = ln.href;
+            ln.onclick = function () {
+                chrome.tabs.create({active: true, url: location});
+            };
+        })();
+    }
 });
