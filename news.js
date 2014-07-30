@@ -7,11 +7,13 @@
  * 
  * @type {string}
  */
-var NEWS_SOURCES_RSS = new Array();
+var NEWS_SOURCES_RSS = [];
 
+//todo: add storing selected source in option page and store to local storage
 NEWS_SOURCES_RSS['up'] = 'http://www.pravda.com.ua/rss/view_news/';
 NEWS_SOURCES_RSS['lb'] = 'http://lb.ua/export/rss_news.xml';
 NEWS_SOURCES_RSS['lg'] = 'http://news.liga.net/news/rss.xml';
+NEWS_SOURCES_RSS['un'] = 'http://rss.unian.net/site/news_rus.rss';
 
 
 /**
@@ -86,11 +88,14 @@ var newsGenerator = {
    */
     requestNews: function() {
 
+
+      //todo: Rewrite with cyrcle for whole source elements
+
       var req = new XMLHttpRequest();
+
       req.open("GET", NEWS_SOURCES_RSS['lb'], false);
       req.send();
       result = req.responseXML.querySelectorAll('item');
-
 
       req.open("GET", NEWS_SOURCES_RSS['lg'], false);
       req.send();
@@ -99,6 +104,10 @@ var newsGenerator = {
       req.open("GET", NEWS_SOURCES_RSS['up'], false);
       req.send();
       result3 = req.responseXML.querySelectorAll('item');
+
+      req.open("GET", NEWS_SOURCES_RSS['un'], false);
+      req.send();
+      result4 = req.responseXML.querySelectorAll('item');
 
       res = [];
 
@@ -133,36 +142,21 @@ var newsGenerator = {
           res[res.length] = rst;
       }
 
+      for (i = 0; i < result4.length; i++) {
+
+          rst = [];
+          rst['date'] = result4[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+          rst['title'] = result4[i].querySelector('title').textContent;
+          rst['link'] = result4[i].querySelector('link').textContent;
+
+          res[res.length] = rst;
+      }
+
       res.sort(function(a ,b) {
           return new Date(b.date) - new Date(a.date);
       })
 
-
-      //return res;
-
       newsGenerator.showNews_(res);
-      //console.log(res);
-
-
-      //e.target.responseXML.querySelectorAll('item')
-      //e.target.responseXML.querySelectorAll('item');
-
-      /*
-        var req = new XMLHttpRequest();
-        req.open("GET", NEWS_SOURCES_RSS['lb'], true);
-        req.onload = this.showNews_.bind(this);
-        req.send(null);
-
-        var req2 = new XMLHttpRequest();
-        req2.open("GET", NEWS_SOURCES_RSS['lg'], true);
-        req2.onload = this.showNews_.bind(this);
-        req2.send(null);
-
-        var req3 = new XMLHttpRequest();
-        req3.open("GET", NEWS_SOURCES_RSS['up'], true);
-        req3.onload = this.showNews_.bind(this);
-        req3.send(null);
-        */
     },
 
     markAsRead: function(title) {
@@ -217,6 +211,12 @@ var newsGenerator = {
                 if (news[i]['link'].match('liga.net')) {
                     var logo_name = 'lg';
                 }
+
+                if (news[i]['link'].match('unian.net')) {
+                    var logo_name = 'un';
+                }
+
+
                 // end
 
                 logo.setAttribute('class', 'logo ' + logo_name);
@@ -239,9 +239,10 @@ var newsGenerator = {
                     chrome.tabs.create({ url: this.getAttribute("href") });
                 });
 
-                li.appendChild(logo);
+
                 li.appendChild(chk);
                 li.appendChild(spn);
+                li.appendChild(logo);
                 li.appendChild(a);
 
                 document.getElementById("content").appendChild(li);
