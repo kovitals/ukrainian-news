@@ -91,30 +91,58 @@ var newsGenerator = {
       req.send();
       result = req.responseXML.querySelectorAll('item');
 
+
       req.open("GET", NEWS_SOURCES_RSS['lg'], false);
       req.send();
-
       result2 = req.responseXML.querySelectorAll('item');
 
-      //result.concat(req.responseXML.querySelectorAll('item'));
+      req.open("GET", NEWS_SOURCES_RSS['up'], false);
+      req.send();
+      result3 = req.responseXML.querySelectorAll('item');
 
+      res = [];
 
+      for (i = 0; i < result.length; i++) {
 
-      console.log(result);
-      console.log(result2);
+          rst = [];
+          rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+          rst['title'] = result[i].querySelector('title').textContent;
+          rst['link'] = result[i].querySelector('link').textContent;
 
-
-//      for (var i = 0; i < feedNewsItems.length; i++) {
-
-          // get title of each news
-//          var newsTitle = feedNewsItems[i].querySelector('title').textContent;
-
-      for (i=0;i<result.length;i++) {
-          console.log(result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')[0]);
-          console.log(result[i].querySelector('title').textContent);
+          res[res.length] = rst;
       }
 
-      //console.log(result2);
+
+      for (i = 0; i < result2.length; i++) {
+
+          rst = [];
+          rst['date'] = result2[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+          rst['title'] = result2[i].querySelector('title').textContent;
+          rst['link'] = result2[i].querySelector('link').textContent;
+
+          res[res.length] = rst;
+      }
+
+      for (i = 0; i < result3.length; i++) {
+
+          rst = [];
+          rst['date'] = result3[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+          rst['title'] = result3[i].querySelector('title').textContent;
+          rst['link'] = result3[i].querySelector('link').textContent;
+
+          res[res.length] = rst;
+      }
+
+      res.sort(function(a ,b) {
+          return new Date(b.date) - new Date(a.date);
+      })
+
+
+      //return res;
+
+      newsGenerator.showNews_(res);
+      //console.log(res);
+
 
       //e.target.responseXML.querySelectorAll('item')
       //e.target.responseXML.querySelectorAll('item');
@@ -154,21 +182,23 @@ var newsGenerator = {
    * @param {ProgressEvent} e The XHR ProgressEvent.
    * @private
    */
-    showNews_: function (e) {
+    showNews_: function (news) {
+
+        //console.log(news);
 
         // get fresh newfrom from RSS feed
-        var feedNewsItems = e.target.responseXML.querySelectorAll('item');
+        //var feedNewsItems = e.target.responseXML.querySelectorAll('item');
 
         // load have read news from local storage
         var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
-        for (var i = 0; i < feedNewsItems.length; i++) {
+        for (var i = 0; i < news.length; i++) {
 
             // get title of each news
-            var newsTitle = feedNewsItems[i].querySelector('title').textContent;
+            //var newsTitle = feedNewsItems[i].querySelector('title').textContent;
 
              // show only unread news items
-            if (!newsGenerator.hasStoredNews(newsTitle))
+            if (!newsGenerator.hasStoredNews(news[i]['title']))
             {
                 var li  = document.createElement('li');
 
@@ -176,15 +206,15 @@ var newsGenerator = {
 
 
                 // todo: Refactoring for more proper solution
-                if (feedNewsItems[i].querySelector('link').textContent.match('pravda.com.ua')) {
+                if (news[i]['link'].match('pravda.com.ua')) {
                     var logo_name = 'up';
                 }
 
-                if (feedNewsItems[i].querySelector('link').textContent.match('lb.ua')) {
+                if (news[i]['link'].match('lb.ua')) {
                     var logo_name = 'lb';
                 }
 
-                if (feedNewsItems[i].querySelector('link').textContent.match('liga.net')) {
+                if (news[i]['link'].match('liga.net')) {
                     var logo_name = 'lg';
                 }
                 // end
@@ -193,16 +223,16 @@ var newsGenerator = {
 
                 var chk = document.createElement('input');
                 chk.setAttribute('type','checkbox');
-                chk.setAttribute('name', newsTitle);
+                chk.setAttribute('name', news[i]['title']);
                 chk.addEventListener('click', newsGenerator.markAsRead);
 
                 var spn = document.createElement('span');
                 spn.setAttribute('class', 'time');
-                spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
+                spn.innerText = news[i]['date'].match('[0-9]{2}:[0-9]{2}');
 
                 var a = document.createElement('a');
-                a.innerHTML = newsTitle;
-                a.setAttribute("href",feedNewsItems[i].querySelector('link').textContent);
+                a.innerHTML = news[i]['title'];
+                a.setAttribute("href",news[i]['link']);
                 //a.setAttribute("href", "http://www.pravda.com.ua/rss/view_news/");
                 a.addEventListener('click', function(){
                     newsGenerator.markAsRead(this.innerHTML);
