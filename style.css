@@ -45,9 +45,9 @@ li > .logo {
     margin-right: 3px;
 }
 
-li > .up {background: url("up-icon.ico") no-repeat 4px 0px;}
-li > .lb {background: url("lb-icon.ico") no-repeat 4px 0px;}
-li > .lg {background: url("liga-icon.png") no-repeat 4px 0px;}
+li > .up {background: url("img/up-icon.ico") no-repeat 4px 0px;}
+li > .lb {background: url("img/lb-icon.ico") no-repeat 4px 0px;}
+li > .lg {background: url("img/liga-icon.png") no-repeat 4px 0px;}
 
 .time {
     border: 1px solid #d0d0d0;
