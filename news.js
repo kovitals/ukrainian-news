@@ -7,7 +7,12 @@
  * 
  * @type {string}
  */
-var HTTP_SOURCE_NEWS = 'http://www.pravda.com.ua/rss/view_news/';
+var NEWS_SOURCES_RSS = new Array();
+
+NEWS_SOURCES_RSS['up'] = 'http://www.pravda.com.ua/rss/view_news/';
+NEWS_SOURCES_RSS['lb'] = 'http://lb.ua/export/rss_news.xml';
+NEWS_SOURCES_RSS['lg'] = 'http://news.liga.net/news/rss.xml';
+
 
 /**
  * Global variable with news provider
@@ -80,12 +85,57 @@ var newsGenerator = {
    * @public
    */
     requestNews: function() {
+
+      var req = new XMLHttpRequest();
+      req.open("GET", NEWS_SOURCES_RSS['lb'], false);
+      req.send();
+      result = req.responseXML.querySelectorAll('item');
+
+      req.open("GET", NEWS_SOURCES_RSS['lg'], false);
+      req.send();
+
+      result2 = req.responseXML.querySelectorAll('item');
+
+      //result.concat(req.responseXML.querySelectorAll('item'));
+
+
+
+      console.log(result);
+      console.log(result2);
+
+
+//      for (var i = 0; i < feedNewsItems.length; i++) {
+
+          // get title of each news
+//          var newsTitle = feedNewsItems[i].querySelector('title').textContent;
+
+      for (i=0;i<result.length;i++) {
+          console.log(result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')[0]);
+          console.log(result[i].querySelector('title').textContent);
+      }
+
+      //console.log(result2);
+
+      //e.target.responseXML.querySelectorAll('item')
+      //e.target.responseXML.querySelectorAll('item');
+
+      /*
         var req = new XMLHttpRequest();
-        req.open("GET", HTTP_SOURCE_NEWS, true);
+        req.open("GET", NEWS_SOURCES_RSS['lb'], true);
         req.onload = this.showNews_.bind(this);
         req.send(null);
-    },
 
+        var req2 = new XMLHttpRequest();
+        req2.open("GET", NEWS_SOURCES_RSS['lg'], true);
+        req2.onload = this.showNews_.bind(this);
+        req2.send(null);
+
+        var req3 = new XMLHttpRequest();
+        req3.open("GET", NEWS_SOURCES_RSS['up'], true);
+        req3.onload = this.showNews_.bind(this);
+        req3.send(null);
+        */
+    },
 
     markAsRead: function(title) {
         if (typeof title == 'string' || title instanceof String) {
@@ -122,23 +172,44 @@ var newsGenerator = {
             {
                 var li  = document.createElement('li');
 
+                var logo = document.createElement('span');
+
+
+                // todo: Refactoring for more proper solution
+                if (feedNewsItems[i].querySelector('link').textContent.match('pravda.com.ua')) {
+                    var logo_name = 'up';
+                }
+
+                if (feedNewsItems[i].querySelector('link').textContent.match('lb.ua')) {
+                    var logo_name = 'lb';
+                }
+
+                if (feedNewsItems[i].querySelector('link').textContent.match('liga.net')) {
+                    var logo_name = 'lg';
+                }
+                // end
+
+                logo.setAttribute('class', 'logo ' + logo_name);
+
                 var chk = document.createElement('input');
                 chk.setAttribute('type','checkbox');
                 chk.setAttribute('name', newsTitle);
                 chk.addEventListener('click', newsGenerator.markAsRead);
 
                 var spn = document.createElement('span');
+                spn.setAttribute('class', 'time');
                 spn.innerText = feedNewsItems[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}');
 
                 var a = document.createElement('a');
                 a.innerHTML = newsTitle;
-                a.setAttribute("href",feedNewsItems[i].querySelector('guid').textContent);
+                a.setAttribute("href",feedNewsItems[i].querySelector('link').textContent);
                 //a.setAttribute("href", "http://www.pravda.com.ua/rss/view_news/");
                 a.addEventListener('click', function(){
                     newsGenerator.markAsRead(this.innerHTML);
                     chrome.tabs.create({ url: this.getAttribute("href") });
                 });
 
+                li.appendChild(logo);
                 li.appendChild(chk);
                 li.appendChild(spn);
                 li.appendChild(a);
@@ -147,8 +218,6 @@ var newsGenerator = {
             }
         }
 
-  //var currentdate = new Date();
-     //document.getElementById('currdate').innerHTML = " " + currentdate.getHours() + ":" + currentdate.getMinutes();
   }
 
 };
