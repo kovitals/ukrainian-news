@@ -14,7 +14,7 @@
     "tabs"
   ],
   "browser_action": {
-    "default_icon": "ukraine.png",
-    "default_popup": "popup.html"
+    "default_icon": "img/ukraine.png",
+    "default_popup": "news.html"
   }
 }
