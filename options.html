@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head><title>My Test Extension Options</title></head>
+<head><title>Українські новини - налаштування</title></head>
 <body>
 
+<!--
 Favorite color:
 <select id="color">
     <option value="red">red</option>
@@ -15,6 +16,37 @@ Favorite color:
     <input type="checkbox" id="like">
     I like colors.
 </label>
+-->
+
+<style>
+    .options {
+        font-size: 20px;
+    }
+
+    img {
+        width: 14px;
+        margin-right: 4px;
+        margin-left: 3px;
+    }
+
+    li {
+        list-style: none;
+    }
+</style>
+
+<h1>Українськи новини</h1>
+<h2>Налаштування rss-каналів сайтів новин для показу:</h2>
+
+<div class="options">
+
+<ul>
+    <li></span><input type="checkbox" name="up"><img src="img/up-icon.ico">www.pravda.com.ua</li>
+    <li><span class="logo up"></span><input type="checkbox" name="un">unian.ua</li>
+    <li><span class="logo up"></span><input type="checkbox" name="lg">news.liga.ua</li>
+    <li><span class="logo up"></span><input type="checkbox" name="lb">lb.ua</li>
+</ul>
+
+</div>
 
 <div id="status"></div>
 <button id="save">Save</button>

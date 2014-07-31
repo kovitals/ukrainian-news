@@ -15,7 +15,6 @@ NEWS_SOURCES_RSS['lb'] = 'http://lb.ua/export/rss_news.xml';
 NEWS_SOURCES_RSS['lg'] = 'http://news.liga.net/news/rss.xml';
 NEWS_SOURCES_RSS['un'] = 'http://rss.unian.net/site/news_rus.rss';
 
-
 /**
  * Global variable with news provider
  *
@@ -231,14 +230,21 @@ var newsGenerator = {
                 spn.innerText = news[i]['date'].match('[0-9]{2}:[0-9]{2}');
 
                 var a = document.createElement('a');
-                a.innerHTML = news[i]['title'];
+
+                if (news[i]['title'].length > 65) {
+                    a.innerHTML = news[i]['title'].substr(0,65) + '...';;
+                }
+                else {
+                    a.innerHTML = news[i]['title'];
+                }
+
                 a.setAttribute("href",news[i]['link']);
-                //a.setAttribute("href", "http://www.pravda.com.ua/rss/view_news/");
+                a.setAttribute("title",news[i]['title']);
+
                 a.addEventListener('click', function(){
                     newsGenerator.markAsRead(this.innerHTML);
                     chrome.tabs.create({ url: this.getAttribute("href") });
                 });
-
 
                 li.appendChild(chk);
                 li.appendChild(spn);
