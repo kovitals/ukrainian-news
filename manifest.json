@@ -12,7 +12,8 @@
     "http://lb.ua/export/rss_news.xml",
     "http://news.liga.net/news/rss.xml",
     "http://rss.unian.net/site/news_rus.rss",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "browser_action": {
     "default_icon": "img/ukraine.png",

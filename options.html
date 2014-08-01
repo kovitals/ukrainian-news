@@ -19,8 +19,13 @@ Favorite color:
 -->
 
 <style>
+
+    body {
+        font-family: arial, helvetica, sans-serif;
+    }
+
     .options {
-        font-size: 20px;
+        font-size: 16px;
     }
 
     img {
@@ -29,27 +34,34 @@ Favorite color:
         margin-left: 3px;
     }
 
+    ul {
+        margin: 5px;
+        padding: 0px;
+    }
+
     li {
+        margin: 0px;
         list-style: none;
+        padding: 0px;
     }
 </style>
 
-<h1>Українськи новини</h1>
-<h2>Налаштування rss-каналів сайтів новин для показу:</h2>
+<h2>Українськи новини</h2>
+<h4>Налаштування rss-каналів новин для показу:</h4>
 
 <div class="options">
 
 <ul>
-    <li></span><input type="checkbox" name="up"><img src="img/up-icon.ico">www.pravda.com.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="un">unian.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="lg">news.liga.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="lb">lb.ua</li>
+    <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico">Українська правда - pravda.com.ua</li>
+    <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico">Агенція УНІАН - unian.ua</li>
+    <li><input type="checkbox" name="lg" id="lg"><img src="img/liga-icon.ico">Ліга - news.liga.ua</li>
+    <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico">Лівий берег - lb.ua</li>
 </ul>
 
 </div>
 
 <div id="status"></div>
-<button id="save">Save</button>
+<button id="save">Зберігти</button>
 
 <script src="options.js"></script>
 </body>

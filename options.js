@@ -1,31 +1,31 @@
-// Saves options to chrome.storage
+// Saves options to Local.storage
 function save_options() {
-    var color = document.getElementById('color').value;
-    var likesColor = document.getElementById('like').checked;
-    chrome.storage.sync.set({
-        favoriteColor: color,
-        likesColor: likesColor
-    }, function() {
-        // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(function() {
-            status.textContent = '';
-        }, 750);
-    });
+
+    var rss_channels_storage = {};
+
+    if (localStorage.getItem('rss_channels_storage')) {
+        var rss_channels_storage = JSON.parse(localStorage.getItem('rss_channels_storage'));
+    }
+
+    var rss_channels_options = document.getElementsByTagName('input');
+
+    for (i = 0; i < rss_channels_options.length; i++) {
+        rss_channels_storage[rss_channels_options[i].getAttribute('name').toString()] = rss_channels_options[i].checked.toString();
+    }
+
+    localStorage.setItem('rss_channels_storage', JSON.stringify(rss_channels_storage));
 }
 
 // Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// stored in Local.storage.
 function restore_options() {
-    // Use default value color = 'red' and likesColor = true.
-    chrome.storage.sync.get({
-        favoriteColor: 'red',
-        likesColor: true
-    }, function(items) {
-        document.getElementById('color').value = items.favoriteColor;
-        document.getElementById('like').checked = items.likesColor;
-    });
+    if (localStorage.getItem('rss_channels_storage')) {
+        var rss_channels_storage = JSON.parse(localStorage.getItem('rss_channels_storage'));
+        Object.keys(rss_channels_storage).forEach(function (key) {
+            document.getElementById(key).checked = (rss_channels_storage[key] === "true");
+        });
+    }
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
