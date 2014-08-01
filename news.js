@@ -158,12 +158,20 @@ var newsGenerator = {
       newsGenerator.showNews_(res);
     },
 
+    /**
+     * 
+     * @param title
+     */
     markAsRead: function(title) {
         if (typeof title == 'string' || title instanceof String) {
             newsGenerator.addStoredNews(title);
         } else {
             newsGenerator.addStoredNews(this.getAttribute('name'));
+            var container = this.parentNode.parentNode;
             this.parentNode.remove();
+            if (container.childElementCount == 0) {
+                window.close();
+            }
         }
     },
 
