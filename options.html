@@ -1,26 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head><title>Українські новини - налаштування</title></head>
+<head>
+    <title>Українські новини - налаштування</title>
+</head>
 <body>
 
-<!--
-Favorite color:
-<select id="color">
-    <option value="red">red</option>
-    <option value="green">green</option>
-    <option value="blue">blue</option>
-    <option value="yellow">yellow</option>
-</select>
-
-<label>
-    <input type="checkbox" id="like">
-    I like colors.
-</label>
--->
-
 <style>
-    .options {
-        font-size: 20px;
+
+    body {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 16px;
     }
 
     img {
@@ -29,27 +18,30 @@ Favorite color:
         margin-left: 3px;
     }
 
-    li {
+    ul {
+        margin: 5px;
+        padding: 0px;
         list-style: none;
     }
+
 </style>
 
-<h1>Українськи новини</h1>
-<h2>Налаштування rss-каналів сайтів новин для показу:</h2>
+<h2>Українськи новини</h2>
 
-<div class="options">
+<h4>Налаштування rss-каналів новин для показу:</h4>
 
-<ul>
-    <li></span><input type="checkbox" name="up"><img src="img/up-icon.ico">www.pravda.com.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="un">unian.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="lg">news.liga.ua</li>
-    <li><span class="logo up"></span><input type="checkbox" name="lb">lb.ua</li>
-</ul>
-
+<div>
+    <ul>
+        <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico">Українська правда - pravda.com.ua</li>
+        <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico">Агенція УНІАН - unian.ua</li>
+        <li><input type="checkbox" name="lg" id="lg"><img src="img/liga-icon.ico">Ліга новини - news.liga.ua</li>
+        <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico">Лівий берег - lb.ua</li>
+    </ul>
 </div>
 
 <div id="status"></div>
-<button id="save">Save</button>
+
+<button id="save">Зберігти</button>
 
 <script src="options.js"></script>
 </body>

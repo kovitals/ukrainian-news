@@ -1,31 +1,31 @@
-// Saves options to chrome.storage
+// Saves selected rss chanel to local storage
 function save_options() {
-    var color = document.getElementById('color').value;
-    var likesColor = document.getElementById('like').checked;
-    chrome.storage.sync.set({
-        favoriteColor: color,
-        likesColor: likesColor
-    }, function() {
-        // Update status to let user know options were saved.
-        var status = document.getElementById('status');
-        status.textContent = 'Options saved.';
-        setTimeout(function() {
-            status.textContent = '';
-        }, 750);
-    });
+
+    var rss_channels_config = {};
+
+    if (localStorage.getItem('rss_channels_config')) {
+        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
+    }
+
+    var rss_channels = document.getElementsByTagName('input');
+
+    for (var i = 0; i < rss_channels.length; i++) {
+        rss_channels_config[rss_channels[i].getAttribute('name').toString()] = rss_channels[i].checked.toString();
+    }
+
+    localStorage.setItem('rss_channels_config', JSON.stringify(rss_channels_config));
+    alert("Налаштування збережені");
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in chrome.storage.
+// Restores selected rss channels from local storage
 function restore_options() {
-    // Use default value color = 'red' and likesColor = true.
-    chrome.storage.sync.get({
-        favoriteColor: 'red',
-        likesColor: true
-    }, function(items) {
-        document.getElementById('color').value = items.favoriteColor;
-        document.getElementById('like').checked = items.likesColor;
-    });
+    if (localStorage.getItem('rss_channels_config')) {
+        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
+        Object.keys(rss_channels_config).forEach(function (key) {
+            document.getElementById(key).checked = (rss_channels_config[key] === "true");
+        });
+    }
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);

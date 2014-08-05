@@ -1,26 +1,24 @@
-// Copyright (c) 2012 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
 /**
- * Global variable with source of news
+ * Global variable with registered news rss-channels
  * 
- * @type {string}
+ * @type {object}
  */
-var NEWS_SOURCES_RSS = [];
-
-//todo: add storing selected source in option page and store to local storage
-NEWS_SOURCES_RSS['up'] = 'http://www.pravda.com.ua/rss/view_news/';
-NEWS_SOURCES_RSS['lb'] = 'http://lb.ua/export/rss_news.xml';
-NEWS_SOURCES_RSS['lg'] = 'http://news.liga.net/news/rss.xml';
-NEWS_SOURCES_RSS['un'] = 'http://rss.unian.net/site/news_rus.rss';
+var NEWS_SOURCES_RSS = {
+  up : "http://www.pravda.com.ua/rss/view_news/",
+  lb : "http://lb.ua/export/rss.xml",
+  lg : "http://news.liga.net/news/rss.xml",
+  un : "http://rss.unian.net/site/news_rus.rss"
+}
 
 /**
  * Global variable with news provider
  *
  * @type {string}
  */
-var LOCAL_STORAGE_KEY = 'pravda-last-news';
+var LOCAL_STORAGE_KEY = 'ukrainian-news';
 
 var newsGenerator = {
 
@@ -92,64 +90,32 @@ var newsGenerator = {
 
       var req = new XMLHttpRequest();
 
-      req.open("GET", NEWS_SOURCES_RSS['lb'], false);
-      req.send();
-      result = req.responseXML.querySelectorAll('item');
 
-      req.open("GET", NEWS_SOURCES_RSS['lg'], false);
-      req.send();
-      result2 = req.responseXML.querySelectorAll('item');
-
-      req.open("GET", NEWS_SOURCES_RSS['up'], false);
-      req.send();
-      result3 = req.responseXML.querySelectorAll('item');
-
-      req.open("GET", NEWS_SOURCES_RSS['un'], false);
-      req.send();
-      result4 = req.responseXML.querySelectorAll('item');
-
-      res = [];
-
-      for (i = 0; i < result.length; i++) {
-
-          rst = [];
-          rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-          rst['title'] = result[i].querySelector('title').textContent;
-          rst['link'] = result[i].querySelector('link').textContent;
-
-          res[res.length] = rst;
+      //todo: extract key storage to global variable
+      // load from local storage rss-channels config
+      if (localStorage.getItem('rss_channels_config')) {
+        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
       }
 
+      var res = [];
 
-      for (i = 0; i < result2.length; i++) {
+      Object.keys(rss_channels_config).forEach(function (key) {
 
-          rst = [];
-          rst['date'] = result2[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-          rst['title'] = result2[i].querySelector('title').textContent;
-          rst['link'] = result2[i].querySelector('link').textContent;
+        // retrieve data for enabled rss-channels
+        if (rss_channels_config[key] === "true") {
+          req.open("GET", NEWS_SOURCES_RSS[key], false);
+          req.send();
+          var result = req.responseXML.querySelectorAll('item');
 
-          res[res.length] = rst;
-      }
-
-      for (i = 0; i < result3.length; i++) {
-
-          rst = [];
-          rst['date'] = result3[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-          rst['title'] = result3[i].querySelector('title').textContent;
-          rst['link'] = result3[i].querySelector('link').textContent;
-
-          res[res.length] = rst;
-      }
-
-      for (i = 0; i < result4.length; i++) {
-
-          rst = [];
-          rst['date'] = result4[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-          rst['title'] = result4[i].querySelector('title').textContent;
-          rst['link'] = result4[i].querySelector('link').textContent;
-
-          res[res.length] = rst;
-      }
+          for (var i = 0; i < result.length; i++) {
+            var rst = [];
+            rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+            rst['title'] = result[i].querySelector('title').textContent;
+            rst['link'] = result[i].querySelector('link').textContent;
+            res[res.length] = rst;
+          }
+        }
+      });
 
       res.sort(function(a ,b) {
           return new Date(b.date) - new Date(a.date);
