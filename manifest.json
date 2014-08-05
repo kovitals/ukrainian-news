@@ -9,7 +9,7 @@
 
   "permissions": [
     "http://www.pravda.com.ua/rss/view_news/",
-    "http://lb.ua/export/rss_news.xml",
+    "http://lb.ua/export/rss.xml",
     "http://news.liga.net/news/rss.xml",
     "http://rss.unian.net/site/news_rus.rss",
     "tabs",
