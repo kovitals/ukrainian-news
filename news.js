@@ -85,11 +85,7 @@ var newsGenerator = {
    */
     requestNews: function() {
 
-
-      //todo: Rewrite with cyrcle for whole source elements
-
       var req = new XMLHttpRequest();
-
 
       //todo: extract key storage to global variable
       // load from local storage rss-channels config
@@ -151,26 +147,17 @@ var newsGenerator = {
    */
     showNews_: function (news) {
 
-        //console.log(news);
-
-        // get fresh newfrom from RSS feed
-        //var feedNewsItems = e.target.responseXML.querySelectorAll('item');
-
         // load have read news from local storage
         var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
         for (var i = 0; i < news.length; i++) {
 
-            // get title of each news
-            //var newsTitle = feedNewsItems[i].querySelector('title').textContent;
-
-             // show only unread news items
+             // show only unread news items, check by news url
             if (!newsGenerator.hasStoredNews(news[i]['link']))
             {
                 var li  = document.createElement('li');
 
                 var logo = document.createElement('span');
-
 
                 // todo: Refactoring for more proper solution
                 if (news[i]['link'].match('pravda.com.ua')) {
@@ -188,8 +175,6 @@ var newsGenerator = {
                 if (news[i]['link'].match('unian.net')) {
                     var logo_name = 'un';
                 }
-
-
                 // end
 
                 logo.setAttribute('class', 'logo ' + logo_name);
