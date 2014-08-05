@@ -1,28 +1,28 @@
-// Saves options to Local.storage
+// Saves selected rss chanel to local storage
 function save_options() {
 
-    var rss_channels_storage = {};
+    var rss_channels_config = {};
 
-    if (localStorage.getItem('rss_channels_storage')) {
-        var rss_channels_storage = JSON.parse(localStorage.getItem('rss_channels_storage'));
+    if (localStorage.getItem('rss_channels_config')) {
+        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
     }
 
-    var rss_channels_options = document.getElementsByTagName('input');
+    var rss_channels = document.getElementsByTagName('input');
 
-    for (i = 0; i < rss_channels_options.length; i++) {
-        rss_channels_storage[rss_channels_options[i].getAttribute('name').toString()] = rss_channels_options[i].checked.toString();
+    for (var i = 0; i < rss_channels.length; i++) {
+        rss_channels_config[rss_channels[i].getAttribute('name').toString()] = rss_channels[i].checked.toString();
     }
 
-    localStorage.setItem('rss_channels_storage', JSON.stringify(rss_channels_storage));
+    localStorage.setItem('rss_channels_config', JSON.stringify(rss_channels_config));
+    alert("Налаштування збережені");
 }
 
-// Restores select box and checkbox state using the preferences
-// stored in Local.storage.
+// Restores selected rss channels from local storage
 function restore_options() {
-    if (localStorage.getItem('rss_channels_storage')) {
-        var rss_channels_storage = JSON.parse(localStorage.getItem('rss_channels_storage'));
-        Object.keys(rss_channels_storage).forEach(function (key) {
-            document.getElementById(key).checked = (rss_channels_storage[key] === "true");
+    if (localStorage.getItem('rss_channels_config')) {
+        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
+        Object.keys(rss_channels_config).forEach(function (key) {
+            document.getElementById(key).checked = (rss_channels_config[key] === "true");
         });
     }
 }
