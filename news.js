@@ -137,6 +137,15 @@ var newsGenerator = {
         }
     },
 
+
+    markAllAsRead: function() {
+
+      //var content = document.getElementById("content");
+      //alert(1);
+      console.log(123);
+
+    },
+
  /**
    * Handle the 'onload' event of our kitten XHR request, generated in
    * 'requestKittens', by generating 'img' elements, and stuffing them into
@@ -148,7 +157,7 @@ var newsGenerator = {
     showNews_: function (news) {
 
         // load have read news from local storage
-        var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
+        var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
         for (var i = 0; i < news.length; i++) {
 
@@ -220,7 +229,7 @@ var newsGenerator = {
 
 // Run our news generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
-  newsGenerator.requestNews();
+    newsGenerator.requestNews();
     chrome.browserAction.setBadgeText ( { text: "15" } );
 });
 

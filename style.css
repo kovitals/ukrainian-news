@@ -36,6 +36,7 @@ li {
 
 h2 {
     margin: 0px;
+    float: left;
 }
 
 li > .logo {
@@ -67,4 +68,9 @@ img {
     margin-top: 0px;
     margin-right: 10px;
     width:25px
+}
+
+button {
+    margin-left: 300px;
+    margin-top: 3px;
 }
