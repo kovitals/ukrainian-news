@@ -85,11 +85,7 @@ var newsGenerator = {
    */
     requestNews: function() {
 
-
-      //todo: Rewrite with cyrcle for whole source elements
-
       var req = new XMLHttpRequest();
-
 
       //todo: extract key storage to global variable
       // load from local storage rss-channels config
@@ -126,11 +122,11 @@ var newsGenerator = {
 
     /**
      * 
-     * @param title
+     * @param url
      */
-    markAsRead: function(title) {
-        if (typeof title == 'string' || title instanceof String) {
-            newsGenerator.addStoredNews(title);
+    markAsRead: function(url) {
+        if (typeof url == 'string' || url instanceof String) {
+            newsGenerator.addStoredNews(url);
         } else {
             newsGenerator.addStoredNews(this.getAttribute('name'));
             var container = this.parentNode.parentNode;
@@ -151,26 +147,17 @@ var newsGenerator = {
    */
     showNews_: function (news) {
 
-        //console.log(news);
-
-        // get fresh newfrom from RSS feed
-        //var feedNewsItems = e.target.responseXML.querySelectorAll('item');
-
         // load have read news from local storage
         var storedNewsItems = JSON.parse(localStorage.getItem("pravda-last-news"));
 
         for (var i = 0; i < news.length; i++) {
 
-            // get title of each news
-            //var newsTitle = feedNewsItems[i].querySelector('title').textContent;
-
-             // show only unread news items
-            if (!newsGenerator.hasStoredNews(news[i]['title']))
+             // show only unread news items, check by news url
+            if (!newsGenerator.hasStoredNews(news[i]['link']))
             {
                 var li  = document.createElement('li');
 
                 var logo = document.createElement('span');
-
 
                 // todo: Refactoring for more proper solution
                 if (news[i]['link'].match('pravda.com.ua')) {
@@ -188,15 +175,13 @@ var newsGenerator = {
                 if (news[i]['link'].match('unian.net')) {
                     var logo_name = 'un';
                 }
-
-
                 // end
 
                 logo.setAttribute('class', 'logo ' + logo_name);
 
                 var chk = document.createElement('input');
                 chk.setAttribute('type','checkbox');
-                chk.setAttribute('name', news[i]['title']);
+                chk.setAttribute('name', news[i]['link']);
                 chk.addEventListener('click', newsGenerator.markAsRead);
 
                 var spn = document.createElement('span');
@@ -216,7 +201,7 @@ var newsGenerator = {
                 a.setAttribute("title",news[i]['title']);
 
                 a.addEventListener('click', function(){
-                    newsGenerator.markAsRead(this.innerHTML);
+                    newsGenerator.markAsRead(this.getAttribute("href"));
                     chrome.tabs.create({ url: this.getAttribute("href") });
                 });
 
