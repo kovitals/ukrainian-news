@@ -126,11 +126,11 @@ var newsGenerator = {
 
     /**
      * 
-     * @param title
+     * @param url
      */
-    markAsRead: function(title) {
-        if (typeof title == 'string' || title instanceof String) {
-            newsGenerator.addStoredNews(title);
+    markAsRead: function(url) {
+        if (typeof url == 'string' || url instanceof String) {
+            newsGenerator.addStoredNews(url);
         } else {
             newsGenerator.addStoredNews(this.getAttribute('name'));
             var container = this.parentNode.parentNode;
@@ -165,7 +165,7 @@ var newsGenerator = {
             //var newsTitle = feedNewsItems[i].querySelector('title').textContent;
 
              // show only unread news items
-            if (!newsGenerator.hasStoredNews(news[i]['title']))
+            if (!newsGenerator.hasStoredNews(news[i]['link']))
             {
                 var li  = document.createElement('li');
 
@@ -196,7 +196,7 @@ var newsGenerator = {
 
                 var chk = document.createElement('input');
                 chk.setAttribute('type','checkbox');
-                chk.setAttribute('name', news[i]['title']);
+                chk.setAttribute('name', news[i]['link']);
                 chk.addEventListener('click', newsGenerator.markAsRead);
 
                 var spn = document.createElement('span');
@@ -216,7 +216,7 @@ var newsGenerator = {
                 a.setAttribute("title",news[i]['title']);
 
                 a.addEventListener('click', function(){
-                    newsGenerator.markAsRead(this.innerHTML);
+                    newsGenerator.markAsRead(this.getAttribute("href"));
                     chrome.tabs.create({ url: this.getAttribute("href") });
                 });
 
