@@ -95,10 +95,10 @@ var newsGenerator = {
 
       var res = [];
 
-      Object.keys(rss_channels_config).forEach(function (key) {
+      Object.keys(NEWS_SOURCES_RSS).forEach(function (key) {
 
         // retrieve data for enabled rss-channels
-        if (rss_channels_config[key] === "true") {
+        if (rss_channels_config == null || rss_channels_config[key] === "true") {
           req.open("GET", NEWS_SOURCES_RSS[key], false);
           req.send();
           var result = req.responseXML.querySelectorAll('item');
@@ -137,13 +137,20 @@ var newsGenerator = {
         }
     },
 
-
+    /**
+     * Mark all presents news in window as read
+     */
     markAllAsRead: function() {
-
-      //var content = document.getElementById("content");
-      //alert(1);
-      console.log(123);
-
+        var content = document.getElementById("content");
+        for (i = content.childElementCount; i >= 0; i--) {
+            if (content.childNodes[i]) {
+                newsGenerator.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
+                content.childNodes[i].remove();
+                if (content.childElementCount == 0) {
+                    window.close();
+                }
+            }
+        }
     },
 
  /**
@@ -230,7 +237,9 @@ var newsGenerator = {
 // Run our news generation script as soon as the document's DOM is ready.
 document.addEventListener('DOMContentLoaded', function () {
     newsGenerator.requestNews();
-    chrome.browserAction.setBadgeText ( { text: "15" } );
+    document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
+    // set some text for extension icon
+    //chrome.browserAction.setBadgeText ( { text: "15" } );
 });
 
 document.addEventListener('DOMContentLoaded', function () {
