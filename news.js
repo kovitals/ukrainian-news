@@ -229,9 +229,7 @@ var newsGenerator = {
                 document.getElementById("content").appendChild(li);
             }
         }
-
   }
-
 };
 
 // Run our news generation script as soon as the document's DOM is ready.
@@ -240,17 +238,4 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
     // set some text for extension icon
     //chrome.browserAction.setBadgeText ( { text: "15" } );
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    var links = document.getElementsByTagName("a");
-    for (var i = 0; i < links.length; i++) {
-        (function () {
-            var ln = links[i];
-            var location = ln.href;
-            ln.onclick = function () {
-                chrome.tabs.create({active: true, url: location});
-            };
-        })();
-    }
 });
