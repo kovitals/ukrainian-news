@@ -166,6 +166,9 @@ var newsGenerator = {
         // load have read news from local storage
         var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
 
+
+        var newsFragment = document.createDocumentFragment();
+
         for (var i = 0; i < news.length; i++) {
 
              // show only unread news items, check by news url
@@ -226,9 +229,10 @@ var newsGenerator = {
                 li.appendChild(logo);
                 li.appendChild(a);
 
-                document.getElementById("content").appendChild(li);
+                newsFragment.appendChild(li);
             }
         }
+        document.getElementById("content").appendChild(newsFragment);
   }
 };
 
