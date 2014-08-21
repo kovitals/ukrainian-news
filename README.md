@@ -1,29 +1,10 @@
-# README #
+# Українські новини #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Українські новини це додаток до браузеру Google Chrome.
+Зручний та швидкий перегляд заголовків новин без необхідності заходити безпосередньо на сайти. Цей додаток використовує джерела з найпопулярніших українських сайтів новин, а саме: lb.ua, news.liga.net, unian.ua, pravda.com.ua. Існує можливість вибирати тільки окремі сайти для відслідковування новин. Після ознайомлення з новиною, ви можете відмітити її як прочитана і вона більше не буде відображатись у додатку.
 
-### What is this repository for? ###
+## Приклад, як виглядає додаток у браузері ##
+![Приклад, як виглядає додаток у браузері](https://lh6.googleusercontent.com/kOWHBSXuuUR-EhZvdXbRZZpX5Dv4q_rkhsnPM8pfReEYqcEhzy3d305rSlJnflST4HNFAqG8=s640-h400-e365-rw)
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Посилання на сторінку додатку в Chrome Web Store - [ Українські новини ](https://chrome.google.com/webstore/detail/%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D1%96-%D0%BD%D0%BE%D0%B2%D0%B8%D0%BD%D0%B8/jpcekcffbnecihdflgjpkeoflpfbeglc?hl=en-US)
 
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
