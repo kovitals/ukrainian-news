@@ -47,6 +47,8 @@ var newsGenerator = {
           arr.push(newsItem);
           localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(arr));
       }
+      // update badge with news items count
+      chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length-1).toString() } );
   },
 
   /**
@@ -124,7 +126,8 @@ var newsGenerator = {
           return new Date(b.date) - new Date(a.date);
       })
 
-      newsGenerator.showNews_(res);
+      //newsGenerator.showNews_(res);
+      return res;
     },
 
     /**
@@ -263,9 +266,12 @@ var newsGenerator = {
 };
 
 // Run our news generation script as soon as the document's DOM is ready.
+/*
 document.addEventListener('DOMContentLoaded', function () {
-    newsGenerator.requestNews();
+    //;
+    newsGenerator.showNews_(newsGenerator.requestNews());
     document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
     // set some text for extension icon
     //chrome.browserAction.setBadgeText ( { text: "15" } );
 });
+*/

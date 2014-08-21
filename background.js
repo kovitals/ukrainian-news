@@ -1,15 +1,12 @@
-var wifiAlarmName = "wifiSignIn";
+var alarmName = "ukrainian-news";
 
-chrome.alarms.create(wifiAlarmName, {
+chrome.alarms.create(alarmName, {
     delayInMinutes: 0,
-    periodInMinutes: 1
+    periodInMinutes: 10
 });
 
 chrome.alarms.onAlarm.addListener(function(alarm) {
-    if (alarm.name === wifiAlarmName) {
-        // Sign in
-        //alert("Alarm");
-        //var newsCount = newsGenerator.showNewsCount_();
-        //chrome.browserAction.setBadgeText ( { text: newsCount } );
+    if (alarm.name === alarmName) {
+        chrome.browserAction.setBadgeText ( { text: newsGenerator.requestNews().length.toString() } );
     }
 });
