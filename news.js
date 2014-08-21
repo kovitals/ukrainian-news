@@ -163,29 +163,6 @@ var newsGenerator = {
         }
     },
 
-
-    /**
-     * Handle the 'onload' event of our kitten XHR request, generated in
-     * 'requestKittens', by generating 'img' elements, and stuffing them into
-     * the document for display.
-     *
-     * @param {ProgressEvent} e The XHR ProgressEvent.
-     * @private
-     */
-    showNewsCount_: function (news) {
-        var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-        var newsCount = 0;
-        for (var i = 0; i < news.length; i++) {
-
-            // show only unread news items, check by news url
-            if (!newsGenerator.hasStoredNews(news[i]['link']))
-            {
-                newsCount++;
-            }
-        }
-        return newsCount;
-    },
-
  /**
    * Handle the 'onload' event of our kitten XHR request, generated in
    * 'requestKittens', by generating 'img' elements, and stuffing them into
@@ -196,16 +173,11 @@ var newsGenerator = {
    */
     showNews_: function (news) {
 
-        // load have read news from local storage
-        var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-
-
         var newsFragment = document.createDocumentFragment();
 
         for (var i = 0; i < news.length; i++) {
 
                 var li  = document.createElement('li');
-
                 var logo = document.createElement('span');
 
                 // todo: Refactoring for more proper solution
@@ -264,14 +236,3 @@ var newsGenerator = {
         document.getElementById("content").appendChild(newsFragment);
   }
 };
-
-// Run our news generation script as soon as the document's DOM is ready.
-/*
-document.addEventListener('DOMContentLoaded', function () {
-    //;
-    newsGenerator.showNews_(newsGenerator.requestNews());
-    document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
-    // set some text for extension icon
-    //chrome.browserAction.setBadgeText ( { text: "15" } );
-});
-*/
