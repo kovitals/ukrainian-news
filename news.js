@@ -93,6 +93,9 @@ var newsGenerator = {
         var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
       }
 
+      // load read news
+      var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
       var res = [];
 
       Object.keys(NEWS_SOURCES_RSS).forEach(function (key) {
@@ -104,12 +107,16 @@ var newsGenerator = {
           var result = req.responseXML.querySelectorAll('item');
 
           for (var i = 0; i < result.length; i++) {
-            var rst = [];
-            rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-            rst['title'] = result[i].querySelector('title').textContent;
-            rst['link'] = result[i].querySelector('link').textContent;
-            res[res.length] = rst;
+            // will show only unread news items
+            if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
+                var rst = [];
+                rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+                rst['title'] = result[i].querySelector('title').textContent;
+                rst['link'] = result[i].querySelector('link').textContent;
+                res[res.length] = rst;
+            }
           }
+
         }
       });
 
@@ -194,9 +201,6 @@ var newsGenerator = {
 
         for (var i = 0; i < news.length; i++) {
 
-             // show only unread news items, check by news url
-            if (!newsGenerator.hasStoredNews(news[i]['link']))
-            {
                 var li  = document.createElement('li');
 
                 var logo = document.createElement('span');
@@ -254,7 +258,6 @@ var newsGenerator = {
 
                 newsFragment.appendChild(li);
             }
-        }
         document.getElementById("content").appendChild(newsFragment);
   }
 };
