@@ -14,6 +14,18 @@ function save_options() {
     }
 
     localStorage.setItem('rss_channels_config', JSON.stringify(rss_channels_config));
+
+    if (document.getElementById('background_period_config').value) {
+        localStorage.setItem('background_period_config', document.getElementById('background_period_config').value);
+
+        chrome.alarms.clear('ukrainian-news');
+        chrome.alarms.create('ukrainian-news', {
+            delayInMinutes: 0,
+            periodInMinutes: parseInt(document.getElementById('background_period_config').value)
+        });
+
+    }
+
     alert("Налаштування збережені");
 }
 
@@ -24,6 +36,9 @@ function restore_options() {
         Object.keys(rss_channels_config).forEach(function (key) {
             document.getElementById(key).checked = (rss_channels_config[key] === "true");
         });
+    }
+    if (localStorage.getItem('background_period_config')) {
+        document.getElementById('background_period_config').value = localStorage.getItem('background_period_config');
     }
 }
 

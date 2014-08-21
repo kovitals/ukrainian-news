@@ -7,13 +7,18 @@
 
   "options_page": "options.html",
 
+  "background" : {
+      "page": "background.html"
+  },
+
   "permissions": [
     "http://www.pravda.com.ua/rss/view_news/",
     "http://lb.ua/export/rss.xml",
     "http://news.liga.net/news/rss.xml",
     "http://rss.unian.net/site/news_rus.rss",
     "tabs",
-    "storage"
+    "storage",
+    "alarms"
   ],
   "browser_action": {
     "default_icon": "img/ukraine.png",

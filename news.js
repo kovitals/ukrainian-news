@@ -47,6 +47,8 @@ var newsGenerator = {
           arr.push(newsItem);
           localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(arr));
       }
+      // update badge with news items count
+      chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length-1).toString() } );
   },
 
   /**
@@ -93,6 +95,9 @@ var newsGenerator = {
         var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
       }
 
+      // load read news
+      var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+
       var res = [];
 
       Object.keys(NEWS_SOURCES_RSS).forEach(function (key) {
@@ -104,12 +109,16 @@ var newsGenerator = {
           var result = req.responseXML.querySelectorAll('item');
 
           for (var i = 0; i < result.length; i++) {
-            var rst = [];
-            rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-            rst['title'] = result[i].querySelector('title').textContent;
-            rst['link'] = result[i].querySelector('link').textContent;
-            res[res.length] = rst;
+            // will show only unread news items
+            if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
+                var rst = [];
+                rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+                rst['title'] = result[i].querySelector('title').textContent;
+                rst['link'] = result[i].querySelector('link').textContent;
+                res[res.length] = rst;
+            }
           }
+
         }
       });
 
@@ -117,7 +126,8 @@ var newsGenerator = {
           return new Date(b.date) - new Date(a.date);
       })
 
-      newsGenerator.showNews_(res);
+      //newsGenerator.showNews_(res);
+      return res;
     },
 
     /**
@@ -163,19 +173,11 @@ var newsGenerator = {
    */
     showNews_: function (news) {
 
-        // load have read news from local storage
-        var storedNewsItems = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-
-
         var newsFragment = document.createDocumentFragment();
 
         for (var i = 0; i < news.length; i++) {
 
-             // show only unread news items, check by news url
-            if (!newsGenerator.hasStoredNews(news[i]['link']))
-            {
                 var li  = document.createElement('li');
-
                 var logo = document.createElement('span');
 
                 // todo: Refactoring for more proper solution
@@ -231,15 +233,6 @@ var newsGenerator = {
 
                 newsFragment.appendChild(li);
             }
-        }
         document.getElementById("content").appendChild(newsFragment);
   }
 };
-
-// Run our news generation script as soon as the document's DOM is ready.
-document.addEventListener('DOMContentLoaded', function () {
-    newsGenerator.requestNews();
-    document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
-    // set some text for extension icon
-    //chrome.browserAction.setBadgeText ( { text: "15" } );
-});
