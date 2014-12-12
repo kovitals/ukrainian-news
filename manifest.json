@@ -16,6 +16,8 @@
     "http://lb.ua/export/rss.xml",
     "http://news.liga.net/news/rss.xml",
     "http://rss.unian.net/site/news_rus.rss",
+    "http://censor.net.ua/includes/news_ru.xml",
+    "http://zn.ua/rss",
     "tabs",
     "storage",
     "alarms"

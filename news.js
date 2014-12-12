@@ -10,7 +10,9 @@ var NEWS_SOURCES_RSS = {
   up : "http://www.pravda.com.ua/rss/view_news/",
   lb : "http://lb.ua/export/rss.xml",
   lg : "http://news.liga.net/news/rss.xml",
-  un : "http://rss.unian.net/site/news_rus.rss"
+  un : "http://rss.unian.net/site/news_rus.rss",
+  cn : "http://censor.net.ua/includes/news_ru.xml",
+  zn : "http://zn.ua/rss"
 }
 
 /**
@@ -196,6 +198,15 @@ var newsGenerator = {
                 if (news[i]['link'].match('unian.net')) {
                     var logo_name = 'un';
                 }
+
+                if (news[i]['link'].match('zn.ua')) {
+                    var logo_name = 'zn';
+                }
+
+                if (news[i]['link'].match('censor.net.ua')) {
+                    var logo_name = 'cn';
+                }
+
                 // end
 
                 logo.setAttribute('class', 'logo ' + logo_name);
