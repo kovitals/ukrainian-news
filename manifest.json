@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Українські новини",
-  "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів. Є можливість приховати прочитані новини.",
-  "version": "1.0",
+  "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
+  "version": "1.1.0",
 
   "options_page": "options.html",
 
@@ -23,7 +23,12 @@
     "alarms"
   ],
   "browser_action": {
-    "default_icon": "img/ukraine.png",
+    "default_icon": "img/icon48.png",
     "default_popup": "news.html"
+  },
+  "icons": {
+      "16": "img/icon16.png",
+      "48": "img/icon48.png",
+      "128": "img/icon128.png"
   }
 }
