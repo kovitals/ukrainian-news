@@ -7,5 +7,5 @@
 Посилання на сторінку додатку в Chrome Web Store - [ Українські новини ](https://chrome.google.com/webstore/detail/%D1%83%D0%BA%D1%80%D0%B0%D1%97%D0%BD%D1%81%D1%8C%D0%BA%D1%96-%D0%BD%D0%BE%D0%B2%D0%B8%D0%BD%D0%B8/jpcekcffbnecihdflgjpkeoflpfbeglc?hl=en-US)
 
 ## Приклад, як виглядає додаток у браузері ##
-![Приклад, як виглядає додаток у браузері](https://lh6.googleusercontent.com/kOWHBSXuuUR-EhZvdXbRZZpX5Dv4q_rkhsnPM8pfReEYqcEhzy3d305rSlJnflST4HNFAqG8=s640-h400-e365-rw)
+![Приклад, як виглядає додаток у браузері](https://lh5.googleusercontent.com/pv9L2W3vGTH1FkXYu8Aw8B-aHQ-aZ8jLapGY33YMVD0gLO8_tHOLNdr472WS5RWYQKbzV9JeXQg=s640-h400-e365-rw)
 
