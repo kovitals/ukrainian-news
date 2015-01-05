@@ -12,7 +12,8 @@ var NEWS_SOURCES_RSS = {
   lg : "http://news.liga.net/news/rss.xml",
   un : "http://rss.unian.net/site/news_rus.rss",
   cn : "http://censor.net.ua/includes/news_ru.xml",
-  zn : "http://zn.ua/rss"
+  zn : "http://zn.ua/rss",
+  fn : "http://news.finance.ua/rss"
 }
 
 /**
@@ -206,6 +207,11 @@ var newsGenerator = {
                 if (news[i]['link'].match('censor.net.ua')) {
                     var logo_name = 'cn';
                 }
+
+                if (news[i]['link'].match('finance.ua')) {
+                    var logo_name = 'fn';
+                }
+
 
                 // end
 
