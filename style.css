@@ -4,7 +4,7 @@
 }
 
 body {
-    min-width: 650px;
+    min-width: 670px;
     overflow-x: hidden;
     font-family: arial, helvetica, sans-serif;
     overflow: hidden;
@@ -89,7 +89,7 @@ div#toolbar {
 div#toolbar > a > img {
     clear: left;
     margin-top: 5px;
-    margin-right: 10px;
+    margin-left: 10px;
     width:24px;
     height:24px
 }
