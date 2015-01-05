@@ -228,8 +228,8 @@ var newsGenerator = {
 
                 var a = document.createElement('a');
 
-                if (news[i]['title'].length > 65) {
-                    a.innerHTML = news[i]['title'].substr(0,65) + '...';;
+                if (news[i]['title'].length > 67) {
+                    a.innerHTML = news[i]['title'].substr(0,67) + '...';;
                 }
                 else {
                     a.innerHTML = news[i]['title'];
