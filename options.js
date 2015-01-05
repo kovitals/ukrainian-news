@@ -39,6 +39,9 @@ function restore_options() {
     }
     if (localStorage.getItem('background_period_config')) {
         document.getElementById('background_period_config').value = localStorage.getItem('background_period_config');
+    } else {
+        // default value - 30 minutes
+        document.getElementById('background_period_config').value = 30;
     }
 }
 

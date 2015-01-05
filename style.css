@@ -4,7 +4,7 @@
 }
 
 body {
-    min-width: 670px;
+    min-width: 640px;
     overflow-x: hidden;
     font-family: arial, helvetica, sans-serif;
     overflow: hidden;
@@ -28,9 +28,10 @@ input[type='checkbox']{
 }
 
 ul {
+    min-width: 640px;
     list-style: none;
     padding: 0px;
-    margin-top: 20px;
+    margin-top: 10px;
     display: inline-block;
     overflow-y: scroll;
 }
@@ -88,8 +89,8 @@ div#toolbar {
 
 div#toolbar > a > img {
     clear: left;
-    margin-top: 5px;
+    margin-top: 7px;
     margin-left: 10px;
-    width:24px;
-    height:24px
+    width:22px;
+    height:22px
 }
