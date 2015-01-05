@@ -184,7 +184,7 @@ var newsGenerator = {
                 var logo = document.createElement('span');
 
                 // todo: Refactoring for more proper solution
-                if (news[i]['link'].match('pravda.com.ua')) {
+                if (news[i]['link'].match('pravda.com.ua') || news[i]['link'].match('eurointegration.com.ua')) {
                     var logo_name = 'up';
                 }
 
