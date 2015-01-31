@@ -23,7 +23,10 @@ function save_options() {
             delayInMinutes: 0,
             periodInMinutes: parseInt(document.getElementById('background_period_config').value)
         });
+    }
 
+    if (document.getElementById('window_width_config').value) {
+        localStorage.setItem('window_width_config', document.getElementById('window_width_config').value);
     }
 
     alert("Налаштування збережені");
@@ -42,6 +45,12 @@ function restore_options() {
     } else {
         // default value - 30 minutes
         document.getElementById('background_period_config').value = 30;
+    }
+    if (localStorage.getItem('window_width_config')) {
+        document.getElementById('window_width_config').value = localStorage.getItem('window_width_config');
+    } else {
+        // default window width value - 600px
+        document.getElementById('window_width_config').value = 600;
     }
 }
 

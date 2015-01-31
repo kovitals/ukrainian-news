@@ -212,7 +212,6 @@ var newsGenerator = {
                     var logo_name = 'fn';
                 }
 
-
                 // end
 
                 logo.setAttribute('class', 'logo ' + logo_name);
@@ -228,12 +227,7 @@ var newsGenerator = {
 
                 var a = document.createElement('a');
 
-                if (news[i]['title'].length > 67) {
-                    a.innerHTML = news[i]['title'].substr(0,67) + '...';;
-                }
-                else {
-                    a.innerHTML = news[i]['title'];
-                }
+                a.innerHTML = news[i]['title'];
 
                 a.setAttribute("href",news[i]['link']);
                 a.setAttribute("title",news[i]['title']);
@@ -250,6 +244,10 @@ var newsGenerator = {
 
                 newsFragment.appendChild(li);
             }
+        if (localStorage.getItem('window_width_config')) {
+            document.getElementById("content").style.width = localStorage.getItem('window_width_config')+'px';
+            document.body.style.width = localStorage.getItem('window_width_config')+'px';
+        }
         document.getElementById("content").appendChild(newsFragment);
   }
 };

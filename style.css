@@ -4,7 +4,6 @@
 }
 
 body {
-    min-width: 640px;
     overflow-x: hidden;
     font-family: arial, helvetica, sans-serif;
     overflow: hidden;
@@ -28,7 +27,6 @@ input[type='checkbox']{
 }
 
 ul {
-    min-width: 640px;
     list-style: none;
     padding: 0px;
     margin-top: 10px;
@@ -40,6 +38,9 @@ li {
     padding-top: 5px;
     padding-bottom: 5px;
     border-top: 1px solid #d0d0d0;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 h2 {
