@@ -155,15 +155,15 @@ var newsGenerator = {
      */
     markAllAsRead: function() {
         var content = document.getElementById("content");
+        var i;
         for (i = content.childElementCount; i >= 0; i--) {
-            if (content.childNodes[i]) {
+            if (content.childNodes[i] && content.childNodes[i].childNodes[0]) {
                 newsGenerator.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
-                content.childNodes[i].remove();
-                if (content.childElementCount == 0) {
-                    window.close();
-                }
             }
         }
+        content.innerHTML = "";
+        chrome.browserAction.setBadgeText ( { text: newsGenerator.requestNews().length.toString() } );
+        window.close();
     },
 
  /**
