@@ -50,8 +50,6 @@ var newsGenerator = {
           arr.push(newsItem);
           localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(arr));
       }
-      // update badge with news items count
-      chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length-1).toString() } );
   },
 
   /**
@@ -130,6 +128,7 @@ var newsGenerator = {
                 window.close();
             }
         }
+        chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length-1).toString() } );
     },
 
     /**
@@ -143,7 +142,7 @@ var newsGenerator = {
             }
         }
         content.innerHTML = "";
-        chrome.browserAction.setBadgeText ( { text: newsGenerator.requestNews().length.toString() } );
+        chrome.browserAction.setBadgeText ( { text: "0" } );
         window.close();
     },
 
@@ -210,10 +209,9 @@ var newsGenerator = {
             // Add created news item to window
             newsFragment.appendChild(li);
         }
-        if (localStorage.getItem('window_width_config')) {
-            document.getElementById("content").style.width = localStorage.getItem('window_width_config')+'px';
-            document.body.style.width = localStorage.getItem('window_width_config')+'px';
-        }
-        document.getElementById("content").appendChild(newsFragment);
+
+        var content = document.getElementById("content");
+        content.style.width = (localStorage.getItem('window_width_config') ? localStorage.getItem('window_width_config') : 600) + 'px';
+        content.appendChild(newsFragment)
   }
 };
