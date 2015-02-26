@@ -67,22 +67,6 @@ var newsGenerator = {
   },
 
   /**
-   * Check actual status of stored news. Remove obsolete items which not receive from rss feeds
-   *
-   * @param news
-   */
-  cleanUpStoredNews: function(news) {
-    var storedNews = this.getStoredNews();
-    for (var i = 0; storedNews.length > i; i++) {
-      if (news.indexOf(storedNews[i]) == -1) {
-        storedNews.remove();
-      }
-    }
-    this.setStoredNews(storedNews);
-  },
-
-
-  /**
    * Sends an XHR GET request to grab last new from RSS feed of pravda.com.ua. The
    * XHR's 'onload' event is hooks up to the 'showNews_' method.
    *
@@ -121,15 +105,14 @@ var newsGenerator = {
                 res[res.length] = rst;
             }
           }
-
         }
+
       });
 
       res.sort(function(a ,b) {
           return new Date(b.date) - new Date(a.date);
       })
 
-      //newsGenerator.showNews_(res);
       return res;
     },
 
@@ -183,37 +166,24 @@ var newsGenerator = {
                 var li  = document.createElement('li');
                 var logo = document.createElement('span');
 
-                // todo: Refactoring for more proper solution
-                if (news[i]['link'].match('pravda.com.ua') || news[i]['link'].match('eurointegration.com.ua')) {
-                    var logo_name = 'up';
+                // Mapping URL of sites to an appropriate logo names in CSS style
+                var URL_TO_LOGO = {
+                    'pravda.com.ua': 'up',
+                    'eurointegration.com.ua': 'up',
+                    'lb.ua': 'lb',
+                    'liga.net': 'lg',
+                    'unian.net': 'un',
+                    'zn.ua': 'zn',
+                    'censor.net.ua': 'cn',
+                    'finance.ua': 'fn'
+                };
+
+                for (var url in URL_TO_LOGO){
+                    if (news[i]['link'].match(url)) {
+                        var logo_name = URL_TO_LOGO[url];
+                    }
                 }
-
-                if (news[i]['link'].match('lb.ua')) {
-                    var logo_name = 'lb';
-                }
-
-                if (news[i]['link'].match('liga.net')) {
-                    var logo_name = 'lg';
-                }
-
-                if (news[i]['link'].match('unian.net')) {
-                    var logo_name = 'un';
-                }
-
-                if (news[i]['link'].match('zn.ua')) {
-                    var logo_name = 'zn';
-                }
-
-                if (news[i]['link'].match('censor.net.ua')) {
-                    var logo_name = 'cn';
-                }
-
-                if (news[i]['link'].match('finance.ua')) {
-                    var logo_name = 'fn';
-                }
-
-                // end
-
+            
                 logo.setAttribute('class', 'logo ' + logo_name);
 
                 var chk = document.createElement('input');
