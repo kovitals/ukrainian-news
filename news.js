@@ -88,7 +88,6 @@ var newsGenerator = {
       var res = [];
 
       Object.keys(NEWS_SOURCES_RSS).forEach(function (key) {
-
         // retrieve data for enabled rss-channels
         if (rss_channels_config == null || rss_channels_config[key] === "true") {
           req.open("GET", NEWS_SOURCES_RSS[key], false);
@@ -138,8 +137,7 @@ var newsGenerator = {
      */
     markAllAsRead: function() {
         var content = document.getElementById("content");
-        var i;
-        for (i = content.childElementCount; i >= 0; i--) {
+        for (var i = content.childElementCount; i >= 0; i--) {
             if (content.childNodes[i] && content.childNodes[i].childNodes[0]) {
                 newsGenerator.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
             }
@@ -150,9 +148,6 @@ var newsGenerator = {
     },
 
  /**
-   * Handle the 'onload' event of our kitten XHR request, generated in
-   * 'requestKittens', by generating 'img' elements, and stuffing them into
-   * the document for display.
    *
    * @param {ProgressEvent} e The XHR ProgressEvent.
    * @private
@@ -163,57 +158,58 @@ var newsGenerator = {
 
         for (var i = 0; i < news.length; i++) {
 
-                var li  = document.createElement('li');
-                var logo = document.createElement('span');
+            var li  = document.createElement('li');
 
-                // Mapping URL of sites to an appropriate logo names in CSS style
-                var URL_TO_LOGO = {
-                    'pravda.com.ua': 'up',
-                    'eurointegration.com.ua': 'up',
-                    'lb.ua': 'lb',
-                    'liga.net': 'lg',
-                    'unian.net': 'un',
-                    'zn.ua': 'zn',
-                    'censor.net.ua': 'cn',
-                    'finance.ua': 'fn'
-                };
+            // Mapping URL of sites to an appropriate logo names in CSS style
+            var URL_TO_LOGO = {
+                'pravda.com.ua': 'up',
+                'eurointegration.com.ua': 'up',
+                'lb.ua': 'lb',
+                'liga.net': 'lg',
+                'unian.net': 'un',
+                'zn.ua': 'zn',
+                'censor.net.ua': 'cn',
+                'finance.ua': 'fn'
+            };
 
-                for (var url in URL_TO_LOGO){
-                    if (news[i]['link'].match(url)) {
-                        var logo_name = URL_TO_LOGO[url];
-                    }
+            for (var url in URL_TO_LOGO){
+                if (news[i]['link'].match(url)) {
+                    var logo_name = URL_TO_LOGO[url];
                 }
-            
-                logo.setAttribute('class', 'logo ' + logo_name);
-
-                var chk = document.createElement('input');
-                chk.setAttribute('type','checkbox');
-                chk.setAttribute('name', news[i]['link']);
-                chk.addEventListener('click', newsGenerator.markAsRead);
-
-                var spn = document.createElement('span');
-                spn.setAttribute('class', 'time');
-                spn.innerText = news[i]['date'].match('[0-9]{2}:[0-9]{2}');
-
-                var a = document.createElement('a');
-
-                a.innerHTML = news[i]['title'];
-
-                a.setAttribute("href",news[i]['link']);
-                a.setAttribute("title",news[i]['title']);
-
-                a.addEventListener('click', function(){
-                    newsGenerator.markAsRead(this.getAttribute("href"));
-                    chrome.tabs.create({ url: this.getAttribute("href") });
-                });
-
-                li.appendChild(chk);
-                li.appendChild(spn);
-                li.appendChild(logo);
-                li.appendChild(a);
-
-                newsFragment.appendChild(li);
             }
+
+            // Create checkbox element for marked read and hide item
+            var chk = document.createElement('input');
+            chk.setAttribute('type','checkbox');
+            chk.setAttribute('name', news[i]['link']);
+            chk.addEventListener('click', newsGenerator.markAsRead);
+            li.appendChild(chk);
+
+            // Create block for show time of news
+            var spn = document.createElement('span');
+            spn.setAttribute('class', 'time');
+            spn.innerText = news[i]['date'].match('[0-9]{2}:[0-9]{2}');
+            li.appendChild(spn);
+
+            // Create element with logo of news site
+            var logo = document.createElement('span');
+            logo.setAttribute('class', 'logo ' + logo_name);
+            li.appendChild(logo);
+
+            // Create link element with a direct URL to news
+            var a = document.createElement('a');
+            a.innerHTML = news[i]['title'];
+            a.setAttribute("href",news[i]['link']);
+            a.setAttribute("title",news[i]['title']);
+            a.addEventListener('click', function(){
+                newsGenerator.markAsRead(this.getAttribute("href"));
+                chrome.tabs.create({ url: this.getAttribute("href") });
+            });
+            li.appendChild(a);
+
+            // Add created news item to window
+            newsFragment.appendChild(li);
+        }
         if (localStorage.getItem('window_width_config')) {
             document.getElementById("content").style.width = localStorage.getItem('window_width_config')+'px';
             document.body.style.width = localStorage.getItem('window_width_config')+'px';
