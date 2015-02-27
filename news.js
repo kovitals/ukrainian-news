@@ -128,7 +128,7 @@ var newsGenerator = {
                 window.close();
             }
         }
-        chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length-1).toString() } );
+        chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length).toString() } );
     },
 
     /**
