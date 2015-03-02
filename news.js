@@ -163,6 +163,7 @@ var newsGenerator = {
             var URL_TO_LOGO = {
                 'pravda.com.ua': 'up',
                 'eurointegration.com.ua': 'up',
+                'champion.com.ua': 'up',
                 'lb.ua': 'lb',
                 'liga.net': 'lg',
                 'unian.net': 'un',
