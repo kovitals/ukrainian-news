@@ -120,6 +120,7 @@ var newsGenerator = {
     markAsRead: function(url) {
         if (typeof url == 'string' || url instanceof String) {
             newsGenerator.addStoredNews(url);
+            document.getElementsByName(url)[0].parentNode.remove();
         } else {
             newsGenerator.addStoredNews(this.getAttribute('name'));
             var container = this.parentNode.parentNode;
@@ -128,7 +129,7 @@ var newsGenerator = {
                 window.close();
             }
         }
-        chrome.browserAction.setBadgeText ( { text: (document.getElementById('content').children.length).toString() } );
+        chrome.browserAction.setBadgeText ( { text: (document.getElementById("content").childElementCount).toString() } );
     },
 
     /**
