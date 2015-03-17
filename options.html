@@ -7,60 +7,83 @@
 </head>
 <body>
 <style>
-
-    body {
-        font-family: arial, helvetica, sans-serif;
-        font-size: 16px;
+    @font-face {
+        font-family: titleFont;
+        src: url(resource/Arsenal-Regular.otf);
     }
 
+    h2 {
+        font-size: 30px;
+        font-family: titleFont, arial, helvetica, sans-serif;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    h4 {
+        border-bottom: 1px solid #aeaeae;
+    }
+    body {
+        font-family: arial, helvetica, sans-serif;
+        font-size: 14px;
+        background-color: #e1e1e1;
+    }
     img {
         width: 14px;
         margin-right: 4px;
         margin-left: 3px;
     }
-
     ul {
         margin: 5px;
         padding: 0px;
         list-style: none;
     }
+    .option{
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+        background-color: #f5f5f5;
+        border: solid 1px #aeaeae;
+        border-radius: 5px;
+        padding: 25px;
 
+    }
 </style>
 
 <h2>Українськи новини</h2>
 
-<h4>Налаштування rss-каналів новин для показу:</h4>
+<div class="option">
+    <div>
+        <h4>Вибрати джерела:</h4>
 
-<div>
-    <ul>
-        <!-- TODO add dynamic generation items -->
-        <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico">Українська правда - <a target="_blank" href="http://pravda.com.ua">pravda.com.ua</a></li>
-        <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico">Агенція УНІАН - <a target="_blank" href="http://unian.ua">unian.ua</a></li>
-        <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico">Ліга новини - <a target="_blank" href="http://news.liga.ua">news.liga.ua</a></li>
-        <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico">Лівий берег - <a target="_blank" href="http://lb.ua">lb.ua</a></li>
-        <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico">Цензор - <a target="_blank" href="http://censor.net.ua">censor.net.ua</a></li>
-        <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico">Зеркало недели - <a target="_blank" href="http://zn.ua">zn.ua</a></li>
-        <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico">Finance.ua - <a target="_blank" href="http://finance.ua">finance.ua</a></li>
-    </ul>
+        <ul>
+            <!-- TODO add dynamic generation items -->
+            <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico">Українська правда - <a target="_blank" href="http://pravda.com.ua">pravda.com.ua</a></li>
+            <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico">Агенція УНІАН - <a target="_blank" href="http://unian.ua">unian.ua</a></li>
+            <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico">Ліга новини - <a target="_blank" href="http://news.liga.ua">news.liga.ua</a></li>
+            <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico">Лівий берег - <a target="_blank" href="http://lb.ua">lb.ua</a></li>
+            <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico">Цензор - <a target="_blank" href="http://censor.net.ua">censor.net.ua</a></li>
+            <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico">Зеркало недели - <a target="_blank" href="http://zn.ua">zn.ua</a></li>
+            <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico">Finance.ua - <a target="_blank" href="http://finance.ua">finance.ua</a></li>
+        </ul>
+    </div>
+
+    <h4>Періодичність перевірки новин:</h4>
+
+    <div>
+        <label>Хвилини:</label><input type="text" name="background_period_config" id="background_period_config" size="2">
+    </div>
+
+    <h4>Ширина вікна з новинами:</h4>
+
+    <div>
+        <label>Пікселів:</label><input type="text" name="window_width_config" id="window_width_config" size="3">
+    </div>
+
+    <div id="status"></div>
+
+    <br>
+
+    <button id="save">Зберегти</button>
 </div>
-
-<h4>Періодичність перевірки новин:</h4>
-
-<div>
-    <label>Хвилини:</label><input type="text" name="background_period_config" id="background_period_config" size="2">
-</div>
-
-<h4>Ширина вікна з новинами:</h4>
-
-<div>
-    <label>Пікселів:</label><input type="text" name="window_width_config" id="window_width_config" size="3">
-</div>
-
-<div id="status"></div>
-
-<br>
-
-<button id="save">Зберегти</button>
 <script src="options.js"></script>
 </body>
 </html>
