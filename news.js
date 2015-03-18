@@ -218,6 +218,6 @@ var newsGenerator = {
         content.style.width = (localStorage.getItem('window_width_config') ? localStorage.getItem('window_width_config') : 600) + 'px';
         content.appendChild(newsFragment)
 
-        chrome.browserAction.setBadgeText ( { text: (newsFragment.childElementCount).toString() } );
+        chrome.browserAction.setBadgeText ( { text: (document.getElementById("content").childElementCount).toString() } );
   }
 };
