@@ -11,79 +11,142 @@
         font-family: titleFont;
         src: url(resource/Arsenal-Regular.otf);
     }
-
-    h2 {
-        font-size: 30px;
-        font-family: titleFont, arial, helvetica, sans-serif;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    h4 {
-        border-bottom: 1px solid #aeaeae;
-    }
     body {
         font-family: arial, helvetica, sans-serif;
         font-size: 14px;
         background-color: #e1e1e1;
     }
-    img {
-        width: 14px;
-        margin-right: 4px;
-        margin-left: 3px;
+    h2 {
+        font-size: 30px;
+        font-family: titleFont, arial, helvetica, sans-serif;
+        text-align: center;
+        margin-bottom: 20px;
+        color: #6f6f6f;
+        background: url(img/icon48.png) no-repeat left center;
+        background-size: 30px 30px;
+        width: 310px;
+    }
+    h3 {
+        color: #6f6f6f;
+        margin-top: 0px;
+    }
+    h4 {
+        border-bottom: 1px solid #adadad;
+        color: #6f6f6f;
+        font-size: 13px;
     }
     ul {
-        margin: 5px;
+        font-size: 15px;
+        margin: 10px;
         padding: 0px;
         list-style: none;
+    }
+    li {
+        margin-bottom: 4px;
+        line-height: 15px;
+        position:relative;
+        text-align: left;
+    }
+    li img {
+        width: 16px;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin-top: 2px;
+        margin-left: 22px;
+    }
+    .logo{
+        margin-left: auto;
+        margin-right: auto;
+        width: 280px;
     }
     .option{
         margin-left: auto;
         margin-right: auto;
-        width: 50%;
+        width: 380px;
         background-color: #f5f5f5;
         border: solid 1px #aeaeae;
-        border-radius: 5px;
-        padding: 25px;
-
+        border-radius: 6px;
+        padding: 30px;
+    }
+    .sub-block{
+        margin-left: 15px;
+    }
+    input[type="number"] {
+        padding: 3px;
+        border: solid 1px #adadad;
+        border-radius: 2px;
+        background-color: #eaeaea;
+        width: 45px;
+    }
+    label {
+        width: 65px;
+        display: block;
+        float: left;
+        padding-top: 2px;
+    }
+    .copyright {
+        margin-top: 15px;
+        font-size: 11px;
+        text-align: center;
+        color: #6f6f6f;
+    }
+    a {
+        margin-left: 22px;
+        text-decoration: none;
+        color: inherit;
+    }
+    a:hover {
+        text-decoration: underline;
     }
 </style>
 
-<h2>Українськи новини</h2>
-
+<div class="logo">
+    <h2>Українські новини</h2>
+</div>
 <div class="option">
+    <h3>НАЛАШТУВАННЯ</h3>
     <div>
-        <h4>Вибрати джерела:</h4>
-
-        <ul>
-            <!-- TODO add dynamic generation items -->
-            <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico">Українська правда - <a target="_blank" href="http://pravda.com.ua">pravda.com.ua</a></li>
-            <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico">Агенція УНІАН - <a target="_blank" href="http://unian.ua">unian.ua</a></li>
-            <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico">Ліга новини - <a target="_blank" href="http://news.liga.ua">news.liga.ua</a></li>
-            <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico">Лівий берег - <a target="_blank" href="http://lb.ua">lb.ua</a></li>
-            <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico">Цензор - <a target="_blank" href="http://censor.net.ua">censor.net.ua</a></li>
-            <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico">Зеркало недели - <a target="_blank" href="http://zn.ua">zn.ua</a></li>
-            <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico">Finance.ua - <a target="_blank" href="http://finance.ua">finance.ua</a></li>
-        </ul>
+        <h4>вибрати джерела новин</h4>
+        <div>
+            <ul>
+                <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico"><a href="http://www.pravda.com.ua" target="_blank">Українська Правда</a></li>
+                <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico"><a href="http://unian.net" target="_blank">Агенція УНІАН</a></li>
+                <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico"><a href="http://news.liga.net" target="_blank">Ліга Новини</a></li>
+                <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico"><a href="http://lb.ua" target="_blank">Лівий Берег</a></li>
+                <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico"><a href="http://censor.net.ua" target="_blank">Цензор.НЕТ</a></li>
+                <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico"><a href="http://zn.ua" target="_blank">Зеркало Недели</a></li>
+                <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico"><a href="http://news.finance.ua" target="_blank">Finance.ua</a></li>
+                <li><input type="checkbox" name="nv" id="nv"><img src="img/nv-icon.ico"><a href="http://nv.ua" target="_blank">Новое Время</a></li>
+            </ul>
+        </div>
     </div>
 
-    <h4>Періодичність перевірки новин:</h4>
-
-    <div>
-        <label>Хвилини:</label><input type="text" name="background_period_config" id="background_period_config" size="2">
+    <div class="block">
+        <h4>періодичність оновлення новин</h4>
+        <div class="sub-block">
+            <label>хвилини:</label><input type="number" min="5" name="background_period_config" id="background_period_config" size="2">
+        </div>
     </div>
 
-    <h4>Ширина вікна з новинами:</h4>
-
-    <div>
-        <label>Пікселів:</label><input type="text" name="window_width_config" id="window_width_config" size="3">
+    <div class="block">
+        <h4>ширина вікна з новинами</h4>
+        <div class="sub-block">
+            <label>пікселі:</label><input type="number" min="200" name="window_width_config" id="window_width_config" size="3">
+        </div>
     </div>
 
     <div id="status"></div>
 
     <br>
 
-    <button id="save">Зберегти</button>
+    <div style="text-align: center">
+        <button id="save">Зберегти</button>
+    </div>
 </div>
+<div class="copyright">© Права на матеріали належать сайтам-джерелам новин</div>
 <script src="options.js"></script>
 </body>
 </html>

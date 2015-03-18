@@ -13,7 +13,8 @@ var NEWS_SOURCES_RSS = {
   un : "http://rss.unian.net/site/news_rus.rss",
   cn : "http://censor.net.ua/includes/news_ru.xml",
   zn : "http://zn.ua/rss",
-  fn : "http://news.finance.ua/rss"
+  fn : "http://news.finance.ua/rss",
+  nv : "http://nv.ua/xml/rss.xml"
 }
 
 /**
@@ -170,7 +171,8 @@ var newsGenerator = {
                 'unian.net': 'un',
                 'zn.ua': 'zn',
                 'censor.net.ua': 'cn',
-                'finance.ua': 'fn'
+                'finance.ua': 'fn',
+                'nv.ua': 'nv'
             };
 
             for (var url in URL_TO_LOGO){
@@ -215,5 +217,7 @@ var newsGenerator = {
         var content = document.getElementById("content");
         content.style.width = (localStorage.getItem('window_width_config') ? localStorage.getItem('window_width_config') : 600) + 'px';
         content.appendChild(newsFragment)
+
+        chrome.browserAction.setBadgeText ( { text: (newsFragment.childElementCount).toString() } );
   }
 };
