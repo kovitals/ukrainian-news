@@ -3,7 +3,7 @@
 
   "name": "Українські новини",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.4.0",
+  "version": "1.4.1",
 
   "options_page": "options.html",
 
@@ -19,7 +19,7 @@
     "http://censor.net.ua/includes/news_ru.xml",
     "http://zn.ua/rss",
     "http://news.finance.ua/rss",
-    "http://nv.ua/xml/rss.xml",
+    /*"http://nv.ua/xml/rss.xml",*/
     "tabs",
     "storage",
     "alarms"
