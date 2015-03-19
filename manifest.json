@@ -19,7 +19,6 @@
     "http://censor.net.ua/includes/news_ru.xml",
     "http://zn.ua/rss",
     "http://news.finance.ua/rss",
-    /*"http://nv.ua/xml/rss.xml",*/
     "tabs",
     "storage",
     "alarms"
