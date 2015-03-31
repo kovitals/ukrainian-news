@@ -3,14 +3,12 @@ function save_options() {
 
     var rss_channels_config = {};
 
-    if (localStorage.getItem('rss_channels_config')) {
-        var rss_channels_config = JSON.parse(localStorage.getItem('rss_channels_config'));
-    }
-
     var rss_channels = document.getElementsByTagName('input');
 
     for (var i = 0; i < rss_channels.length; i++) {
-        rss_channels_config[rss_channels[i].getAttribute('name').toString()] = rss_channels[i].checked.toString();
+        if (rss_channels[i].checked == true) {
+            rss_channels_config[rss_channels[i].getAttribute('name').toString()] = rss_channels[i].checked.toString();
+        }
     }
 
     localStorage.setItem('rss_channels_config', JSON.stringify(rss_channels_config));

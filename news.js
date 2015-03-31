@@ -13,8 +13,8 @@ var NEWS_SOURCES_RSS = {
   un : "http://rss.unian.net/site/news_rus.rss",
   cn : "http://censor.net.ua/includes/news_ru.xml",
   zn : "http://zn.ua/rss",
-  fn : "http://news.finance.ua/rss"
-  /*nv : "http://nv.ua/xml/rss.xml"*/
+  fn : "http://news.finance.ua/rss",
+  nv : "http://nv.ua/xml/rss.xml"
 }
 
 /**
@@ -73,7 +73,7 @@ var newsGenerator = {
    */
     requestNews: function() {
 
-      var req = new XMLHttpRequest();
+      var request = new XMLHttpRequest();
 
       //todo: extract key storage to global variable
       // load from local storage rss-channels config
@@ -87,22 +87,27 @@ var newsGenerator = {
       var res = [];
 
       Object.keys(NEWS_SOURCES_RSS).forEach(function (key) {
-        // retrieve data for enabled rss-channels
-        if (rss_channels_config == null || rss_channels_config[key] === "true") {
-          req.open("GET", NEWS_SOURCES_RSS[key], false);
-          req.send();
-          var result = req.responseXML.querySelectorAll('item');
-
-          for (var i = 0; i < result.length; i++) {
-            // will show only unread news items
-            if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
-                var rst = [];
-                rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-                rst['title'] = result[i].querySelector('title').textContent;
-                rst['link'] = result[i].querySelector('link').textContent;
-                res[res.length] = rst;
+        // retrieve data for enabled rss-channels or for all when no one selected
+        if (rss_channels_config == null || rss_channels_config[key] === "true" || Object.getOwnPropertyNames(rss_channels_config).length === 0) {
+            request.open("GET", NEWS_SOURCES_RSS[key], false);
+            request.send();
+            // check valid response
+            if (request.readyState==4 && request.status == 200) {
+                // checking valid XML in response
+                if (request.responseXML != null) {
+                    var result = request.responseXML.querySelectorAll('item');
+                    for (var i = 0; i < result.length; i++) {
+                        // will show only unread news items
+                        if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
+                            var rst = [];
+                            rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+                            rst['title'] = result[i].querySelector('title').textContent;
+                            rst['link'] = result[i].querySelector('link').textContent;
+                            res[res.length] = rst;
+                        }
+                    }
+                }
             }
-          }
         }
 
       });
@@ -171,8 +176,9 @@ var newsGenerator = {
                 'unian.net': 'un',
                 'zn.ua': 'zn',
                 'censor.net.ua': 'cn',
-                'finance.ua': 'fn'
-                /*'nv.ua': 'nv'*/
+                'finance.ua': 'fn',
+                'liveintegrationnew': 'nv',
+                'nv.ua': 'nv'
             };
 
             for (var url in URL_TO_LOGO){
