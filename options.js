@@ -13,11 +13,11 @@ function save_options() {
         chrome.alarms.clear('ukrainian-news');
         chrome.alarms.create('ukrainian-news', {
             delayInMinutes: 0,
-            periodInMinutes: parseInt(document.getElementById('background_period_config').value)
+            periodInMinutes: parseInt(document.getElementById(common.storageKey.updatePeriod).value)
         });
     }
-    common.options.setWindowWidth(document.getElementById(common.options.storageKey.windowWidth).value);
-    common.options.setShowLastItems(document.document.getElementById(common.storageKey.showLastItems).value);
+    common.options.setWindowWidth(document.getElementById(common.storageKey.windowWidth).value);
+    common.options.setShowLastItems(document.getElementById(common.storageKey.showLastItems).value);
     alert("Налаштування збережені");
 }
 // Restores selected rss channels from local storage

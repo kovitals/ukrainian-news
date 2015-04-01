@@ -27,6 +27,7 @@ common.options = {
     },
 
     setShowLastItems : function (value) {
+        console.log('presaved:'+value);
         this.set(common.storageKey.showLastItems, value);
     },
 
@@ -52,6 +53,7 @@ common.options = {
     set : function(key,value) {
         if (key && value) {
             localStorage.setItem(key, value);
+            console.log('aftersaved:'+localStorage.getItem(key));
         }
     }
 }
@@ -67,7 +69,7 @@ common.storageKey = {
 common.options.defaultValues = {
     windowWidth: 600,
     updatePeriod : 30,
-    showLastItems : 5
+    showLastItems : 10
 }
 
 common.newsSources = {
