@@ -1,6 +1,6 @@
 chrome.alarms.create("ukrainian-news", {
     delayInMinutes: 0,
-    periodInMinutes: common.options.getUpdatePeriod()
+    periodInMinutes: parseInt(common.options.getUpdatePeriod())
 });
 chrome.alarms.onAlarm.addListener(function(alarm) {
     if (alarm.name === "ukrainian-news") {
