@@ -96,7 +96,14 @@ var newsGenerator = {
                 // checking valid XML in response
                 if (request.responseXML != null) {
                     var result = request.responseXML.querySelectorAll('item');
-                    for (var i = 0; i < result.length; i++) {
+                    //if (localStorage.getItem('show_last_items')) {
+                    var show_items = (localStorage.getItem('show_last_items') != null ? localStorage.getItem('show_last_items') : 5);
+                    console.log(localStorage.getItem('show_last_items'));
+                    console.log(show_items);
+                    //} else {
+                    //    var count = 5;
+                    //}
+                    for (var i = 0; i < show_items; i++) {
                         // will show only unread news items
                         if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
                             var rst = [];
@@ -219,11 +226,9 @@ var newsGenerator = {
             // Add created news item to window
             newsFragment.appendChild(li);
         }
-
         var content = document.getElementById("content");
-        content.style.width = (localStorage.getItem('window_width_config') ? localStorage.getItem('window_width_config') : 600) + 'px';
+        content.style.width = common.options.getWindowWith() + 'px';
         content.appendChild(newsFragment)
-
         chrome.browserAction.setBadgeText ( { text: (document.getElementById("content").childElementCount).toString() } );
   }
 };
