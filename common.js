@@ -69,3 +69,14 @@ common.options.defaultValues = {
     updatePeriod : 30,
     showLastItems : 5
 }
+
+common.newsSources = {
+    up : "http://www.pravda.com.ua/rss/view_news/",
+    lb : "http://lb.ua/export/rss.xml",
+    lg : "http://news.liga.net/news/rss.xml",
+    un : "http://rss.unian.net/site/news_rus.rss",
+    cn : "http://censor.net.ua/includes/news_ru.xml",
+    zn : "http://zn.ua/rss",
+    fn : "http://news.finance.ua/rss",
+    nv : "http://nv.ua/xml/rss.xml"
+}
