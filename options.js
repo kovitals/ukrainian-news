@@ -12,8 +12,8 @@ function save_options() {
         common.options.setUpdatePeriod(document.getElementById(common.storageKey.updatePeriod).value);
         chrome.alarms.clear('ukrainian-news');
         chrome.alarms.create('ukrainian-news', {
-            delayInMinutes: 0,
-            periodInMinutes: parseInt(document.getElementById(common.storageKey.updatePeriod).value)
+            delayInMinutes: parseInt(common.options.getUpdatePeriod()),
+            periodInMinutes: parseInt(common.options.getUpdatePeriod())
         });
     }
     common.options.setWindowWidth(document.getElementById(common.storageKey.windowWidth).value);

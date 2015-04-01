@@ -178,3 +178,8 @@ var newsGenerator = {
         chrome.browserAction.setBadgeText ( { text: (document.getElementById("content").childElementCount).toString() } );
   }
 };
+
+document.addEventListener('DOMContentLoaded', function () {
+    newsGenerator.showNews_(newsGenerator.requestNews());
+    document.getElementById('readall').addEventListener('click', newsGenerator.markAllAsRead);
+});
