@@ -69,7 +69,7 @@ common.storageKey = {
 common.options.defaultValues = {
     windowWidth: 600,
     updatePeriod : 30,
-    showLastItems : 10
+    showLastItems : 8
 }
 
 common.newsSources = {
