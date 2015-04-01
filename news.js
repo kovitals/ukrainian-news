@@ -1,5 +1,4 @@
 var newsGenerator = {
-
   /**
    * Load from local storage have read news items
    *
@@ -138,7 +137,6 @@ var newsGenerator = {
                 'zn.ua': 'zn',
                 'censor.net.ua': 'cn',
                 'finance.ua': 'fn',
-                'liveintegrationnew': 'nv',
                 'nv.ua': 'nv'
             };
             for (var url in URL_TO_LOGO){

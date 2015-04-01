@@ -27,7 +27,6 @@ common.options = {
     },
 
     setShowLastItems : function (value) {
-        console.log('presaved:'+value);
         this.set(common.storageKey.showLastItems, value);
     },
 
@@ -35,16 +34,12 @@ common.options = {
         return this.get(common.storageKey.showLastItems);
     },
 
-    isConfigured : function(key) {
-        return localStorage.hasOwnProperty(key);
-    },
-
     get : function(key) {
         if (localStorage.getItem(key)) {
             return localStorage.getItem(key);
         } else {
-            if (this.isConfigured(key)) {
-                return common.options.defaultValues.get(key);
+            if (common.options.defaultValues.hasOwnProperty(key)) {
+                return common.options.defaultValues[key];
             }
             return null;
         }
@@ -53,7 +48,6 @@ common.options = {
     set : function(key,value) {
         if (key && value) {
             localStorage.setItem(key, value);
-            console.log('aftersaved:'+localStorage.getItem(key));
         }
     }
 }
@@ -67,9 +61,9 @@ common.storageKey = {
 }
 
 common.options.defaultValues = {
-    windowWidth: 600,
-    updatePeriod : 30,
-    showLastItems : 8
+    window_width_config : 600,
+    background_period_config : 30,
+    show_last_items : 8
 }
 
 common.newsSources = {

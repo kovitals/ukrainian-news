@@ -1,64 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset=utf-8 />
-    <title>Українські новини - налаштування</title>
-    <script src="common.js"></script>
-    <script src="tracker.js"></script>
-    <link type="text/css" rel="stylesheet" href="options.css" media="all">
-</head>
-<body>
-<div class="logo">
-    <h2>Українські новини</h2>
-</div>
-<div class="option">
-    <h3>НАЛАШТУВАННЯ</h3>
-    <div>
-        <h4>вибрати джерела новин</h4>
-        <div>
-            <ul>
-                <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico"><a href="http://www.pravda.com.ua" target="_blank">Українська Правда</a></li>
-                <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico"><a href="http://unian.net" target="_blank">Агенція УНІАН</a></li>
-                <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico"><a href="http://news.liga.net" target="_blank">Ліга Новини</a></li>
-                <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico"><a href="http://lb.ua" target="_blank">Лівий Берег</a></li>
-                <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico"><a href="http://censor.net.ua" target="_blank">Цензор.НЕТ</a></li>
-                <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico"><a href="http://zn.ua" target="_blank">Зеркало Недели</a></li>
-                <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico"><a href="http://news.finance.ua" target="_blank">Finance.ua</a></li>
-                <li><input type="checkbox" name="nv" id="nv"><img src="img/nv-icon.ico"><a href="http://nv.ua" target="_blank">Новое Время</a></li>
-            </ul>
+    <head>
+        <meta charset=utf-8 />
+        <title>Українські новини - налаштування</title>
+        <script src="common.js"></script>
+        <script src="tracker.js"></script>
+        <link type="text/css" rel="stylesheet" href="options.css" media="all">
+    </head>
+    <body>
+        <div class="logo">
+            <h2>Українські новини</h2>
         </div>
-    </div>
-
-    <div class="block">
-        <h4>показувати останніх новин з джерела</h4>
-        <div class="sub-block">
-            <label>кількість:</label><input type="number" min="1" name="show_last_items" id="show_last_items" size="2">
+        <div class="option">
+            <h3>НАЛАШТУВАННЯ</h3>
+            <div>
+                <h4>вибрати джерела новин</h4>
+                <div>
+                    <ul>
+                        <li><input type="checkbox" name="up" id="up"><img src="img/up-icon.ico"><a href="http://www.pravda.com.ua" target="_blank">Українська Правда</a></li>
+                        <li><input type="checkbox" name="un" id="un"><img src="img/un-icon.ico"><a href="http://unian.net" target="_blank">Агенція УНІАН</a></li>
+                        <li><input type="checkbox" name="lg" id="lg"><img src="img/lg-icon.ico"><a href="http://news.liga.net" target="_blank">Ліга Новини</a></li>
+                        <li><input type="checkbox" name="lb" id="lb"><img src="img/lb-icon.ico"><a href="http://lb.ua" target="_blank">Лівий Берег</a></li>
+                        <li><input type="checkbox" name="cn" id="cn"><img src="img/cn-icon.ico"><a href="http://censor.net.ua" target="_blank">Цензор.НЕТ</a></li>
+                        <li><input type="checkbox" name="zn" id="zn"><img src="img/zn-icon.ico"><a href="http://zn.ua" target="_blank">Зеркало Недели</a></li>
+                        <li><input type="checkbox" name="fn" id="fn"><img src="img/fn-icon.ico"><a href="http://news.finance.ua" target="_blank">Finance.ua</a></li>
+                        <li><input type="checkbox" name="nv" id="nv"><img src="img/nv-icon.ico"><a href="http://nv.ua" target="_blank">Новое Время</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="block">
+                <h4>показувати останніх новин з джерела</h4>
+                <div class="sub-block">
+                    <label>кількість:</label><input type="number" min="1" name="show_last_items" id="show_last_items" size="2">
+                </div>
+            </div>
+            <div class="block">
+                <h4>періодичність оновлення новин в фоновому режимі</h4>
+                <div class="sub-block">
+                    <label>хвилини:</label><input type="number" min="5" name="background_period_config" id="background_period_config" size="2">
+                </div>
+            </div>
+            <div class="block">
+                <h4>ширина вікна з новинами</h4>
+                <div class="sub-block">
+                    <label>пікселі:</label><input type="number" min="200" name="window_width_config" id="window_width_config" size="3">
+                </div>
+            </div>
+            <div id="status"></div>
+            <br>
+            <div style="text-align: center">
+                <button id="save">Зберегти</button>
+            </div>
         </div>
-    </div>
-
-    <div class="block">
-        <h4>періодичність оновлення новин в фоновому режимі</h4>
-        <div class="sub-block">
-            <label>хвилини:</label><input type="number" min="5" name="background_period_config" id="background_period_config" size="2">
-        </div>
-    </div>
-
-    <div class="block">
-        <h4>ширина вікна з новинами</h4>
-        <div class="sub-block">
-            <label>пікселі:</label><input type="number" min="200" name="window_width_config" id="window_width_config" size="3">
-        </div>
-    </div>
-
-    <div id="status"></div>
-
-    <br>
-
-    <div style="text-align: center">
-        <button id="save">Зберегти</button>
-    </div>
-</div>
-<div class="copyright">© Права на матеріали належать сайтам-джерелам новин</div>
-<script src="options.js"></script>
-</body>
+        <div class="copyright">© Права на матеріали належать сайтам-джерелам новин</div>
+        <script src="options.js"></script>
+    </body>
 </html>
