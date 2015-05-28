@@ -153,7 +153,16 @@ var newsGenerator = {
             // Create block for show time of news
             var spn = document.createElement('span');
             spn.setAttribute('class', 'time');
-            spn.innerText = news[i]['date'].match('[0-9]{2}:[0-9]{2}');
+
+            //dirty fix for broken rss format date
+            var newsdate = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
+            if (newsdate && newsdate[0].length == 4) {
+                newsdate[0] = '0'+newsdate[0];
+            }
+            //end dirty fix
+            spn.innerText = newsdate;
+
+            //spn.innerText = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
             li.appendChild(spn);
             // Create element with logo of news site
             var logo = document.createElement('span');
