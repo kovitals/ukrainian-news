@@ -64,8 +64,10 @@ li > .zn {background: url("img/zn-icon.ico") no-repeat 4px 0px;}
 li > .fn {background: url("img/fn-icon.ico") no-repeat 4px 0px;}
 li > .nv {background: url("img/nv-icon.ico") no-repeat 4px 0px;}
 
+li > .newTabBackground {background: url("img/back2.png") no-repeat 4px 0px;}
+
 .time {
-    border: 1px solid #d0d0d0;
+    /*border: 1px solid #d0d0d0;*/
     border-radius: 3px;
     color: #5b5b5b;
     vertical-align: 5%;

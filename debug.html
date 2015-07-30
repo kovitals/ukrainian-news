@@ -1,15 +1,99 @@
 <html><head>
+    <meta charset="utf-8">
     <title>Українські новини</title>
+    <script type="text/javascript" async="" src="https://ssl.google-analytics.com/ga.js"></script><script src="common.js"></script>
     <script src="news.js"></script>
+    <script src="tracker.js"></script>
     <link type="text/css" rel="stylesheet" href="style.css" media="all">
 </head>
 <body id="popup">
-<img src="img/icon48.png">
-<h2>Українські новини</h2>
-<button>очистити все</button>
-<ul id="content">
-    <li><input type="checkbox" name="Россия намерена ввести в заблуждение наблюдателей ОБСЕ - СНБО"><span class="time">19:05</span><span class="logo lg"></span><a href="http://news.liga.net/news/politics/2737260-rossiya_namerena_vvesti_v_zabluzhdenie_nablyudateley_obse_snbo.htm">Россия намерена ввести в заблуждение наблюдателей ОБСЕ - СНБО</a></li>
-    <li><input type="checkbox" name="Украина не будет силой отбивать зону падения Boeing - Гройсман"><span class="time">18:55</span><span class="logo lg"></span><a href="http://news.liga.net/news/politics/2725488-ukraina_ne_budet_siloy_otbivat_zonu_padeniya_boeing_groysman.htm">Украина не будет силой отбивать зону падения Boeing - Гройсман</a></li>
-    <li><input type="checkbox" name="Рада в четверг соберется в закрытом режиме "><span class="time">18:40</span><span class="logo lb"></span><a href="http://lb.ua/news/2014/07/30/274642_rada_chetverg_soberetsya_zakritom.html">Рада в четверг соберется в закрытом режиме </a></li>
-    <li><input type="checkbox" name="Українські війська наступають одночасно на кількох напрямках "><span class="time">18:28</span><span class="logo up"></span><a href="http://www.pravda.com.ua/news/2014/07/30/7033471/">Українські війська наступають одночасно на кількох напрямках </a></li>
-</body></html>
+<div id="toolbar">
+    <a href="options.html" title="Налаштування" target="_blank"><img src="img/config.png"></a>
+    <a href="#" id="readall" title="Видалити всі новини"><img src="img/delete.png"></a>
+</div>
+<div id="gradient"></div>
+<ul id="content" style="width: 600px;">
+    <li><input type="checkbox"
+               name="http://ecology.unian.net/trash/1106581-v-nyu-yorke-musornyie-baki-razdayut-wi-fi.html"><a
+            class="logo newTabBackground"
+            href="http://ecology.unian.net/trash/1106581-v-nyu-yorke-musornyie-baki-razdayut-wi-fi.html"></a><span
+            class="time">18:06</span><span class="logo un"></span><a
+            href="http://ecology.unian.net/trash/1106581-v-nyu-yorke-musornyie-baki-razdayut-wi-fi.html"
+            title="В Нью Йорке мусорные баки &quot;раздают&quot; Wi-Fi">В Нью Йорке мусорные баки "раздают" Wi-Fi</a>
+    </li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/incident/6302377-v_vengrii_za_kontrabandu_s_ukrainoy_arestovano_bolee_chelovek.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/incident/6302377-v_vengrii_za_kontrabandu_s_ukrainoy_arestovano_bolee_chelovek.htm"></a><span
+            class="time">18:00</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/incident/6302377-v_vengrii_za_kontrabandu_s_ukrainoy_arestovano_bolee_chelovek.htm"
+            title="В Венгрии за контрабанду с Украиной арестовано более человек">В Венгрии за контрабанду с Украиной
+        арестовано более человек</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/world/6302351-skotland_yard_rossiya_imeet_otnoshenie_k_smerti_litvinenko.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/world/6302351-skotland_yard_rossiya_imeet_otnoshenie_k_smerti_litvinenko.htm"></a><span
+            class="time">17:51</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/world/6302351-skotland_yard_rossiya_imeet_otnoshenie_k_smerti_litvinenko.htm"
+            title="Скотланд Ярд: Россия имеет отношение к смерти Литвиненко">Скотланд Ярд: Россия имеет отношение к
+        смерти Литвиненко</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/politics/6302360-obstrel_dzerzhinska_kvalifitsirovan_kak_terakt.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/politics/6302360-obstrel_dzerzhinska_kvalifitsirovan_kak_terakt.htm"></a><span
+            class="time">17:44</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/politics/6302360-obstrel_dzerzhinska_kvalifitsirovan_kak_terakt.htm"
+            title="Обстрел Дзержинска квалифицирован как теракт">Обстрел Дзержинска квалифицирован как теракт</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/politics/6302343-v_verkhovnoy_rade_prizvali_italyanskikh_deputatov_ne_ekhat_v_krym.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/politics/6302343-v_verkhovnoy_rade_prizvali_italyanskikh_deputatov_ne_ekhat_v_krym.htm"></a><span
+            class="time">17:38</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/politics/6302343-v_verkhovnoy_rade_prizvali_italyanskikh_deputatov_ne_ekhat_v_krym.htm"
+            title="В Верховной Раде призвали итальянских депутатов не ехать в Крым">В Верховной Раде призвали
+        итальянских депутатов не ехать в Крым</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/politics/6302324-ubiystvo_buziny_zashchita_podozrevaemykh_obvinyaet_spetssluzhby.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/politics/6302324-ubiystvo_buziny_zashchita_podozrevaemykh_obvinyaet_spetssluzhby.htm"></a><span
+            class="time">17:09</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/politics/6302324-ubiystvo_buziny_zashchita_podozrevaemykh_obvinyaet_spetssluzhby.htm"
+            title="Убийство Бузины: защита подозреваемых обвиняет спецслужбы">Убийство Бузины: защита подозреваемых
+        обвиняет спецслужбы</a></li>
+    <li><input type="checkbox" name="http://www.pravda.com.ua/news/2015/07/30/7076229/"><a class="logo newTabBackground"
+                                                                                           href="http://www.pravda.com.ua/news/2015/07/30/7076229/"></a><span
+            class="time">16:53</span><span class="logo up"></span><a
+            href="http://www.pravda.com.ua/news/2015/07/30/7076229/"
+            title="В Угорщині затримали 18 митників за сприяння контрабанді з Закарпаття">В Угорщині затримали 18
+        митників за сприяння контрабанді з Закарпаття</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/politics/6302302-konstitutsionnyy_sud_ozvuchit_verdikt_po_detsentralizatsii_31_iyulya.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/politics/6302302-konstitutsionnyy_sud_ozvuchit_verdikt_po_detsentralizatsii_31_iyulya.htm"></a><span
+            class="time">16:46</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/politics/6302302-konstitutsionnyy_sud_ozvuchit_verdikt_po_detsentralizatsii_31_iyulya.htm"
+            title="Конституционный суд озвучит вердикт по децентрализации 31 июля">Конституционный суд озвучит вердикт
+        по децентрализации 31 июля</a></li>
+    <li><input type="checkbox"
+               name="http://news.liga.net/news/politics/6302295-voennym_medikam_na_fronte_nuzhno_oborudovanie_dlya_spaseniya_boytsov.htm"><a
+            class="logo newTabBackground"
+            href="http://news.liga.net/news/politics/6302295-voennym_medikam_na_fronte_nuzhno_oborudovanie_dlya_spaseniya_boytsov.htm"></a><span
+            class="time">16:35</span><span class="logo lg"></span><a
+            href="http://news.liga.net/news/politics/6302295-voennym_medikam_na_fronte_nuzhno_oborudovanie_dlya_spaseniya_boytsov.htm"
+            title="Военным медикам на фронте нужно оборудование для спасения бойцов">Военным медикам на фронте нужно
+        оборудование для спасения бойцов</a></li>
+    <li><input type="checkbox" name="http://www.pravda.com.ua/news/2015/07/30/7076226/"><a class="logo newTabBackground"
+                                                                                           href="http://www.pravda.com.ua/news/2015/07/30/7076226/"></a><span
+            class="time">16:28</span><span class="logo up"></span><a
+            href="http://www.pravda.com.ua/news/2015/07/30/7076226/"
+            title="Убивство Бузини: захист підозрюваних звинувачує спецслужби">Убивство Бузини: захист підозрюваних
+        звинувачує спецслужби</a></li>
+    <li><input type="checkbox" name="http://www.pravda.com.ua/news/2015/07/30/7076227/"><a class="logo newTabBackground"
+                                                                                           href="http://www.pravda.com.ua/news/2015/07/30/7076227/"></a><span
+            class="time">16:28</span><span class="logo up"></span><a
+            href="http://www.pravda.com.ua/news/2015/07/30/7076227/"
+            title="Прикордонники замінюють російські системи радіаційного контролю на американські">Прикордонники
+        замінюють російські системи радіаційного контролю на американські</a></li>
+</ul>
+</body>
+</html>

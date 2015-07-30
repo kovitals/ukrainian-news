@@ -150,6 +150,17 @@ var newsGenerator = {
             chk.setAttribute('name', news[i]['link']);
             chk.addEventListener('click', newsGenerator.markAsRead);
             li.appendChild(chk);
+
+            // Create element with link to open in background
+            var logo2 = document.createElement('a');
+            logo2.setAttribute('class', 'logo newTabBackground');
+            logo2.setAttribute("href", news[i]['link']);
+            logo2.addEventListener('click', function() {
+                newsGenerator.markAsRead(this.getAttribute("href"));
+                chrome.tabs.create({ url: this.getAttribute("href"), active: false});
+            });
+            li.appendChild(logo2);
+
             // Create block for show time of news
             var spn = document.createElement('span');
             spn.setAttribute('class', 'time');
@@ -160,9 +171,7 @@ var newsGenerator = {
                 newsdate[0] = '0'+newsdate[0];
             }
             //end dirty fix
-            spn.innerText = newsdate;
-
-            //spn.innerText = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
+            spn.innerText = newsdate[0];
             li.appendChild(spn);
             // Create element with logo of news site
             var logo = document.createElement('span');
@@ -171,11 +180,11 @@ var newsGenerator = {
             // Create link element with a direct URL to news
             var a = document.createElement('a');
             a.innerHTML = news[i]['title'];
-            a.setAttribute("href",news[i]['link']);
-            a.setAttribute("title",news[i]['title']);
+            a.setAttribute("href", news[i]['link']);
+            a.setAttribute("title", news[i]['title']);
             a.addEventListener('click', function(){
                 newsGenerator.markAsRead(this.getAttribute("href"));
-                chrome.tabs.create({ url: this.getAttribute("href") });
+                chrome.tabs.create({ url: this.getAttribute("href"), active: true});
             });
             li.appendChild(a);
             // Add created news item to window
