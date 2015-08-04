@@ -61,7 +61,7 @@ common.storageKey = {
 }
 
 common.options.defaultValues = {
-    window_width_config : 600,
+    window_width_config : 650,
     background_period_config : 30,
     show_last_items : 8
 }

@@ -144,22 +144,26 @@ var newsGenerator = {
                     var logo_name = URL_TO_LOGO[url];
                 }
             }
-            // Create checkbox element for marked read and hide item
-            var chk = document.createElement('input');
-            chk.setAttribute('type','checkbox');
-            chk.setAttribute('name', news[i]['link']);
-            chk.addEventListener('click', newsGenerator.markAsRead);
-            li.appendChild(chk);
+
+            // Create element with link to hide element
+            var hideItemLink = document.createElement('a');
+            hideItemLink.setAttribute('class', 'logo hideItem');
+            hideItemLink.setAttribute('href', '#');
+            hideItemLink.setAttribute('title', 'Видалити');
+            hideItemLink.setAttribute('name', news[i]['link']);
+            hideItemLink.addEventListener('click', newsGenerator.markAsRead);
+            li.appendChild(hideItemLink);
 
             // Create element with link to open in background
-            var logo2 = document.createElement('a');
-            logo2.setAttribute('class', 'logo newTabBackground');
-            logo2.setAttribute("href", news[i]['link']);
-            logo2.addEventListener('click', function() {
+            var newTabLink = document.createElement('a');
+            newTabLink.setAttribute('class', 'logo newTab');
+            newTabLink.setAttribute("href", news[i]['link']);
+            newTabLink.setAttribute('title', 'Прочитати');
+            newTabLink.addEventListener('click', function() {
                 newsGenerator.markAsRead(this.getAttribute("href"));
                 chrome.tabs.create({ url: this.getAttribute("href"), active: false});
             });
-            li.appendChild(logo2);
+            li.appendChild(newTabLink);
 
             // Create block for show time of news
             var spn = document.createElement('span');

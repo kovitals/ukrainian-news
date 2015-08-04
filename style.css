@@ -42,6 +42,10 @@ li {
     overflow: hidden;
 }
 
+li:hover {
+    background-color: #f5f5f5;
+}
+
 h2 {
     margin: 0px;
     font-size: 30px;
@@ -51,8 +55,8 @@ h2 {
 
 li > .logo {
     padding-left: 20px;
-    padding-right: 2px;
-    margin-right: 6px;
+    padding-right: 0px;
+    margin-right: 5px;
 }
 
 li > .up {background: url("img/up-icon.ico") no-repeat 4px 0px;}
@@ -64,18 +68,16 @@ li > .zn {background: url("img/zn-icon.ico") no-repeat 4px 0px;}
 li > .fn {background: url("img/fn-icon.ico") no-repeat 4px 0px;}
 li > .nv {background: url("img/nv-icon.ico") no-repeat 4px 0px;}
 
-li > .newTabBackground {background: url("img/back3.png") no-repeat 4px 0px; width: 16px; height: 16px}
+li > .hideItem {background: url("img/hide.gif") no-repeat 6px 3px}
+li > .newTab {background: url("img/newtab.png") no-repeat 3px 3px}
 
 .time {
-    /*border: 1px solid #d0d0d0;*/
-    border-radius: 3px;
-    color: #5b5b5b;
+    /*border-left: 1px solid #d0d0d0;*/
+    color: #a4a4a4;
     vertical-align: 5%;
-    margin-right: 5px;
-    margin-left: 3px;
     font-size: 12px;
-    padding-left: 3px;
-    padding-right: 3px;
+    /*padding-left: 5px;*/
+    padding-right: 5px;
 }
 
 img#title {
