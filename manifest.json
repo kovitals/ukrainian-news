@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Українські новини",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.4.6",
+  "version": "1.4.7",
   "options_page": "options.html",
   "background" : {
     "scripts" : ["common.js","news.js","background.js"]
@@ -16,6 +16,8 @@
     "http://zn.ua/rss",
     "http://news.finance.ua/rss",
     "http://nv.ua/xml/rss.xml",
+    "http://tsn.ua/rss",
+    "http://interfax.com.ua/news/last.rss",
     "tabs",
     "storage",
     "alarms"

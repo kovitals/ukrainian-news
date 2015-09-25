@@ -60,8 +60,19 @@ var newsGenerator = {
                 // check valid response
                 if (request.readyState == 4 && request.status == 200) {
                     // checking valid XML in response
-                    if (request.responseXML != null) {
-                        var result = request.responseXML.querySelectorAll('item');
+                    if (request.responseXML != null || request.responseText != null) {
+                        if (request.responseXML != null) {
+                            var result = request.responseXML.querySelectorAll('item');
+                        }
+                        // fix for case when rss return result without XML content type
+                        if (result == null && request.responseText != null) {
+                            var container = document.implementation.createHTMLDocument().documentElement;
+                            container.innerHTML = request.responseText;
+                            var result = container.querySelectorAll('item');
+                        }
+
+                        console.log(result);
+
                         for (var i = 0; i < result.length && i < common.options.getShowLastItems(); i++) {
                             // will show only unread news items
                             if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
@@ -124,6 +135,7 @@ var newsGenerator = {
     */
     showNews_: function (news) {
         var newsFragment = document.createDocumentFragment();
+        console.log("news-length="+news.length);
         for (var i = 0; i < news.length; i++) {
             var li  = document.createElement('li');
             // Mapping URL of sites to an appropriate logo names in CSS style
@@ -137,14 +149,15 @@ var newsGenerator = {
                 'zn.ua': 'zn',
                 'censor.net.ua': 'cn',
                 'finance.ua': 'fn',
-                'nv.ua': 'nv'
+                'nv.ua': 'nv',
+                'tsn.ua': 'tn',
+                'interfax.com.ua': 'ix'
             };
             for (var url in URL_TO_LOGO){
                 if (news[i]['link'].match(url)) {
                     var logo_name = URL_TO_LOGO[url];
                 }
             }
-
             // Create element with link to hide element
             var hideItemLink = document.createElement('a');
             hideItemLink.setAttribute('class', 'logo hideItem');
@@ -169,7 +182,7 @@ var newsGenerator = {
             var spn = document.createElement('span');
             spn.setAttribute('class', 'time');
 
-            //dirty fix for broken rss format date
+            //fix for broken rss format date
             var newsdate = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
             if (newsdate && newsdate[0].length == 4) {
                 newsdate[0] = '0'+newsdate[0];

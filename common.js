@@ -74,5 +74,7 @@ common.newsSources = {
     cn : "http://censor.net.ua/includes/news_ru.xml",
     zn : "http://zn.ua/rss",
     fn : "http://news.finance.ua/rss",
-    nv : "http://nv.ua/xml/rss.xml"
+    nv : "http://nv.ua/xml/rss.xml",
+    ix : "http://interfax.com.ua/news/last.rss",
+    tn : "http://tsn.ua/rss"
 }

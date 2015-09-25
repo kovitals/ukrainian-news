@@ -35,7 +35,7 @@ ul {
 
 li {
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 7px;
     border-top: 1px solid #d0d0d0;
     text-overflow:ellipsis;
     white-space: nowrap;
@@ -67,16 +67,16 @@ li > .cn {background: url("img/cn-icon.ico") no-repeat 4px 0px;}
 li > .zn {background: url("img/zn-icon.ico") no-repeat 4px 0px;}
 li > .fn {background: url("img/fn-icon.ico") no-repeat 4px 0px;}
 li > .nv {background: url("img/nv-icon.ico") no-repeat 4px 0px;}
+li > .ix {background: url("img/ix-icon.ico") no-repeat 4px 0px;}
+li > .tn {background: url("img/tn-icon.ico") no-repeat 4px 0px;}
 
 li > .hideItem {background: url("img/hide.gif") no-repeat 6px 3px}
 li > .newTab {background: url("img/newtab.png") no-repeat 3px 3px}
 
 .time {
-    /*border-left: 1px solid #d0d0d0;*/
     color: #a4a4a4;
     vertical-align: 5%;
     font-size: 12px;
-    /*padding-left: 5px;*/
     padding-right: 5px;
 }
 
