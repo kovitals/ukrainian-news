@@ -91,20 +91,17 @@ var newsGenerator = {
     },
 
     /**
-     * 
+     * Mark item as read and hide element from list
      * @param url
      */
     markAsRead: function(url) {
-        if (typeof url == 'string' || url instanceof String) {
-            newsGenerator.addStoredNews(url);
-            document.getElementsByName(url)[0].parentNode.remove();
-        } else {
-            newsGenerator.addStoredNews(this.getAttribute('name'));
-            var container = this.parentNode.parentNode;
-            this.parentNode.remove();
-            if (container.childElementCount == 0) {
-                window.close();
-            }
+        if (typeof url !== 'string' && !(url instanceof String)) {
+            url = this.getAttribute('name');
+        }
+        newsGenerator.addStoredNews(url);
+        document.getElementsByName(url)[0].parentNode.remove();
+        if (document.getElementById("content").childElementCount == 0) {
+            window.close();
         }
         chrome.browserAction.setBadgeText ( { text: (document.getElementById("content").childElementCount).toString() } );
     },
@@ -168,8 +165,8 @@ var newsGenerator = {
             newTabLink.setAttribute("href", news[i]['link']);
             newTabLink.setAttribute('title', 'Прочитати');
             newTabLink.addEventListener('click', function() {
-                newsGenerator.markAsRead(this.getAttribute("href"));
                 chrome.tabs.create({ url: this.getAttribute("href"), active: false});
+                newsGenerator.markAsRead(this.getAttribute("href"));
             });
             li.appendChild(newTabLink);
 
