@@ -1,4 +1,4 @@
-var common = common || {};
+var common = {};
 
 common.options = {
 
@@ -75,6 +75,6 @@ common.newsSources = {
     zn : "http://zn.ua/rss",
     fn : "http://news.finance.ua/rss",
     nv : "http://nv.ua/xml/rss.xml",
-    ix : "http://interfax.com.ua/news/last.rss",
+    ix : "http://ua.interfax.com.ua/news/last.rss",
     tn : "http://tsn.ua/rss"
 }

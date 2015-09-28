@@ -65,14 +65,10 @@ var newsGenerator = {
                             var result = request.responseXML.querySelectorAll('item');
                         }
                         // fix for case when rss return result without XML content type
-                        if (result == null && request.responseText != null) {
-                            var container = document.implementation.createHTMLDocument().documentElement;
-                            container.innerHTML = request.responseText;
-                            var result = container.querySelectorAll('item');
+                        if (request.responseXML == null && request.responseText != null) {
+                            var parser = new DOMParser();
+                            var result = parser.parseFromString(request.responseText, "text/xml").querySelectorAll('item');
                         }
-
-                        console.log(result);
-
                         for (var i = 0; i < result.length && i < common.options.getShowLastItems(); i++) {
                             // will show only unread news items
                             if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
@@ -135,7 +131,6 @@ var newsGenerator = {
     */
     showNews_: function (news) {
         var newsFragment = document.createDocumentFragment();
-        console.log("news-length="+news.length);
         for (var i = 0; i < news.length; i++) {
             var li  = document.createElement('li');
             // Mapping URL of sites to an appropriate logo names in CSS style
