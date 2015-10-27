@@ -92,3 +92,11 @@ a {
 a:hover {
     text-decoration: underline;
 }
+.newsSources {
+    clear: left;
+    padding-bottom: 180px;
+}
+.newsSourcesElement {
+    float: right;
+    width: 50%;
+}

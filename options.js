@@ -34,3 +34,28 @@ function restore_options() {
 }
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
+
+// create elements for each news source
+Object.keys(common.newsSources).forEach(function (key) {
+    var newsSourceItem = document.createElement('li');
+    newsSourceItem.setAttribute("class", "newsSourcesElement");
+
+    var newsSourceCheckbox = document.createElement('input');
+    newsSourceCheckbox.setAttribute("type","checkbox");
+    newsSourceCheckbox.setAttribute("name",key);
+    newsSourceCheckbox.setAttribute("id",key);
+
+    var newsSourceIcon = document.createElement('img');
+    newsSourceIcon.setAttribute("src","img/"+key+"-icon.ico");
+
+    var newsSourceLink = document.createElement('a');
+    newsSourceLink.setAttribute("href", common.newsSources[key].http)
+    newsSourceLink.setAttribute("target","_blank");
+    newsSourceLink.innerText = common.newsSources[key].name;
+
+    newsSourceItem.appendChild(newsSourceCheckbox);
+    newsSourceItem.appendChild(newsSourceIcon);
+    newsSourceItem.appendChild(newsSourceLink);
+
+    document.getElementsByClassName("newsSources")[0].appendChild(newsSourceItem);
+});

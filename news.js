@@ -55,7 +55,7 @@ var newsGenerator = {
         Object.keys(common.newsSources).forEach(function (key) {
             // retrieve data for enabled rss-channels or for all when no one selected
             if (rss_channels_config == null || rss_channels_config[key] === "true" || Object.getOwnPropertyNames(rss_channels_config).length === 0) {
-                request.open("GET", common.newsSources[key], false);
+                request.open("GET", common.newsSources[key].rss, false);
                 request.send();
                 // check valid response
                 if (request.readyState == 4 && request.status == 200) {
@@ -73,6 +73,7 @@ var newsGenerator = {
                             // will show only unread news items
                             if (!newsGenerator.hasStoredNews(result[i].querySelector('link').textContent)) {
                                 var rst = [];
+                                rst['key'] = key;
                                 rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
                                 rst['title'] = result[i].querySelector('title').textContent;
                                 rst['link'] = result[i].querySelector('link').textContent;
@@ -130,26 +131,6 @@ var newsGenerator = {
         var newsFragment = document.createDocumentFragment();
         for (var i = 0; i < news.length; i++) {
             var li  = document.createElement('li');
-            // Mapping URL of sites to an appropriate logo names in CSS style
-            var URL_TO_LOGO = {
-                'pravda.com.ua': 'up',
-                'eurointegration.com.ua': 'up',
-                'champion.com.ua': 'up',
-                'lb.ua': 'lb',
-                'liga.net': 'lg',
-                'unian.net': 'un',
-                'zn.ua': 'zn',
-                'censor.net.ua': 'cn',
-                'finance.ua': 'fn',
-                'nv.ua': 'nv',
-                'tsn.ua': 'tn',
-                'interfax.com.ua': 'ix'
-            };
-            for (var url in URL_TO_LOGO){
-                if (news[i]['link'].match(url)) {
-                    var logo_name = URL_TO_LOGO[url];
-                }
-            }
             // Create element with link to hide element
             var hideItemLink = document.createElement('a');
             hideItemLink.setAttribute('class', 'logo hideItem');
@@ -158,7 +139,6 @@ var newsGenerator = {
             hideItemLink.setAttribute('name', news[i]['link']);
             hideItemLink.addEventListener('click', newsGenerator.markAsRead);
             li.appendChild(hideItemLink);
-
             // Create element with link to open in background
             var newTabLink = document.createElement('a');
             newTabLink.setAttribute('class', 'logo newTab');
@@ -169,11 +149,9 @@ var newsGenerator = {
                 newsGenerator.markAsRead(this.getAttribute("href"));
             });
             li.appendChild(newTabLink);
-
             // Create block for show time of news
             var spn = document.createElement('span');
             spn.setAttribute('class', 'time');
-
             //fix for broken rss format date
             var newsdate = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
             if (newsdate && newsdate[0].length == 4) {
@@ -184,7 +162,8 @@ var newsGenerator = {
             li.appendChild(spn);
             // Create element with logo of news site
             var logo = document.createElement('span');
-            logo.setAttribute('class', 'logo ' + logo_name);
+            logo.setAttribute('class', 'logo');
+            logo.setAttribute('style','background: url("img/'+news[i]['key']+'-icon.ico") no-repeat 4px 0px;');
             li.appendChild(logo);
             // Create link element with a direct URL to news
             var a = document.createElement('a');

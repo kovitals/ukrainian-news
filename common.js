@@ -67,20 +67,84 @@ common.options.defaultValues = {
 }
 
 common.newsSources = {
-    up : "http://www.pravda.com.ua/rss/view_news/",
-    lb : "http://lb.ua/export/rss.xml",
-    lg : "http://news.liga.net/news/rss.xml",
-    un : "http://rss.unian.net/site/news_rus.rss",
-    cn : "http://censor.net.ua/includes/news_ru.xml",
-    zn : "http://zn.ua/rss",
-    fn : "http://news.finance.ua/rss",
-    nv : "http://nv.ua/xml/rss.xml",
-    ix : "http://ua.interfax.com.ua/news/last.rss",
-    tn : "http://tsn.ua/rss",
-    kr : "http://k.img.com.ua/rss/ru/all_news2.0.xml",
-    gu : "http://gazeta.ua/rss",
-    ht : "http://112.ua/rss/index.rss",
-    es : "http://espreso.tv/rss",
-    gd : "http://gordonua.com/xml/rss.html",
-    hm : "http://www.hromadske.tv/misc/spec/all-chapters.xml",
+    up : {
+        "rss" : "http://www.pravda.com.ua/rss/view_news/",
+        "http" : "http://www.pravda.com.ua",
+        "name" : "Українська Правда"
+    },
+    lb : {
+        "rss" : "http://lb.ua/export/rss.xml",
+        "http" : "http://lb.ua",
+        "name" : "Лівий Берег"
+    },
+    lg : {
+        "rss" : "http://news.liga.net/news/rss.xml",
+        "http" : "http://news.liga.net",
+        "name" : "Ліга Новини"
+    },
+    un : {
+        "rss" : "http://rss.unian.net/site/news_rus.rss",
+        "http" : "http://unian.net",
+        "name" : "Агенція УНІАН"
+    },
+    cn : {
+        "rss" : "http://censor.net.ua/includes/news_ru.xml",
+        "http" : "http://censor.net.ua",
+        "name" : "Цензор.НЕТ"
+    },
+    zn : {
+        "rss" : "http://zn.ua/rss",
+        "http" : "http://zn.ua",
+        "name" : "Зеркало Недели"
+    },
+    fn : {
+        "rss" : "http://news.finance.ua/rss",
+        "http" : "http://finance.ua",
+        "name" : "Finance.ua"
+    },
+    nv : {
+        "rss" : "http://nv.ua/xml/rss.xml",
+        "http" : "http://nv.ua",
+        "name" : "Новое Время"
+    },
+    ix : {
+        "rss" : "http://ua.interfax.com.ua/news/last.rss",
+        "http" : "http://interfax.com.ua",
+        "name" : "Інтерфакс"
+    },
+    tn : {
+        "rss" : "http://tsn.ua/rss",
+        "http" : "http://tsn.ua",
+        "name" : "ТСН"
+    },
+    "kr" : {
+        "rss" : "http://k.img.com.ua/rss/ru/all_news2.0.xml",
+        "http" : "http://korrespondent.net",
+        "name" : "Корреспондент"
+    },
+    gu : {
+        "rss" : "http://gazeta.ua/rss",
+        "http" : "http://gazeta.ua/",
+        "name" : "Gazeta.ua"
+    },
+    ht : {
+        "rss" : "http://112.ua/rss/index.rss",
+        "http" : "http://112.ua",
+        "name" : "112 Канал"
+    },
+    es : {
+        "rss" : "http://espreso.tv/rss",
+        "http" : "http://espreso.tv",
+        "name" : "Еспресо"
+    },
+    gd : {
+        "rss" : "http://gordonua.com/xml/rss.html",
+        "http" : "http://gordonua.com",
+        "name" : "Гордон"
+    },
+    hm : {
+        "rss" : "http://www.hromadske.tv/misc/spec/all-chapters.xml",
+        "http" : "http://www.hromadske.tv",
+        "name" : "Hromadske.tv"
+    }
 }

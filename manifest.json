@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Українські новини",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.4.8",
+  "version": "1.5.0",
   "options_page": "options.html",
   "background" : {
     "scripts" : ["common.js","news.js","background.js"]
