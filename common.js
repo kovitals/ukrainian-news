@@ -76,5 +76,11 @@ common.newsSources = {
     fn : "http://news.finance.ua/rss",
     nv : "http://nv.ua/xml/rss.xml",
     ix : "http://ua.interfax.com.ua/news/last.rss",
-    tn : "http://tsn.ua/rss"
+    tn : "http://tsn.ua/rss",
+    kr : "http://k.img.com.ua/rss/ru/all_news2.0.xml",
+    gu : "http://gazeta.ua/rss",
+    ht : "http://112.ua/rss/index.rss",
+    es : "http://espreso.tv/rss",
+    gd : "http://gordonua.com/xml/rss.html",
+    hm : "http://www.hromadske.tv/misc/spec/all-chapters.xml",
 }

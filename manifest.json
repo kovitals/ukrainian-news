@@ -18,6 +18,12 @@
     "http://nv.ua/xml/rss.xml",
     "http://tsn.ua/rss",
     "http://ua.interfax.com.ua/news/last.rss",
+    "http://k.img.com.ua/rss/ru/all_news2.0.xml",
+    "http://gazeta.ua/rss",
+    "http://112.ua/rss/index.rss",
+    "http://espreso.tv/rss",
+    "http://gordonua.com/xml/rss.html",
+    "http://www.hromadske.tv/misc/spec/all-chapters.xml",
     "tabs",
     "storage",
     "alarms"
