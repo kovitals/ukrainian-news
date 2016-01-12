@@ -18,7 +18,7 @@ common.newsSources = {
         "name" : "Ліга Новини"
     },
     un : {
-        "rss" : "http://rss.unian.net/site/news_rus.rss",
+        "rss" : "http://rss.unian.net/site/news_ukr.rss",
         "http" : "http://unian.net",
         "name" : "Агенція УНІАН"
     },
@@ -28,19 +28,19 @@ common.newsSources = {
         "name" : "Цензор.НЕТ"
     },
     zn : {
-        "rss" : "http://zn.ua/rss",
-        "http" : "http://zn.ua",
-        "name" : "Зеркало Недели"
+        "rss" : "http://dt.ua/rss",
+        "http" : "http://dt.ua",
+        "name" : "Дзеркало Тижня"
     },
     fn : {
-        "rss" : "http://news.finance.ua/rss",
+        "rss" : "http://news.finance.ua/ua/rss",
         "http" : "http://finance.ua",
         "name" : "Finance.ua"
     },
     nv : {
-        "rss" : "http://nv.ua/xml/rss.xml",
+        "rss" : "http://nv.ua/ukr/xml/rss.html",
         "http" : "http://nv.ua",
-        "name" : "Новое Время"
+        "name" : "Новий Час"
     },
     ix : {
         "rss" : "http://ua.interfax.com.ua/news/last.rss",
@@ -53,9 +53,9 @@ common.newsSources = {
         "name" : "ТСН"
     },
     kr : {
-        "rss" : "http://k.img.com.ua/rss/ru/all_news2.0.xml",
+        "rss" : "http://k.img.com.ua/rss/ua/all_news2.0.xml",
         "http" : "http://korrespondent.net",
-        "name" : "Корреспондент"
+        "name" : "Korrespondent.net"
     },
     gu : {
         "rss" : "http://gazeta.ua/rss",
@@ -63,7 +63,7 @@ common.newsSources = {
         "name" : "Gazeta.ua"
     },
     ht : {
-        "rss" : "http://112.ua/rss/index.rss",
+        "rss" : "http://ua.112.ua/rss/index.rss",
         "http" : "http://112.ua",
         "name" : "112 Канал"
     },
