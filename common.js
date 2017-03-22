@@ -8,8 +8,8 @@ common.newsSources = {
         "name" : "Українська Правда"
     },
     lb : {
-        "rss" : "http://lb.ua/export/rss.xml",
-        "http" : "http://lb.ua",
+        "rss" : "https://lb.ua/rss/ukr/rss.xml",
+        "http" : "https://lb.ua",
         "name" : "Лівий Берег"
     },
     lg : {
@@ -48,8 +48,8 @@ common.newsSources = {
         "name" : "Інтерфакс"
     },
     tn : {
-        "rss" : "http://tsn.ua/rss",
-        "http" : "http://tsn.ua",
+        "rss" : "https://tsn.ua/rss",
+        "http" : "https://tsn.ua",
         "name" : "ТСН"
     },
     kr : {
@@ -58,8 +58,8 @@ common.newsSources = {
         "name" : "Корреспондент"
     },
     gu : {
-        "rss" : "http://gazeta.ua/rss",
-        "http" : "http://gazeta.ua/",
+        "rss" : "https://gazeta.ua/rss",
+        "http" : "https://gazeta.ua/",
         "name" : "Gazeta.ua"
     },
     ht : {
@@ -76,11 +76,6 @@ common.newsSources = {
         "rss" : "http://gordonua.com/xml/rss.html",
         "http" : "http://gordonua.com",
         "name" : "Гордон"
-    },
-    hm : {
-        "rss" : "http://www.hromadske.tv/misc/spec/all-chapters.xml",
-        "http" : "http://www.hromadske.tv",
-        "name" : "Hromadske.tv"
     }
 }
 
