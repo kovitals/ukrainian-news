@@ -30,7 +30,7 @@ function restore_options() {
     }
     document.getElementById(common.storageKey.showLastItems).value = common.options.getShowLastItems();
     document.getElementById(common.storageKey.updatePeriod).value = common.options.getUpdatePeriod();
-    document.getElementById(common.storageKey.windowWidth).value = common.options.getWindowWith();
+    document.getElementById(common.storageKey.windowWidth).value = common.options.getWindowWidth();
 }
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);

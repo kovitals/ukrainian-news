@@ -2,11 +2,13 @@
     font-family: titleFont;
     src: url(resource/Arsenal-Regular.otf);
 }
+
 body {
     font-family: arial, helvetica, sans-serif;
     font-size: 14px;
     background-color: #e1e1e1;
 }
+
 h2 {
     font-size: 30px;
     font-family: titleFont, arial, helvetica, sans-serif;
@@ -17,27 +19,32 @@ h2 {
     background-size: 30px 30px;
     width: 310px;
 }
+
 h3 {
     color: #6f6f6f;
     margin-top: 0px;
 }
+
 h4 {
     border-bottom: 1px solid #adadad;
     color: #6f6f6f;
     font-size: 13px;
 }
+
 ul {
     font-size: 15px;
     margin: 10px;
     padding: 0px;
     list-style: none;
 }
+
 li {
     margin-bottom: 4px;
     line-height: 15px;
-    position:relative;
+    position: relative;
     text-align: left;
 }
+
 li img {
     width: 16px;
     position: absolute;
@@ -48,12 +55,14 @@ li img {
     margin-top: 2px;
     margin-left: 22px;
 }
-.logo{
+
+.logo {
     margin-left: auto;
     margin-right: auto;
     width: 280px;
 }
-.option{
+
+.option {
     margin-left: auto;
     margin-right: auto;
     width: 420px;
@@ -62,9 +71,11 @@ li img {
     border-radius: 6px;
     padding: 30px;
 }
-.sub-block{
+
+.sub-block {
     margin-left: 15px;
 }
+
 input[type="number"] {
     padding: 3px;
     border: solid 1px #adadad;
@@ -72,30 +83,36 @@ input[type="number"] {
     background-color: #eaeaea;
     width: 45px;
 }
+
 label {
     width: 65px;
     display: block;
     float: left;
     padding-top: 2px;
 }
+
 .copyright {
     margin-top: 15px;
     font-size: 11px;
     text-align: center;
     color: #6f6f6f;
 }
+
 a {
     margin-left: 22px;
     text-decoration: none;
     color: inherit;
 }
+
 a:hover {
     text-decoration: underline;
 }
+
 .newsSources {
     clear: left;
     padding-bottom: 180px;
 }
+
 .newsSourcesElement {
     float: right;
     width: 50%;

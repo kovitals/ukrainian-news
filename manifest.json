@@ -2,10 +2,14 @@
   "manifest_version": 2,
   "name": "Українські новини",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "options_page": "options.html",
-  "background" : {
-    "scripts" : ["common.js","news.js","background.js"]
+  "background": {
+    "scripts": [
+      "common.js",
+      "news.js",
+      "background.js"
+    ]
   },
   "permissions": [
     "http://www.pravda.com.ua/rss/view_news/",
@@ -23,7 +27,6 @@
     "http://112.ua/rss/index.rss",
     "http://espreso.tv/rss",
     "http://gordonua.com/xml/rss.html",
-    "tabs",
     "storage",
     "alarms"
   ],
@@ -33,8 +36,8 @@
     "default_popup": "news.html"
   },
   "icons": {
-      "16": "img/icon16.png",
-      "48": "img/icon48.png",
-      "128": "img/icon128.png"
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
   }
 }

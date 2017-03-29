@@ -8,5 +8,4 @@ copy *.html ukrainian-news
 copy img\*.* ukrainian-news\img
 copy resource\*.otf ukrainian-news\resource
 IF EXIST ukrainian-news.zip del /F ukrainian-news.zip
-#zip ukrainian-news.zip ukrainian-news -r
-#rmdir ukrainian-news /s/q
+7z a -sdel -aoa ukrainian-news.zip ukrainian-news
