@@ -1,0 +1,23 @@
+{
+  "name": "ukrainian-news",
+  "version": "1.5.3",
+  "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів.",
+  "main": "background.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kovitals/ukrainian-news.git"
+  },
+  "author": "Vitaliy Kovalev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kovitals/ukrainian-news/issues"
+  },
+  "homepage": "https://github.com/kovitals/ukrainian-news#readme",
+  "devDependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "webpack": "^2.3.2"
+  }
+}
