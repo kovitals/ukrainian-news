@@ -5,15 +5,13 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
 
     entry: {
-        'background': './src/background.js',
-        'app': './src/news.js',
-        'options': './src/options.js'
+        background: path.join(__dirname, "src", "js", "background.js")
     },
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].bundle.js',
-        sourceMapFilename: '[name].bundle.map'
+        filename: '[name].js',
+        sourceMapFilename: '[name].map'
     },
 
     devtool: 'source-map',
@@ -31,6 +29,13 @@ module.exports = {
         //
         //     // Loaders for other file types can go here
         // ],
+    },
+
+    module: {
+        rules: [
+            { test: /\.js$/, loader: "babel-loader", exclude: /node_modules/ },
+            { test: /\.css$/, loader: "style-loader!css-loader", exclude: /node_modules/  }
+        ]
     },
 
     plugins:[

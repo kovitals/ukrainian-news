@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/kovitals/ukrainian-news#readme",
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
     "copy-webpack-plugin": "^4.0.1",
     "webpack": "^2.3.2"
   }
