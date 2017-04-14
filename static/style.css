@@ -1,6 +1,6 @@
 @font-face {
     font-family: titleFont;
-    src: url(resource/Arsenal-Regular.otf);
+    src: url(../../resource/Arsenal-Regular.otf);
 }
 
 body {
@@ -60,11 +60,11 @@ li > .logo {
 }
 
 li > .hideItem {
-    background: url("img/hide.gif") no-repeat 6px 3px
+    background: url("../../img/hide.gif") no-repeat 6px 3px
 }
 
 li > .newTab {
-    background: url("img/newtab.png") no-repeat 3px 3px
+    background: url("../../img/newtab.png") no-repeat 3px 3px
 }
 
 .time {
