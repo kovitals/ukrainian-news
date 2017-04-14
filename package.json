@@ -1,10 +1,10 @@
 {
   "name": "ukrainian-news",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів.",
   "main": "background.js",
   "scripts": {
-    "build": "webpack"
+    "build": "node ./utils/cleanup.dist.js ../dist && node ./utils/generate.manifest.js && webpack"
   },
   "repository": {
     "type": "git",
@@ -24,6 +24,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^2.28.0",
     "style-loader": "^0.16.1",
-    "webpack": "^2.3.2"
+    "webpack": "^2.3.2",
+    "zip-dir": "^1.0.2"
   }
 }

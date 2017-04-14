@@ -1,8 +1,9 @@
 {
   "manifest_version": 2,
   "name": "Українські новини",
-  "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.5.3",
+  "description": "",
+  "version": "",
+  "author": "Vitaliy Kovalev",
   "options_page": "options.html",
   "background": {
     "scripts": [
