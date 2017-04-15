@@ -1,22 +1,28 @@
-import Common from './common/common';
-// import News from './news';
-import Tracker from './background/tracker';
+import common from './common';
+import newsGenerator from './news';
+import ga from './analytics/ga';
 
-var common = Common();
-// var news = News();
-var ga = Tracker();
+// initialize Google Analytics;
+ga();
 
-console.log('HW. ' + common.options.getUpdatePeriod());
+updateBadge();
+
+// TODO should be used chrome.runtime.sendMessage to communicate with view;
+
+function updateBadge() {
+    chrome.browserAction.setBadgeText({
+        text: newsGenerator.requestNews().length.toString()
+    });
+}
 
 chrome.alarms.create("ukrainian-news", {
     delayInMinutes: 1,
-    periodInMinutes: parseInt(common.options.getUpdatePeriod())
+    periodInMinutes: common.options.getUpdatePeriod()
 });
 
 chrome.alarms.onAlarm.addListener(function (alarm) {
-    if (alarm.name === "ukrainian-news") {
-        chrome.browserAction.setBadgeText({
-             text: '22' //news.newsGenerator.requestNews().length.toString()
-        });
-    }
+
+    if (alarm.name === "ukrainian-news")
+        updateBadge();
+
 });

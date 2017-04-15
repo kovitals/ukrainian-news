@@ -9,7 +9,7 @@ module.exports = {
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
         options: path.join(__dirname, "src", "js", "options.js"),
-        news: path.join(__dirname, "src", "js", "news.js")
+        popup: path.join(__dirname, "src", "js", "popup.js")
     },
 
     output: {
@@ -19,6 +19,8 @@ module.exports = {
     },
 
     devtool: 'source-map',
+
+    watch: true,
 
     module: {
         rules: [
@@ -45,9 +47,9 @@ module.exports = {
         ]),
 
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, "src", "news.html"),
-            filename: "news.html",
-            chunks: ["news"]
+            template: path.join(__dirname, "src", "popup.html"),
+            filename: "popup.html",
+            chunks: ["popup"]
         }),
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "options.html"),

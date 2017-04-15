@@ -1,6 +1,4 @@
-import Common from './common/common';
-
-var common = Common();
+import common from './common';
 
 // Saves selected rss chanel to local storage
 function save_options() {
