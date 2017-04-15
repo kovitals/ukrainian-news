@@ -1,6 +1,6 @@
 const zipdir = require('zip-dir');
 
-zipdir('public', {saveTo: 'build/build.zip'}, function (err, buffer){
+zipdir('dist', {saveTo: 'build_' + process.env.npm_package_version + '.zip'}, function (err, buffer){
    if(err) {
       console.log('An error occurred during archiving:', err);
    } else {

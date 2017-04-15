@@ -4,6 +4,10 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'production');
+
+console.log('isProduction: ' + isProduction);
+
 module.exports = {
 
     entry: {
@@ -18,9 +22,9 @@ module.exports = {
         sourceMapFilename: '[name].map'
     },
 
-    devtool: 'source-map',
+    devtool: isProduction ? '' : 'eval',
 
-    watch: true,
+    watch: !isProduction,
 
     module: {
         rules: [
@@ -56,6 +60,7 @@ module.exports = {
             filename: "options.html",
             chunks: ["options"]
         })
+
         // new webpack.optimize.UglifyJsPlugin({
         //     sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
         // })
