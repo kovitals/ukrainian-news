@@ -5,8 +5,9 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'production');
+const watch = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'dev-watch');
 
-console.log('isProduction: ' + isProduction);
+console.log('isProduction: ' + isProduction + "\nwatch:" + watch);
 
 module.exports = {
 
@@ -22,9 +23,9 @@ module.exports = {
         sourceMapFilename: '[name].map'
     },
 
-    devtool: isProduction ? '' : 'eval',
+    devtool: isProduction ? '' : 'source-map',
 
-    watch: !isProduction,
+    watch: watch,
 
     module: {
         rules: [
@@ -39,6 +40,10 @@ module.exports = {
                     fallback: "style-loader",
                     use: "css-loader"
                 })
+            },
+            {
+                test: /\.json$/,
+                use: 'json-loader'
             }
         ]
     },

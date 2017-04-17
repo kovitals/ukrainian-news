@@ -11,21 +11,6 @@
     ]
   },
   "permissions": [
-    "http://www.pravda.com.ua/rss/view_news/",
-    "https://lb.ua/rss/ukr/rss.xml",
-    "http://news.liga.net/news/rss.xml",
-    "http://rss.unian.net/site/news_rus.rss",
-    "http://censor.net.ua/includes/news_ru.xml",
-    "http://zn.ua/rss",
-    "http://news.finance.ua/rss",
-    "http://nv.ua/xml/rss.xml",
-    "https://tsn.ua/rss",
-    "http://ua.interfax.com.ua/news/last.rss",
-    "http://k.img.com.ua/rss/ru/all_news2.0.xml",
-    "https://gazeta.ua/rss",
-    "http://112.ua/rss/index.rss",
-    "http://espreso.tv/rss",
-    "http://gordonua.com/xml/rss.html",
     "storage",
     "alarms"
   ],
