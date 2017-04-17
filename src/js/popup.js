@@ -1,5 +1,9 @@
 import newsGenerator from './news';
 import common from './common';
+import ga from './analytics/ga';
+
+// initialize Google Analytics;
+ga();
 
 /**
  * Mark item as read and hide element from list

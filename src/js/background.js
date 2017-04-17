@@ -1,9 +1,5 @@
 import common from './common';
 import newsGenerator from './news';
-import ga from './analytics/ga';
-
-// initialize Google Analytics;
-ga();
 
 updateBadge();
 
