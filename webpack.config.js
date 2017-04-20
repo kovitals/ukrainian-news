@@ -9,7 +9,7 @@ const watch = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'dev-watch
 
 console.log('isProduction: ' + isProduction + "\nwatch:" + watch);
 
-module.exports = {
+var options = {
 
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
@@ -31,8 +31,13 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                loader: "babel-loader",
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['es2015']
+                    }
+                }
             },
             {
                 test: /\.css$/,
@@ -48,11 +53,12 @@ module.exports = {
         ]
     },
 
-    plugins:[
+    plugins: [
+        //TODO add CSS preprocessor and move *.css to src dir;
         // new ExtractTextPlugin("css/options.css"),
 
         new CopyWebpackPlugin([
-            { from: 'static' }
+            {from: 'static'}
         ]),
 
         new HtmlWebpackPlugin({
@@ -60,14 +66,17 @@ module.exports = {
             filename: "popup.html",
             chunks: ["popup"]
         }),
+
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "options.html"),
             filename: "options.html",
             chunks: ["options"]
-        })
+        }),
 
-        // new webpack.optimize.UglifyJsPlugin({
-        //     sourceMap: options.devtool && (options.devtool.indexOf("sourcemap") >= 0 || options.devtool.indexOf("source-map") >= 0)
-        // })
+        new webpack.optimize.UglifyJsPlugin({
+            sourceMap: !isProduction
+        })
     ]
 };
+
+module.exports = options;

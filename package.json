@@ -4,9 +4,9 @@
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів.",
   "main": "background.js",
   "scripts": {
-`    "build": "node utils/generate.manifest.js && webpack",
+    "build": "node utils/generate.manifest.js && webpack",
     "build-watch": "set NODE_ENV=dev-watch && npm run build",
-    "prod": "set NODE_ENV=production && node utils/cleanup.dist.js ../dist && npm run build && node utils/zip.build.js"
+    "build-prod": "set NODE_ENV=production && node utils/cleanup.dist.js ../dist && npm run build && node utils/zip.build.js"
   },
   "repository": {
     "type": "git",
@@ -21,12 +21,15 @@
   "devDependencies": {
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "html-webpack-plugin": "^2.28.0",
     "json-loader": "^0.5.4",
     "style-loader": "^0.16.1",
+    "uglify-js": "^2.8.22",
+    "uglifyjs-webpack-plugin": "^0.4.3",
     "webpack": "^2.3.2",
     "zip-dir": "^1.0.2"
   }
