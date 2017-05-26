@@ -8,6 +8,8 @@ var manifest = require("../src/manifest.json"),
 
 console.log( 'Generate manifest.json;');
 
+var distDir = path.join(__dirname, "../dist");
+
 Object.keys(channels).forEach(function (key) {
     manifest.permissions.push( channels[key].rss );
 });
@@ -16,7 +18,11 @@ Object.keys(channels).forEach(function (key) {
 manifest.description = process.env.npm_package_description;
 manifest.version = process.env.npm_package_version;
 
+if( !fileSystem.existsSync(distDir) ){
+    fileSystem.mkdirSync(distDir);
+}
+
 fileSystem.writeFileSync(
-    path.join(__dirname, "../dist/manifest.json"),
+    distDir + '/manifest.json',
     JSON.stringify(manifest)
 );
