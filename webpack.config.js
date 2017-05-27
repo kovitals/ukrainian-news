@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
+//const nodeEnv =
 const isProduction = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'production');
 const watch = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'dev-watch');
 
@@ -13,8 +14,8 @@ var options = {
 
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
-        options: path.join(__dirname, "src", "js", "options.js"),
-        popup: path.join(__dirname, "src", "js", "popup.js")
+        options: [path.join(__dirname, "src", "js", "options.js"), path.join(__dirname, "src", "css", "options.css")],
+        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
     },
 
     output: {
@@ -49,16 +50,23 @@ var options = {
             {
                 test: /\.json$/,
                 use: 'json-loader'
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg|ico|gif|otf)$/,
+                loader: 'url-loader?limit=100000'
             }
         ]
     },
 
     plugins: [
-        //TODO add CSS preprocessor and move *.css to src dir;
-        // new ExtractTextPlugin("css/options.css"),
 
-        new CopyWebpackPlugin([
-            {from: 'static'}
+        new CopyWebpackPlugin([{
+                from: path.join(__dirname, 'static', 'icons'),
+                to: 'icons'
+            },{
+                from: path.join(__dirname, 'static', 'img'),
+                to: 'img'
+            }
         ]),
 
         new HtmlWebpackPlugin({
@@ -75,6 +83,10 @@ var options = {
 
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: !isProduction
+        }),
+
+        new ExtractTextPlugin({
+            filename: "[name].css"
         })
     ]
 };

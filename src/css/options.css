@@ -1,6 +1,6 @@
 @font-face {
     font-family: titleFont;
-    src: url(fonts/Arsenal-Regular.otf);
+    src: url(../../static/fonts/Arsenal-Regular.otf);
 }
 
 body {
@@ -15,7 +15,7 @@ h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #6f6f6f;
-    background: url(img/icon48.png) no-repeat left center;
+    background: url(../../static/icons/icon48.png) no-repeat left center;
     background-size: 30px 30px;
     width: 310px;
 }
