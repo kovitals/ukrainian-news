@@ -4,9 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-//const nodeEnv =
-const isProduction = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'production');
-const watch = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'dev-watch');
+const nodeEnv = process.env.NODE_ENV;
+const isProduction = nodeEnv && (nodeEnv.trim() === 'production');
+const watch = nodeEnv && (nodeEnv.trim() === 'dev-watch');
 
 console.log('isProduction: ' + isProduction + "\nwatch:" + watch);
 
@@ -86,7 +86,7 @@ var options = {
         }),
 
         new ExtractTextPlugin({
-            filename: "[name].css"
+            filename: "[name].[contenthash].css"
         })
     ]
 };
