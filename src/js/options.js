@@ -1,4 +1,6 @@
 import common from './common';
+import $ from 'jquery';
+import materialize from 'materialize-css';
 
 // Saves selected rss chanel to local storage
 function save_options() {

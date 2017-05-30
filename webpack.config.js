@@ -14,7 +14,7 @@ var options = {
 
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
-        options: [path.join(__dirname, "src", "js", "options.js"), path.join(__dirname, "src", "css", "options.css")],
+        options: [path.join(__dirname, "src", "js", "options.js"), path.join(__dirname, "src", "scss", "options.scss")],
         popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
     },
 
@@ -41,10 +41,14 @@ var options = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.(scss|css)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }]
                 })
             },
             {
