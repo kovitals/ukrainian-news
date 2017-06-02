@@ -14,8 +14,13 @@ var options = {
 
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
-        options: [path.join(__dirname, "src", "js", "options.js"), path.join(__dirname, "src", "scss", "options.scss")],
-        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
+
+        options: [  path.join(__dirname, "src", "js", "options.js"),
+                    path.join(__dirname, "src", "scss", "options.scss")],
+
+        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")],
+
+        materialize: path.join(__dirname, "vendor", "materialize-src", 'js', 'bin', "materialize.js")
     },
 
     output: {
@@ -27,6 +32,10 @@ var options = {
     devtool: isProduction ? '' : 'source-map',
 
     watch: watch,
+
+    externals: [
+      './vendor/materialize-src'
+    ],
 
     module: {
         rules: [
@@ -82,7 +91,7 @@ var options = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "options.html"),
             filename: "options.html",
-            chunks: ["options"]
+            chunks: ['materialize', "options"]
         }),
 
         new webpack.optimize.UglifyJsPlugin({

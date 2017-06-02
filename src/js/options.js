@@ -1,8 +1,7 @@
 import common from './common';
-import $ from 'jquery';
-import materialize from 'materialize-css';
 
 // Saves selected rss chanel to local storage
+/*
 function save_options() {
 
     var rss_channels_config = {};
@@ -69,3 +68,4 @@ Object.keys(common.newsSources).forEach(function (key) {
 
     document.getElementsByClassName("newsSources")[0].appendChild(newsSourceItem);
 });
+    */

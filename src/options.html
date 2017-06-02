@@ -5,43 +5,27 @@
     <title>Українські новини - налаштування</title>
 </head>
 <body>
-<div class="logo">
-    <h2>Українські новини</h2>
-</div>
-<div class="option">
-    <h3>НАЛАШТУВАННЯ:</h3>
-    <div>
-        <h4>вибрати джерела новин</h4>
-        <ul class="newsSources">
-            <!--Items generates by JS in options.js -->
-        </ul>
-    </div>
-    <div>
-        <h4>показувати останніх новин з джерела</h4>
-        <div class="sub-block">
-            <label>кількість:</label><input type="number" min="1" name="show_last_items" id="show_last_items" size="2">
+    <div class="row"></div>
+    <div class="row">
+        <div class="col s3"></div>
+        <div class="col s6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Налаштування</span>
+                    <p>I am a very simple card. I am good at containing small bits of information.
+                        I am convenient because I require little markup to use effectively.</p>
+                    <a class="waves-effect waves-light btn">button</a>
+                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
+                    <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>
+                </div>
+                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                <div class="card-action">
+                    <a href="#">This is a link</a>
+                    <a href="#">This is a link</a>
+                </div>
+            </div>
         </div>
+        <div class="col s3"></div>
     </div>
-    <div>
-        <h4>періодичність оновлення новин в фоновому режимі</h4>
-        <div class="sub-block">
-            <label>хвилини:</label><input type="number" min="5" name="background_period_config"
-                                          id="background_period_config" size="2">
-        </div>
-    </div>
-    <div>
-        <h4>ширина вікна з новинами</h4>
-        <div class="sub-block">
-            <label>пікселі:</label><input type="number" min="200" name="window_width_config" id="window_width_config"
-                                          size="3">
-        </div>
-    </div>
-    <div id="status"></div>
-    <br>
-    <div style="text-align: center">
-        <button id="save">Зберегти</button>
-    </div>
-</div>
-<div class="copyright">© Права на матеріали належать сайтам-джерелам новин</div>
 </body>
 </html>
