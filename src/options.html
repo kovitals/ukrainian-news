@@ -5,27 +5,90 @@
     <title>Українські новини - налаштування</title>
 </head>
 <body>
-    <div class="row"></div>
-    <div class="row">
-        <div class="col s3"></div>
-        <div class="col s6">
-            <div class="card">
-                <div class="card-content">
-                    <span class="card-title">Налаштування</span>
-                    <p>I am a very simple card. I am good at containing small bits of information.
-                        I am convenient because I require little markup to use effectively.</p>
-                    <a class="waves-effect waves-light btn">button</a>
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>button</a>
-                    <a class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>button</a>
+<div class="row"></div>
+<div class="row">
+    <div class="col s2 m3 l4"></div>
+    <div class="col s8 m6 l4">
+
+        <div class="card-panel">
+            <span class="card-title">Налаштування</span>
+
+            <div id="collection2">
+                <label for="collection">Джерела новин:</label>
+                <p>
+                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked"/>
+                    <label for="filled-in-box"><img src="img/es-icon.ico"> Лівий Берег</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="filled-in-box2"/>
+                    <label for="filled-in-box2"><img src="img/ix-icon.ico"> Лівий Берег</label>
+                </p>
+                <p>
+                    <input type="checkbox" class="filled-in" id="filled-in-box3" checked="checked"/>
+                    <label for="filled-in-box3"><img src="img/kr-icon.ico"> Лівий Берег</label>
+                </p>
+            </div>
+
+            <label for="num">Показувати останніх новин з джерела: <span id="num2">8</span></label>
+            <p class="range-field">
+                <input type="range" id="num" min="0" max="100"/>
+            </p>
+
+            <label for="delay" class="settings-block">Періодичність оновлення новин: <span id="delay2">2 години</span></label>
+            <p class="range-field">
+                <input type="range" id="delay" min="0" max="100"/>
+            </p>
+
+            <span class="settings-block">
+                    <label for="width">Ширина вікна з новинами: <span id="width2">650 пікселей</span></label>
+                    <p class="range-field">
+                        <input type="range" id="width" min="0" max="100"/>
+                    </p>
+                </span>
+            <p class="flow-text">© Права на матеріали належать сайтам-джерелам новин</p>
+        </div>
+
+        <div class="card z-depth-2">
+            <div class="card-content">
+                <span class="card-title">Налаштування</span>
+
+                <div id="collection">
+                    <label for="collection">Джерела новин:</label>
+                    <p>
+                        <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked"/>
+                        <label for="filled-in-box"><img src="img/es-icon.ico"> Лівий Берег</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="filled-in" id="filled-in-box2"/>
+                        <label for="filled-in-box2"><img src="img/ix-icon.ico"> Лівий Берег</label>
+                    </p>
+                    <p>
+                        <input type="checkbox" class="filled-in" id="filled-in-box3" checked="checked"/>
+                        <label for="filled-in-box3"><img src="img/kr-icon.ico"> Лівий Берег</label>
+                    </p>
                 </div>
-                <a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                    <a href="#">This is a link</a>
-                </div>
+
+                <label for="num">Показувати останніх новин з джерела: <span id="num2">8</span></label>
+                <p class="range-field">
+                    <input type="range" id="num" min="0" max="100"/>
+                </p>
+
+                <label for="delay" class="settings-block">Періодичність оновлення новин: <span id="delay2">2 години</span></label>
+                <p class="range-field">
+                    <input type="range" id="delay" min="0" max="100"/>
+                </p>
+
+                <span class="settings-block">
+                    <label for="width">Ширина вікна з новинами: <span id="width2">650 пікселей</span></label>
+                    <p class="range-field">
+                        <input type="range" id="width" min="0" max="100"/>
+                    </p>
+                </span>
+                <p class="flow-text">© Права на матеріали належать сайтам-джерелам новин</p>
             </div>
         </div>
-        <div class="col s3"></div>
     </div>
+    <div class="col s2 m3 l4"></div>
+</div>
 </body>
 </html>
