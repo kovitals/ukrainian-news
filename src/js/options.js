@@ -1,26 +1,31 @@
-import common from './common';
-import noUiSlider from 'nouislider';
-import m from '../../vendor/materialize-src/js/bin/materialize';
+//import common from './common';
+// import noUiSlider from 'nouislider';
+import '../../vendor/materialize-src/js/bin/materialize';
 
 $(document).ready(function() {
     initialize();
 });
 
 function initialize() {
-    console.log( document.getElementById('num') );
 
-    // var slider = document.getElementById('num');
-    //
-    // noUiSlider.create(slider, {
-    //     start: [20, 80],
-    //     connect: true,
-    //     step: 1,
-    //     range: {
-    //         'min': 0,
-    //         'max': 100
-    //     }
-    // });
+    // Materialize.toast('Deals synchronized.', 3000);
 
+    var slider = document.getElementById('num');
+
+    console.log( slider );
+
+
+    noUiSlider.create(slider, {
+        start: [ 8 ],
+        range: {
+            'min': [  1 ],
+            'max': [ 20 ]
+        }
+    });
+
+    slider.noUiSlider.on('update', function( values, handle ) {
+        console.log(values[handle], values, handle);
+    });
 }
 
 // Saves selected rss chanel to local storage

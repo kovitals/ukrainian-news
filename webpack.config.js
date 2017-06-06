@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const ProvidePlugin = require('webpack-provide-global-plugin');
 
 const nodeEnv = process.env.NODE_ENV;
 const isProduction = nodeEnv && (nodeEnv.trim() === 'production');
@@ -26,8 +25,7 @@ var options = {
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        sourceMapFilename: '[name].map'
+        filename: '[name].js'
     },
 
     devtool: isProduction ? '' : 'source-map',
@@ -83,6 +81,14 @@ var options = {
             }
         ]),
 
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery',
+            noUiSlider: 'nouislider'
+        }),
+
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "popup.html"),
             filename: "popup.html",
@@ -100,16 +106,9 @@ var options = {
         }),
 
         new ExtractTextPlugin({
-            filename: "[name].[contenthash].css"
-        }),
-
-        new ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery'
+            filename: "[name].[contenthash].css",
         })
     ]
 };
 
 module.exports = options;
-
-console.log( options.devtool )

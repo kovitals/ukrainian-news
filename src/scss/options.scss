@@ -6,11 +6,20 @@ body{
   background-color: #F8F8F8;
 }
 
+.s-icon{
+  width: 13px;
+  height: 13px;
+}
+
+input[type=range] {
+  margin: 0;
+}
+
 .settings-block{
-  margin-top: 30px;
 }
 
 .settings-title{
+  font-family: "Roboto", sans-serif;
   margin-bottom: 30px;
 }
 
