@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const ProvidePlugin = require('webpack-provide-global-plugin');
 
 const nodeEnv = process.env.NODE_ENV;
 const isProduction = nodeEnv && (nodeEnv.trim() === 'production');
@@ -91,7 +92,7 @@ var options = {
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "options.html"),
             filename: "options.html",
-            chunks: ['materialize', "options"]
+            chunks: ["options"]
         }),
 
         new webpack.optimize.UglifyJsPlugin({
@@ -100,8 +101,15 @@ var options = {
 
         new ExtractTextPlugin({
             filename: "[name].[contenthash].css"
+        }),
+
+        new ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery'
         })
     ]
 };
 
 module.exports = options;
+
+console.log( options.devtool )

@@ -1,4 +1,27 @@
 import common from './common';
+import noUiSlider from 'nouislider';
+import m from '../../vendor/materialize-src/js/bin/materialize';
+
+$(document).ready(function() {
+    initialize();
+});
+
+function initialize() {
+    console.log( document.getElementById('num') );
+
+    // var slider = document.getElementById('num');
+    //
+    // noUiSlider.create(slider, {
+    //     start: [20, 80],
+    //     connect: true,
+    //     step: 1,
+    //     range: {
+    //         'min': 0,
+    //         'max': 100
+    //     }
+    // });
+
+}
 
 // Saves selected rss chanel to local storage
 /*

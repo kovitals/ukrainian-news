@@ -32,12 +32,14 @@
     "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
     "node-sass": "^4.5.2",
+    "nouislider": "^10.0.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "uglify-js": "^2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.3",
     "url-loader": "^0.5.8",
     "webpack": "^2.3.2",
+    "webpack-provide-global-plugin": "0.0.1",
     "zip-dir": "^1.0.2"
   }
 }
