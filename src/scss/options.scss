@@ -1,14 +1,29 @@
 $roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
 
+@import "../../vendor/material-icons/icon.css";
 @import '../../vendor/materialize-src/sass/materialize';
+
 
 body{
   background-color: #F8F8F8;
 }
 
+.row{
+  //min-width: 600px;
+}
+
+a.s-link:hover{
+    color: gold;
+  }
+
+.s-channel{
+  margin-bottom: 0px;
+}
+
 .s-icon{
-  width: 13px;
-  height: 13px;
+  margin-right: 10px;
+  //width: 13px;
+  //height: 13px;
 }
 
 input[type=range] {
@@ -18,7 +33,7 @@ input[type=range] {
 .settings-block{
 }
 
-.settings-title{
+.s-title{
   font-family: "Roboto", sans-serif;
   margin-bottom: 30px;
 }
@@ -35,3 +50,5 @@ input[type=range] {
 .settings-item{
 }
 
+.s-collection {
+}

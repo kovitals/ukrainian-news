@@ -1,4 +1,4 @@
-//import common from './common';
+import common from './common';
 // import noUiSlider from 'nouislider';
 import '../../vendor/materialize-src/js/bin/materialize';
 
@@ -26,6 +26,23 @@ function initialize() {
     slider.noUiSlider.on('update', function( values, handle ) {
         console.log(values[handle], values, handle);
     });
+
+    let selectedChannels = JSON.parse(common.options.getRSSChannels());
+    let channels = common.newsSources;
+    let collection = document.getElementById('collection');
+
+    for (let key in channels){
+        let channel = channels[key];
+        let checked = (selectedChannels[key] != undefined) ? 'checked' : '';
+        let p = document.createElement('p');
+        p.className = "col s6 s-channel";
+        p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
+                        <label for="${key}">
+                        <img src="img/${key}-icon.ico" class="s-icon"><a href="${channel.http}" target="_blank" class="s-link">${channel.name}
+                        </label>`;//class="circle"
+
+        collection.appendChild(p);
+    }
 }
 
 // Saves selected rss chanel to local storage
