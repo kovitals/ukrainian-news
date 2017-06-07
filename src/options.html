@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="src/scss/options.scss"/>
     <meta charset="UTF-8">
     <title>Українські новини - налаштування</title>
 </head>
@@ -9,43 +8,49 @@
 <div class="row"></div>
 <div class="row">
     <div class="col s1 m1 l3 xl4"></div>
-    <div class="col s10 m10 l6 xl4">
 
+    <div class="col s10 m10 l6 xl4">
         <div class="card-panel">
             <h5 class="s-title">Налаштування</h5>
-            <label for="collection">Джерела новин:</label>
-            <div id="collection" class="s-collection row">
-                <!--<p>-->
-                    <!--<input type="checkbox" id="filled-in-box" checked="checked"/>-->
-                    <!--<label for="filled-in-box"><img src="img/es-icon.ico" class="circle"> Лівий Берег</label>-->
-                <!--</p>-->
+
+            <div class="section">
+                <label for="collection">Джерела новин:</label>
+                <div id="collection" class="s-collection row">
+                    <!--<p>-->
+                        <!--<input type="checkbox" id="filled-in-box" checked="checked"/>-->
+                        <!--<label for="filled-in-box"><img src="img/es-icon.ico" class="circle"> Лівий Берег</label>-->
+                    <!--</p>-->
+                </div>
             </div>
 
-            <p class="s-title"></p>
+            <div class="section">
+                <label for="num">Показувати останніх новин з джерела: <span id="num2">8</span></label>
+                <p class="range-field">
+                    <input type="range" id="num" min="1" max="20"/>
+                </p>
+            </div>
 
-            <!--<i class="small material-icons">schedule</i>-->
-            <label for="num">Показувати останніх новин з джерела: <span id="num2">8</span></label>
-            <p class="range-field">
-                <input type="range" id="num" min="1" max="20"/>
-            </p>
+            <div class="section">
+                <label for="delay" class="settings-block">Періодичність оновлення новин: <span id="delay2">2 години</span></label>
+                <p class="range-field">
+                    <input type="range" id="delay" min="5" max="120"/>
+                </p>
+            </div>
 
-            <p class="s-title"></p>
-            <label for="delay" class="settings-block">Періодичність оновлення новин: <span id="delay2">2 години</span></label>
-            <p class="range-field">
-                <input type="range" id="delay" min="5" max="120"/>
-            </p>
+            <div class="section">
+                <!--<i class="small material-icons col s1">schedule</i>-->
+                <label for="width">Ширина вікна з новинами: <span id="width2">650 пікселей</span></label>
+                <p class="range-field">
+                    <input type="range" id="width" min="400" max="800"/>
+                </p>
+            </div>
 
-            <p class="s-title"></p>
-            <span class="settings-block">
-                    <label for="width">Ширина вікна з новинами: <span id="width2">650 пікселей</span></label>
-                    <p class="range-field">
-                        <input type="range" id="width" min="400" max="800"/>
-                    </p>
-                </span>
-
-            <p class="flow-text settings-copyright">© Права на матеріали належать сайтам-джерелам новин</p>
+            <div class="section">
+                <p class="flow-text settings-copyright">© Права на матеріали належать сайтам-джерелам новин</p>
+            </div>
         </div>
     </div>
+
     <div class="col s1 m1 l3 xl4"></div>
 </div>
 </body>
