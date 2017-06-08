@@ -1,17 +1,16 @@
 $roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
 
-@import "../../vendor/material-icons/icon.css";
+//@import "../../vendor/material-icons/icon.css";
 @import '../../vendor/materialize-src/sass/materialize';
-
 //$primary-color: color("materialize-blue", "darken-4");
-
-//.ilike-blue-container {
-//  @extend .blue-text, .text-lighten-4;
-//}
-
 
 body{
   background-color: #F8F8F8;
+  font-family: "Roboto", sans-serif;
+}
+
+.s-range-value{
+  font-weight: 500;
 }
 
 .noselect {
@@ -24,12 +23,11 @@ body{
 }
 
 .row{
-  //min-width: 600px;
   margin-bottom: 10px;
 }
 
 a.s-link:hover{
-    color: gold;
+    color: goldenrod;
   }
 
 .s-channel{
@@ -37,36 +35,25 @@ a.s-link:hover{
 }
 
 .s-icon{
-  margin-right: 10px;
-  //width: 13px;
-  //height: 13px;
+  margin-right: 8px;
 }
 
 input[type=range] {
   margin: 0;
 }
 
-.settings-block{
-}
-
 .s-title{
-  font-family: "Roboto", sans-serif;
   color: #5a5a5a;
   cursor: default;
+  //font-weight: 400;
 }
 
 .s-copyright{
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  //font-family: "Segoe UI", Tahoma, sans-serif;
   font-size: 0.8rem;
   color: #9e9e9e;
   text-align: center;
   margin-top: 30px;
   cursor: default;
   font-weight: normal;
-}
-
-.settings-item{
-}
-
-.s-collection {
 }

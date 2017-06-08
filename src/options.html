@@ -19,24 +19,25 @@
             </div>
 
             <div class="section">
-                <label for="num">Відображати новин з джерела: <span id="num2">8</span></label>
+                <form>
+                    <label for="num-news">Відображати новин з джерела: <span class="s-range-value" id="num-news-value"></span></label>
+                    <p class="range-field">
+                        <input type="range" id="num-news" min="1" max="20"/>
+                    </p>
+                </form>
+            </div>
+
+            <div class="section">
+                <label for="update-delay">Періодичність оновлення новин: <span class="s-range-value" id="update-delay-value"></span></label>
                 <p class="range-field">
-                    <input type="range" id="num" min="1" max="20"/>
+                    <input type="range" id="update-delay" min="5" max="120"/>
                 </p>
             </div>
 
             <div class="section">
-                <label for="delay" class="settings-block">Періодичність оновлення новин: <span id="delay2">2 години</span></label>
+                <label for="app-width">Ширина вікна з новинами: <span class="s-range-value" id="app-width-value"></span></label>
                 <p class="range-field">
-                    <input type="range" id="delay" min="5" max="120"/>
-                </p>
-            </div>
-
-            <div class="section">
-                <!--<i class="small material-icons col s1">schedule</i>-->
-                <label for="width">Ширина вікна з новинами: <span id="width2">650 пікселей</span></label>
-                <p class="range-field">
-                    <input type="range" id="width" min="400" max="800"/>
+                    <input type="range" id="app-width" min="400" max="800"/>
                 </p>
             </div>
 

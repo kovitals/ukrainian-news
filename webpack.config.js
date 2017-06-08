@@ -18,9 +18,7 @@ var options = {
         options: [  path.join(__dirname, "src", "js", "options.js"),
                     path.join(__dirname, "src", "scss", "options.scss")],
 
-        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")],
-
-        materialize: path.join(__dirname, "vendor", "materialize-src", 'js', 'bin', "materialize.js")
+        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
     },
 
     output: {
@@ -31,10 +29,6 @@ var options = {
     devtool: isProduction ? '' : 'source-map',
 
     watch: watch,
-
-    externals: [
-      './vendor/materialize-src'
-    ],
 
     module: {
         rules: [
@@ -85,8 +79,7 @@ var options = {
             $: 'jquery',
             jQuery: 'jquery',
             'window.$': 'jquery',
-            'window.jQuery': 'jquery',
-            noUiSlider: 'nouislider'
+            'window.jQuery': 'jquery'
         }),
 
         new HtmlWebpackPlugin({
@@ -106,7 +99,7 @@ var options = {
         }),
 
         new ExtractTextPlugin({
-            filename: "[name].[contenthash].css",
+            filename: "[name].css",
         })
     ]
 };
