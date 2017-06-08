@@ -14,6 +14,11 @@ body{
   background-color: #F8F8F8;
 }
 
+.card-panel{
+  width: 500px;
+  margin: 16px auto;
+}
+
 .row{
   //min-width: 600px;
   margin-bottom: 10px;
@@ -43,6 +48,7 @@ input[type=range] {
 .s-title{
   font-family: "Roboto", sans-serif;
   color: #5a5a5a;
+  cursor: default;
 }
 
 .s-copyright{
