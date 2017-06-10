@@ -30,6 +30,10 @@ var options = {
 
     watch: watch,
 
+    watchOptions: {
+        aggregateTimeout: 150,
+    },
+
     module: {
         rules: [
             {
