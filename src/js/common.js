@@ -2,6 +2,8 @@ import channels from '../channels.json';
 
 var common = {};
 
+var rssChannels;
+
 // define news rss channels with an additional information
 common.newsSources = channels;
 
@@ -57,12 +59,25 @@ common.options = {
         return this.get(common.storageKey.windowWidth);
     },
 
-    setRSSChannels: function (value) {
-        this.set(common.storageKey.rssChannels, value);
+    removeRSSChannel: function (id) {
+        rssChannels[id] = false;
+        console.log('removeRSSChannel', id, rssChannels);
+        this.set(common.storageKey.rssChannels, JSON.stringify(rssChannels));
+    },
+
+    addRSSChannel: function (id) {
+        rssChannels[id] = true;
+        console.log('addRSSChannel', id, rssChannels);
+        this.set(common.storageKey.rssChannels, JSON.stringify(rssChannels));
     },
 
     getRSSChannels: function () {
-        return this.get(common.storageKey.rssChannels);
+        let channels = this.get(common.storageKey.rssChannels);
+
+        if (rssChannels == undefined)
+            rssChannels = JSON.parse(channels);
+
+        return rssChannels;
     },
 
     setUpdatePeriod: function (value) {
@@ -70,7 +85,7 @@ common.options = {
     },
 
     getUpdatePeriod: function () {
-        return parseInt( this.get(common.storageKey.updatePeriod) );
+        return parseInt(this.get(common.storageKey.updatePeriod));
     },
 
     setShowLastItems: function (value) {

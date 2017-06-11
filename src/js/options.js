@@ -15,13 +15,16 @@ $(document).ready(function () {
 });
 
 function initialize() {
-    let selectedChannels = JSON.parse(common.options.getRSSChannels());
+    console.log(this, 'initialize;');
+
+    let selectedChannels = common.options.getRSSChannels();
     let channels = common.newsSources;
     let collection = document.getElementById('collection');
 
     for (let key in channels) {
         let channel = channels[key];
-        let checked = (selectedChannels[key] != undefined) ? 'checked' : '';
+        console.log(key,selectedChannels[key]);
+        let checked = selectedChannels[key] ? 'checked' : '';
         let p = document.createElement('p');
         p.className = "col s6 s-channel";
         p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
@@ -40,7 +43,12 @@ function initialize() {
 }
 
 function checkboxChangeHandler(checkbox) {
-    console.log(checkbox.id);
+    console.log(checkbox.id, checkbox.checked);
+
+    if(checkbox.checked)
+        common.options.addRSSChannel(checkbox.id);
+    else
+        common.options.removeRSSChannel(checkbox.id);
 }
 
 function sliderChangeHandler(slider) {

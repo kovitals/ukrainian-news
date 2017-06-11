@@ -15,15 +15,16 @@ var newsGenerator = {
         // create request object
         var request = new XMLHttpRequest();
         // load from local storage rss-channels config
-        var rss_channels_config = JSON.parse(common.options.getRSSChannels());
+        var rss_channels_config = common.options.getRSSChannels();
         // define result
         var res = [];
 
+        console.log(common.newsSources, rss_channels_config);
 
         // request news per rss channel
         Object.keys(common.newsSources).forEach(function (key) {
             // retrieve data for enabled rss-channels or for all when no one selected
-            if (rss_channels_config == null || rss_channels_config[key] === "true" || Object.getOwnPropertyNames(rss_channels_config).length === 0) {
+            if (rss_channels_config == null || rss_channels_config[key] === "true" || rss_channels_config[key] || Object.getOwnPropertyNames(rss_channels_config).length === 0) {
                 try {
                     request.open("GET", common.newsSources[key].rss, false);
                     request.send();
