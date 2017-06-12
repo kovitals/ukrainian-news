@@ -8,7 +8,8 @@ body {
     font-family: arial, helvetica, sans-serif;
     color: #6f6f6f;
     font-size: 15px;
-    padding: 5px;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 
 a {
@@ -30,12 +31,14 @@ ul {
     padding: 0px;
     margin-top: 10px;
     display: inline-block;
-    overflow-y: hidden;
+    overflow: auto;
+    max-height: 500px;
+    margin-bottom: 0;
 }
 
 li {
     padding-top: 5px;
-    padding-bottom: 7px;
+    padding-bottom: 8px;
     border-top: 1px solid #d0d0d0;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -84,6 +87,8 @@ img#title {
 
 div#toolbar {
     float: right;
+    margin-right: 10px;
+    margin-bottom: 6px;
 }
 
 div#toolbar > a > img {
