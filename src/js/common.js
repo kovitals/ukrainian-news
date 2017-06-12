@@ -1,8 +1,9 @@
 import channels from '../channels.json';
+import Messenger from './messenger';
 
 var common = {};
-
 var rssChannels;
+let messenger = new Messenger();
 
 // define news rss channels with an additional information
 common.newsSources = channels;
@@ -81,6 +82,7 @@ common.options = {
     },
 
     setUpdatePeriod: function (value) {
+        messenger.sendMessage('delay', value);
         this.set(common.storageKey.updatePeriod, value);
     },
 
