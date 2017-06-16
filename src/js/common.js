@@ -75,6 +75,17 @@ common.options = {
     getRSSChannels: function () {
         let channels = this.get(common.storageKey.rssChannels);
 
+        if(!channels)
+        {
+            rssChannels = {};
+
+            Object.keys(common.newsSources).forEach(
+                function (key) {
+                    rssChannels[key] = true;
+                }
+            );
+        }
+
         if (rssChannels == undefined)
             rssChannels = JSON.parse(channels);
 

@@ -15,10 +15,6 @@ $(document).ready(function () {
 });
 
 function initialize() {
-    // console.log(this, 'initialize;');
-
-    // TODO remove default sliders values from HTML and check the first ext run;
-
     let selectedChannels = common.options.getRSSChannels();
     let channels = common.newsSources;
     let collection = document.getElementById('collection');
