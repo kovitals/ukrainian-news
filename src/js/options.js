@@ -26,9 +26,7 @@ function initialize() {
         let p = document.createElement('p');
         p.className = "col s6 s-channel";
         p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
-                        <label for="${key}">
-                        <img src="img/${key}-icon.ico" class="s-icon"><a href="${channel.http}" target="_blank" class="s-link">${channel.name}
-                        </label>`;//class="circle"
+                        <label for="${key}"><img src="img/${key}-icon.ico" class="s-icon white-text">${channel.name}</label>`;//<a href="${channel.http}" target="_blank" class="s-link">${channel.name}</a>
         collection.appendChild(p);
 
         let checkbox = document.getElementById(key);
