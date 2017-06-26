@@ -24,7 +24,7 @@ function initialize() {
         // console.log(key,selectedChannels[key]);
         let checked = selectedChannels[key] ? 'checked' : '';
         let p = document.createElement('p');
-        p.className = "col s6 s-channel";
+        p.className = "s-channel col s6";
         p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
                         <label for="${key}"><img src="img/${key}-icon.ico" class="s-icon white-text">${channel.name}</label>`;//<a href="${channel.http}" target="_blank" class="s-link">${channel.name}</a>
         collection.appendChild(p);
