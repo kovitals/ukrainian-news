@@ -19,6 +19,8 @@ function initialize() {
     let channels = common.newsSources;
     let collection = document.getElementById('collection');
 
+    //class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip"
+
     for (let key in channels) {
         let channel = channels[key];
         // console.log(key,selectedChannels[key]);
