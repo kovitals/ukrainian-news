@@ -1,5 +1,6 @@
 import common from './common';
 import '../../vendor/materialize-src/js/bin/materialize';
+import SourceItemView from './options/source-item-view'
 
 const SLIDER_ID_NUM_NEWS = 'num-news';
 const SLIDER_ID_UPDATE_DELAY = 'update-delay';
@@ -19,20 +20,19 @@ function initialize() {
     let channels = common.newsSources;
     let collection = document.getElementById('collection');
 
-    //class="btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="I am tooltip"
-
     for (let key in channels) {
-        let channel = channels[key];
-        // console.log(key,selectedChannels[key]);
-        let checked = selectedChannels[key] ? 'checked' : '';
-        let p = document.createElement('p');
-        p.className = "s-channel col s6";
-        p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
-                        <label for="${key}"><img src="img/${key}-icon.ico" class="s-icon white-text">${channel.name}</label>`;//<a href="${channel.http}" target="_blank" class="s-link">${channel.name}</a>
-        collection.appendChild(p);
 
-        let checkbox = document.getElementById(key);
-        checkbox.onchange = () => checkboxChangeHandler(checkbox);
+        let sourceItem = new SourceItemView(key, channels[key].name, selectedChannels[key]);
+        sourceItem.render(collection);
+
+        // let p = document.createElement('p');
+        // p.className = "s-channel col s6";
+        // p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
+        //                 <label for="${key}"><img src="img/${key}-icon.ico" class="s-icon white-text">${channel.name}</label>`;//<a href="${channel.http}" target="_blank" class="s-link">${channel.name}</a>
+        // collection.appendChild(p);
+        //
+        // let checkbox = document.getElementById(key);
+        // checkbox.onchange = () => checkboxChangeHandler(checkbox);
     }
 
     initializeSlider(SLIDER_ID_NUM_NEWS, common.options.getShowLastItems());
