@@ -31,7 +31,7 @@ var options = {
     watch: watch,
 
     watchOptions: {
-        aggregateTimeout: 150,
+        aggregateTimeout: 50,
     },
 
     module: {

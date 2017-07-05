@@ -21,19 +21,11 @@ function initialize() {
     let collection = document.getElementById('collection');
 
     for (let key in channels) {
-
-        let sourceItem = new SourceItemView(key, channels[key].name, selectedChannels[key]);
+        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, 'Відвідати сторінку', selectedChannels[key], checkboxChangeHandler);
         sourceItem.render(collection);
-
-        // let p = document.createElement('p');
-        // p.className = "s-channel col s6";
-        // p.innerHTML = `<input type="checkbox" id="${key}" ${checked}/>
-        //                 <label for="${key}"><img src="img/${key}-icon.ico" class="s-icon white-text">${channel.name}</label>`;//<a href="${channel.http}" target="_blank" class="s-link">${channel.name}</a>
-        // collection.appendChild(p);
-        //
-        // let checkbox = document.getElementById(key);
-        // checkbox.onchange = () => checkboxChangeHandler(checkbox);
     }
+
+    $('.tooltipped').tooltip({delay: 100});
 
     initializeSlider(SLIDER_ID_NUM_NEWS, common.options.getShowLastItems());
     initializeSlider(SLIDER_ID_UPDATE_DELAY, common.options.getUpdatePeriod());
