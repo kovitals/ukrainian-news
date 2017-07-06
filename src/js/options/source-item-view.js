@@ -11,19 +11,19 @@ class SourceItemView {
 
         // console.log(key, isChecked);
 
-        this.p = document.createElement('p');
-        this.p.className = "s-channel col s6";
+        this.span = document.createElement('span');
+        this.span.className = "s-channel col s6";
 
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = key;
         if (isChecked) checkbox.checked = true;
         checkbox.onchange = () => changeHandler(checkbox);
-        this.p.appendChild(checkbox);
+        this.span.appendChild(checkbox);
 
         let label = document.createElement('label');
         label.setAttribute('for', key);
-        this.p.appendChild(label);
+        this.span.appendChild(label);
 
         let a = document.createElement('a');
         a.className = 's-link';
@@ -42,7 +42,7 @@ class SourceItemView {
     }
 
     render(container) {
-        container.appendChild(this.p);
+        container.appendChild(this.span);
     }
 }
 

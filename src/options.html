@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Українські новини - налаштування</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <title>Українські новини - Налаштування</title>
+</head>
+<body>
+    <!--<h1 class="s-title">Налаштування</h1>-->
+    <div class="s-content">
 
-        <!--<h1 class="s-title">Налаштування</h1>-->
-
-        <div class="card-panel">
-            <div class="section">
-                <label for="collection">Джерела новин:</label>
-                <p id="collection" class="s-collection row">
-                    <!--<p>-->
-                    <!--<input type="checkbox" id="filled-in-box" checked="checked"/>-->
-                    <!--<label for="filled-in-box"><img src="img/es-icon.ico" class="circle"> Лівий Берег</label>-->
-                    <!--</p>-->
-                </p>
-            </div>
-        </div>
+        <p class="s-title">Джерела новин</p>
 
         <div class="card-panel">
-            <div class="section">
-                <label for="num-news">Відображати новин з джерела: <span class="s-range-value" id="num-news-value"></span></label>
-                <p class="range-field">
-                    <input type="range" id="num-news" min="1" max="20"/>
-                </p>
-            </div>
-
-            <div class="section">
-                <label for="update-delay">Періодичність оновлення новин: <span class="s-range-value" id="update-delay-value"></span></label>
-                <p class="range-field">
-                    <input type="range" id="update-delay" min="5" max="120"/>
-                </p>
-            </div>
-
-            <div class="section">
-                <label for="app-width">Ширина вікна з новинами: <span class="s-range-value" id="app-width-value"></span></label>
-                <p class="range-field">
-                    <input type="range" id="app-width" min="400" max="800"/>
-                </p>
-            </div>
+            <p id="collection" class="s-collection row">
+            </p>
         </div>
+
+        <p class="s-title">Налаштування</p>
 
         <div class="card-panel">
-            <p class="grey-text s-copyright">© Права на матеріали належать сайтам-джерелам новин</p>
+
+            <label class="grey-text text-darken-4" for="num-news">Відображати новин з джерела: <span class="s-range-value"
+                                                                                                     id="num-news-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="num-news" min="1" max="20"/>
+            </p>
+
+            <div class="divider"></div>
+
+            <label class="grey-text text-darken-4" for="update-delay">Періодичність оновлення новин: <span class="s-range-value"
+                                                                           id="update-delay-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="update-delay" min="5" max="120"/>
+            </p>
+
+            <div class="divider"></div>
+
+            <label class="grey-text text-darken-4" for="app-width">Ширина вікна з новинами: <span class="s-range-value"
+                                                                  id="app-width-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="app-width" min="400" max="800"/>
+            </p>
         </div>
-    </body>
+
+        <p class="s-title">Інформація</p>
+
+        <div class="card-panel">
+            <p class="grey-text text-darken-4 s-copyright">© Права на матеріали належать сайтам-джерелам новин.</p>
+        </div>
+    </div>
+</body>
 </html>

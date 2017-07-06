@@ -1,23 +1,35 @@
 @import '../../vendor/materialize-src/sass/components/color';
 
 $roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
-$secondary-color: color("indigo", "darken-1");
+$secondary-color: color("light-blue", "darken-2");
 
 @import '../../vendor/materialize-src/sass/materialize';
+
+$title-color: #616161;
+$text-color: #212121;
 
 body {
   background-color: #F8F8F8;
   font-family: "Roboto", sans-serif;
+}
+
+.s-content {
+  width: 500px;
+  margin: 0px auto;
   user-select: none;
+}
+
+.divider {
+  visibility: hidden;
+  margin-bottom: 15px;;
 }
 
 .s-title {
   cursor: default;
-  font-size: 24px;
-  font-weight: 400;
-  margin: 0;
-  padding-bottom: 1rem;
-  padding-top: 0rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: $title-color;
+  padding-top: 16px;
 }
 
 .s-collection {
@@ -25,25 +37,16 @@ body {
 }
 
 .s-channel {
-  margin-bottom: 5px;
+  margin-bottom: 14px;
 }
 
 .s-range-value {
   font-weight: 500;
 }
 
-.card-panel {
-  width: 500px;
-  margin: 16px auto;
+a {
+  color: $text-color;
 }
-
-.s-link{
-
-}
-
-//a.s-link:hover{
-//    color: goldenrod;
-//  }
 
 .s-icon {
   margin-right: 8px;
