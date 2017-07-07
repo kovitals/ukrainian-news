@@ -18,9 +18,18 @@ $(document).ready(function () {
 function initialize() {
     let selectedChannels = common.options.getRSSChannels();
     let channels = common.newsSources;
-    let collection = document.getElementById('collection');
+    let length = Object.keys(channels).length;
+    let containers = ['collection-l', 'collection-r'];
+    let collection = document.getElementById(containers[0]);
+    let index = 0;
 
     for (let key in channels) {
+
+        if(index > (length / 2))
+            collection = document.getElementById(containers[1]);
+
+        index++;
+
         let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, 'Відвідати сторінку', selectedChannels[key], checkboxChangeHandler);
         sourceItem.render(collection);
     }
@@ -35,7 +44,7 @@ function initialize() {
 function checkboxChangeHandler(checkbox) {
     console.log(checkbox.id, checkbox.checked);
 
-    if(checkbox.checked)
+    if (checkbox.checked)
         common.options.addRSSChannel(checkbox.id);
     else
         common.options.removeRSSChannel(checkbox.id);

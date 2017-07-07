@@ -6,54 +6,78 @@ $secondary-color: color("light-blue", "darken-2");
 @import '../../vendor/materialize-src/sass/materialize';
 
 $title-color: #616161;
-$text-color: #212121;
+$text-color: #210017;
+$background-color: #F8F8F8;
 
 body {
-  background-color: #F8F8F8;
+  background-color: $background-color;
   font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  cursor: default;
 }
 
 .s-content {
   width: 500px;
-  margin: 0px auto;
+  margin: 0 auto;
   user-select: none;
 }
 
-.divider {
-  visibility: hidden;
-  margin-bottom: 15px;;
+.card-panel {
+  label {
+    color: $text-color;
+    font-size: 0.8rem;
+  }
+  span {
+    font-size: 0.8rem;
+  }
 }
 
 .s-title {
-  cursor: default;
-  font-size: 12px;
-  font-weight: 500;
   color: $title-color;
   padding-top: 16px;
 }
 
-.s-collection {
-  margin-bottom: 0px;
+//.s-collection {
+//  margin: 0;
+//}
+
+.row .col {
+  padding: 0;
+}
+
+.ollection-r {
+  margin-left: 30px;
 }
 
 .s-channel {
-  margin-bottom: 14px;
+  //margin-bottom: 120px;
+
+  a {
+    color: $text-color;
+  }
 }
 
-.s-range-value {
+.material-tooltip {
+  font-size: 0.8rem;
   font-weight: 500;
+  min-height: 0;
+  padding: 4px 8px;
 }
 
-a {
-  color: $text-color;
+.font-weight-500 {
+  font-weight: 500;
 }
 
 .s-icon {
   margin-right: 8px;
+  width: 14px;
 }
 
-.s-copyright {
-  text-align: center;
-  margin-top: 25px;
-  cursor: default;
+.range-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.s-divider {
+  margin-bottom: 20px;;
 }

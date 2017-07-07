@@ -7,16 +7,14 @@ class SourceItemView {
 
         this.key = key;
         this.name = name;
-        this.isChecked = isChecked;
 
-        // console.log(key, isChecked);
-
-        this.span = document.createElement('span');
-        this.span.className = "s-channel col s6";
+        this.span = document.createElement('p');
+        this.span.className = "s-channel";// col s6
 
         let checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = key;
+        checkbox.className = 'left-align';
         if (isChecked) checkbox.checked = true;
         checkbox.onchange = () => changeHandler(checkbox);
         this.span.appendChild(checkbox);
@@ -36,7 +34,7 @@ class SourceItemView {
 
         let image = document.createElement('img');
         image.src = `img/${key}-icon.ico`;
-        image.className = 's-icon';
+        image.className = 's-icon circle';
         label.appendChild(image);
         label.appendChild(a);
     }
