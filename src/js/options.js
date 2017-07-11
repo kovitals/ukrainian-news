@@ -18,20 +18,19 @@ $(document).ready(function () {
 function initialize() {
     let selectedChannels = common.options.getRSSChannels();
     let channels = common.newsSources;
-    let length = Object.keys(channels).length;
-    let containers = ['collection-l', 'collection-r'];
-    let collection = document.getElementById(containers[0]);
+    let numRow = Math.ceil(Object.keys(channels).length / 2);
+    let containers = [  document.getElementById('collection-l'),
+                        document.getElementById('collection-r') ];
     let index = 0;
 
     for (let key in channels) {
 
-        if(index > (length / 2))
-            collection = document.getElementById(containers[1]);
+        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, 'Відвідати сторінку',
+            `img/${key}-icon.ico`, selectedChannels[key], checkboxChangeHandler);
+
+        sourceItem.render( (index < numRow) ?  containers[0] : containers[1] );
 
         index++;
-
-        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, 'Відвідати сторінку', selectedChannels[key], checkboxChangeHandler);
-        sourceItem.render(collection);
     }
 
     $('.tooltipped').tooltip({delay: 100});

@@ -7,7 +7,8 @@ $secondary-color: color("light-blue", "darken-2");
 
 $title-color: #616161;
 $text-color: #210017;
-$background-color: #F8F8F8;
+$background-color: #F1F1F1; //#F8F8F8;
+$font-size: 0.8rem;
 
 body {
   background-color: $background-color;
@@ -25,10 +26,11 @@ body {
 .card-panel {
   label {
     color: $text-color;
-    font-size: 0.8rem;
+    font-size: $font-size;
+    //padding-left: 33px;
   }
   span {
-    font-size: 0.8rem;
+    font-size: $font-size;
   }
 }
 
@@ -45,12 +47,10 @@ body {
   padding: 0;
 }
 
-.ollection-r {
-  margin-left: 30px;
-}
-
 .s-channel {
-  //margin-bottom: 120px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+
 
   a {
     color: $text-color;
@@ -58,8 +58,8 @@ body {
 }
 
 .material-tooltip {
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: $font-size;
+  //font-weight: 400;
   min-height: 0;
   padding: 4px 8px;
 }
@@ -69,8 +69,11 @@ body {
 }
 
 .s-icon {
+  //position: relative;
   margin-right: 8px;
-  width: 14px;
+  //top: 5px;
+  //clip: rect(1px, 1px, 1px, 1px);
+  //width: 14px;
 }
 
 .range-field {

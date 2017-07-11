@@ -3,7 +3,7 @@
  */
 class SourceItemView {
 
-    constructor(key, name, url, tooltip, isChecked, changeHandler) {
+    constructor(key, name, url, tooltip, imageUrl, isChecked, changeHandler) {
 
         this.key = key;
         this.name = name;
@@ -33,10 +33,12 @@ class SourceItemView {
         a.innerHTML = name;
 
         let image = document.createElement('img');
-        image.src = `img/${key}-icon.ico`;
-        image.className = 's-icon circle';
+        image.src = imageUrl;
+        image.className = 's-icon';//circle
         label.appendChild(image);
         label.appendChild(a);
+
+        console.log(image.src, image.height);
     }
 
     render(container) {
