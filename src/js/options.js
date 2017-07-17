@@ -25,9 +25,11 @@ function initialize() {
 
     for (let key in channels) {
 
-        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, 'Відвідати сторінку',
-            `img/${key}-icon.ico`, selectedChannels[key], checkboxChangeHandler);
-
+        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, `img/${key}-icon.ico`);
+        sourceItem.checked = selectedChannels[key];
+        sourceItem.displayTooltip('Відвідати сторінку');
+        sourceItem.registerChangeHandler(checkboxChangeHandler);
+        sourceItem.lastItem = ((index + 1) % numRow) == 0;
         sourceItem.render( (index < numRow) ?  containers[0] : containers[1] );
 
         index++;

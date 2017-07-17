@@ -27,7 +27,6 @@ body {
   label {
     color: $text-color;
     font-size: $font-size;
-    //padding-left: 33px;
   }
   span {
     font-size: $font-size;
@@ -39,18 +38,12 @@ body {
   padding-top: 16px;
 }
 
-//.s-collection {
-//  margin: 0;
-//}
-
 .row .col {
   padding: 0;
 }
 
 .s-channel {
   margin-top: 0px;
-  margin-bottom: 0px;
-
 
   a {
     color: $text-color;
@@ -59,7 +52,6 @@ body {
 
 .material-tooltip {
   font-size: $font-size;
-  //font-weight: 400;
   min-height: 0;
   padding: 4px 8px;
 }
@@ -69,11 +61,12 @@ body {
 }
 
 .s-icon {
-  //position: relative;
   margin-right: 8px;
+  margin-top: 3px;
+  //padding-top: 5px;
   //top: 5px;
   //clip: rect(1px, 1px, 1px, 1px);
-  //width: 14px;
+  //width: 12px;
 }
 
 .range-field {

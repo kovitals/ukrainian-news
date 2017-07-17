@@ -3,7 +3,7 @@
  */
 class SourceItemView {
 
-    constructor(key, name, url, tooltip, imageUrl, isChecked, changeHandler) {
+    constructor(key, name, url, imageUrl) {
 
         this.key = key;
         this.name = name;
@@ -11,34 +11,52 @@ class SourceItemView {
         this.span = document.createElement('p');
         this.span.className = "s-channel";// col s6
 
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = key;
-        checkbox.className = 'left-align';
-        if (isChecked) checkbox.checked = true;
-        checkbox.onchange = () => changeHandler(checkbox);
-        this.span.appendChild(checkbox);
+        this.checkbox = document.createElement('input');
+        this.checkbox.type = 'checkbox';
+        this.checkbox.id = key;
+        // this.checkbox.className = 'left-align';
+        this.span.appendChild(this.checkbox);
 
         let label = document.createElement('label');
         label.setAttribute('for', key);
         this.span.appendChild(label);
 
-        let a = document.createElement('a');
-        a.className = 's-link';
-        a.setAttribute('target', '_blank');
-        a.setAttribute('href', url);
-        a.className = 'tooltipped';
-        a.setAttribute('data-position', "right");
-        a.setAttribute('data-tooltip', tooltip);
-        a.innerHTML = name;
+        this.a = document.createElement('a');
+        this.a.className = 's-link';
+        this.a.setAttribute('target', '_blank');
+        this.a.setAttribute('href', url);
+        this.a.innerHTML = name;
 
         let image = document.createElement('img');
         image.src = imageUrl;
-        image.className = 's-icon';//circle
+        image.className = 's-icon ';//circle
         label.appendChild(image);
-        label.appendChild(a);
+        label.appendChild(this.a);
 
-        console.log(image.src, image.height);
+        // console.log(image.src, image.height);
+    }
+
+    set lastItem(value){
+        if(value){
+            this.span.style.marginBottom = 0;
+        }
+    }
+
+    set checked(value){
+        if(value)
+            this.checkbox.setAttribute('checked', '');
+        else
+            this.checkbox.removeAttribute('checked');
+    }
+
+    displayTooltip(text){
+        this.a.className = 'tooltipped';
+        this.a.setAttribute('data-position', "right");
+        this.a.setAttribute('data-tooltip', text);
+    }
+
+    registerChangeHandler(handler){
+        this.checkbox.onchange = () => handler(this.checkbox);
     }
 
     render(container) {
