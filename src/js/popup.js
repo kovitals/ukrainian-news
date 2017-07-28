@@ -1,6 +1,10 @@
 import newsGenerator from './news';
 import common from './common';
 import ga from './analytics/ga';
+import BrowserAPI from "./browser-api";
+import MessageTypes from "./types/message-types";
+
+var browserAPI;
 
 // initialize Google Analytics;
 ga();
@@ -113,10 +117,25 @@ function showNews(news) {
     chrome.browserAction.setBadgeText({text: (document.getElementById("content").childElementCount).toString()});
 }
 
+function messageHandler(request, sender, sendResponse) {
+
+    switch (request.type) {
+        case MessageTypes.UPDATE_NEWS:
+            console.log(request.message);
+            // showNews(request.message);
+            break;
+    }
+
+}
+
 document.addEventListener('DOMContentLoaded', function () {
+
     console.log('DOMContentLoaded');
 
-    showNews( newsGenerator.requestNews() );
+    browserAPI = new BrowserAPI();
+    browserAPI.listenMessage(messageHandler);
+    browserAPI.sendMessage(MessageTypes.REQUEST_NEWS, null);
 
     document.getElementById('readall').addEventListener('click', markAllAsRead);
+
 });

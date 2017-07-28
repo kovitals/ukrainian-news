@@ -1,9 +1,11 @@
 import channels from '../channels.json';
-import Messenger from './messenger';
+import BrowserAPI from './browser-api';
+import SettingTypes from "./types/setting-types";
 
 var common = {};
 var rssChannels;
-let messenger = new Messenger();
+
+let browserAPI = new BrowserAPI();
 
 // define news rss channels with an additional information
 common.newsSources = channels;
@@ -16,8 +18,8 @@ common.options = {
      * @returns {*}
      */
     getStoredNews: function () {
-        if (localStorage.getItem(common.storageKey.readNews)) {
-            return JSON.parse(localStorage.getItem(common.storageKey.readNews));
+        if (localStorage.getItem(SettingTypes.STORED_NEWS)) {
+            return JSON.parse(localStorage.getItem(SettingTypes.STORED_NEWS));
         }
         return false;
     },
@@ -29,11 +31,11 @@ common.options = {
      */
     addStoredNews: function (newsItem) {
         if (this.getStoredNews() == false) {
-            localStorage.setItem(common.storageKey.readNews, JSON.stringify(new Array(newsItem)));
+            localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(new Array(newsItem)));
         } else {
             let arr = this.getStoredNews();
             arr.push(newsItem);
-            localStorage.setItem(common.storageKey.readNews, JSON.stringify(arr));
+            localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(arr));
         }
     },
 
@@ -53,27 +55,27 @@ common.options = {
     },
 
     setWindowWidth: function (value) {
-        this.set(common.storageKey.windowWidth, value);
+        this.set(SettingTypes.WINDOW_WIDTH, value);
     },
 
     getWindowWidth: function () {
-        return this.get(common.storageKey.windowWidth);
+        return this.get(SettingTypes.WINDOW_WIDTH);
     },
 
     removeRSSChannel: function (id) {
         rssChannels[id] = false;
         console.log('removeRSSChannel', id, rssChannels);
-        this.set(common.storageKey.rssChannels, JSON.stringify(rssChannels));
+        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(rssChannels));
     },
 
     addRSSChannel: function (id) {
         rssChannels[id] = true;
         console.log('addRSSChannel', id, rssChannels);
-        this.set(common.storageKey.rssChannels, JSON.stringify(rssChannels));
+        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(rssChannels));
     },
 
     getRSSChannels: function () {
-        let channels = this.get(common.storageKey.rssChannels);
+        let channels = this.get(SettingTypes.RSS_CHANNELS);
 
         if(!channels)
         {
@@ -93,20 +95,19 @@ common.options = {
     },
 
     setUpdatePeriod: function (value) {
-        messenger.sendMessage('delay', value);
-        this.set(common.storageKey.updatePeriod, value);
+        this.set(SettingTypes.UPDATE_PERIOD, value);
     },
 
     getUpdatePeriod: function () {
-        return parseInt(this.get(common.storageKey.updatePeriod));
+        return parseInt(this.get(SettingTypes.UPDATE_PERIOD));
     },
 
     setShowLastItems: function (value) {
-        this.set(common.storageKey.showLastItems, value);
+        this.set(SettingTypes.NUM_LAST_ITEMS, value);
     },
 
     getShowLastItems: function () {
-        return this.get(common.storageKey.showLastItems);
+        return this.get(SettingTypes.NUM_LAST_ITEMS);
     },
 
     get: function (key) {
@@ -123,16 +124,9 @@ common.options = {
     set: function (key, value) {
         if (key && value) {
             localStorage.setItem(key, value);
+            browserAPI.sendMessage(key, value);
         }
     }
-}
-
-common.storageKey = {
-    windowWidth: 'window_width_config',
-    rssChannels: 'rss_channels_config',
-    updatePeriod: 'background_period_config',
-    showLastItems: 'show_last_items',
-    readNews: 'ukrainian-news'
 }
 
 common.options.defaultValues = {
