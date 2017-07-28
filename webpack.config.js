@@ -31,7 +31,9 @@ var options = {
     watch: watch,
 
     watchOptions: {
-        aggregateTimeout: 50,
+        aggregateTimeout: 300,
+        ignored: /node_modules/,
+        poll: 1000
     },
 
     module: {
