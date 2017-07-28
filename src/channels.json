@@ -25,8 +25,8 @@
     "name": "Цензор.НЕТ"
   },
   "zn": {
-    "rss": "http://dt.ua/rss",
-    "http": "http://dt.ua",
+    "rss": "https://dt.ua/rss",
+    "http": "https://dt.ua",
     "name": "Дзеркало Тижня"
   },
   "fn": {
@@ -60,8 +60,8 @@
     "name": "Gazeta.ua"
   },
   "ht": {
-    "rss": "http://ua.112.ua/rss/index.rss",
-    "http": "http://112.ua",
+    "rss": "https://ua.112.ua/rss/index.rss",
+    "http": "https://112.ua",
     "name": "112 Канал"
   },
   "es": {
