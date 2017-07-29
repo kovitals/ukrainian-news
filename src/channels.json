@@ -20,7 +20,7 @@
     "name": "Агенція УНІАН"
   },
   "cn": {
-    "rss": "http://censor.net.ua/includes/news_ru.xml",
+    "rss": "https://censor.net.ua/includes/news_ru.xml",
     "http": "http://censor.net.ua",
     "name": "Цензор.НЕТ"
   },
