@@ -1,4 +1,4 @@
-import common from './common';
+import common from '../settings/common';
 import NewsData from "./news-data";
 
 var newsGenerator = {

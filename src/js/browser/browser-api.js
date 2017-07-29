@@ -11,15 +11,19 @@ export default class BrowserAPI {
         chrome.alarms.clear(name);
     }
 
-    createAlarm(name, periodInMinutes){
+    createAlarm(name, delayInMinutes, periodInMinutes = -1){
 
         this.clearAlarm(name);
 
-        chrome.alarms.create(name, {
-            delayInMinutes: parseInt(periodInMinutes),
-            periodInMinutes: parseInt(periodInMinutes)
-        });
+        let alarmInfo = {};
+        alarmInfo.delayInMinutes = parseInt(delayInMinutes);
 
+        if(periodInMinutes != -1)
+            alarmInfo.periodInMinutes = parseInt(periodInMinutes);
+
+        console.log(name, delayInMinutes, periodInMinutes, alarmInfo);
+
+        chrome.alarms.create(name, alarmInfo);
     }
 
     listenAlarm(callback){

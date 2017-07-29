@@ -1,4 +1,4 @@
-import common from './common';
+import common from './settings/common';
 import '../../vendor/materialize-src/js/bin/materialize';
 import SourceItemView from './options/source-item-view'
 

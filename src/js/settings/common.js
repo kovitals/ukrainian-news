@@ -1,6 +1,6 @@
-import channels from '../channels.json';
-import BrowserAPI from './browser-api';
-import SettingTypes from "./types/setting-types";
+import channels from '../../channels.json';
+import BrowserAPI from '../browser/browser-api';
+import SettingTypes from "../types/setting-types";
 
 var common = {};
 var rssChannels;

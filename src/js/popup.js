@@ -1,6 +1,6 @@
-import common from './common';
+import common from './settings/common';
 import ga from './analytics/ga';
-import BrowserAPI from "./browser-api";
+import BrowserAPI from "./browser/browser-api";
 import MessageTypes from "./types/message-types";
 
 var browserAPI;
@@ -117,7 +117,7 @@ function showNews(news) {
 function messageHandler(request, sender, sendResponse) {
 
     switch (request.type) {
-        case MessageTypes.UPDATE_NEWS:
+        case MessageTypes.UPDATE_NEWS_COMPLETE:
             showNews(request.message);
             break;
     }
