@@ -1,4 +1,5 @@
 import common from './common';
+import NewsData from "./news-data";
 
 var newsGenerator = {
 
@@ -43,12 +44,15 @@ var newsGenerator = {
                             for (var i = 0; i < result.length && i < common.options.getShowLastItems(); i++) {
                                 // will show only unread news items
                                 if (!common.options.hasStoredNews(result[i].querySelector('link').textContent)) {
-                                    var rst = [];
-                                    rst['key'] = key;
-                                    rst['date'] = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
-                                    rst['title'] = result[i].querySelector('title').textContent;
-                                    rst['link'] = result[i].querySelector('link').textContent;
-                                    res[res.length] = rst;
+
+                                    let newsData = new NewsData();
+                                    newsData.key = key;
+                                    newsData.title = result[i].querySelector('title').textContent;
+                                    newsData.date = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
+                                    newsData.link = result[i].querySelector('link').textContent;
+
+                                    res[res.length] = newsData;
+
                                 }
                             }
                         }

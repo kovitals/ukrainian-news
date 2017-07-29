@@ -1,4 +1,3 @@
-import newsGenerator from './news';
 import common from './common';
 import ga from './analytics/ga';
 import BrowserAPI from "./browser-api";
@@ -113,16 +112,13 @@ function showNews(news) {
     var content = document.getElementById("content");
     content.style.width = common.options.getWindowWidth() + 'px';
     content.appendChild(newsFragment);
-
-    chrome.browserAction.setBadgeText({text: (document.getElementById("content").childElementCount).toString()});
 }
 
 function messageHandler(request, sender, sendResponse) {
 
     switch (request.type) {
         case MessageTypes.UPDATE_NEWS:
-            console.log(request.message);
-            // showNews(request.message);
+            showNews(request.message);
             break;
     }
 
