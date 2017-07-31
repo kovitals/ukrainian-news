@@ -2,34 +2,43 @@ import channels from '../../channels.json';
 import BrowserAPI from '../browser/browser-api';
 import SettingTypes from "../types/setting-types";
 
-var common = {};
-var rssChannels;
+export default class SettingsStorage {
 
-let browserAPI = new BrowserAPI();
+    constructor() {
+        this.browserAPI = new BrowserAPI();
+    }
 
-// define news rss channels with an additional information
-common.newsSources = channels;
+    // define news rss channels with an additional information
+    get newsSources() {
+        return channels;
+    }
 
-common.options = {
+    get defaultValues() {
+        return {
+            window_width_config: 650,
+            background_period_config: 30,
+            show_last_items: 8
+        }
+    }
 
     /**
      * Load from local storage have read news items
      *
      * @returns {*}
      */
-    getStoredNews: function () {
+    getStoredNews() {
         if (localStorage.getItem(SettingTypes.STORED_NEWS)) {
             return JSON.parse(localStorage.getItem(SettingTypes.STORED_NEWS));
         }
         return false;
-    },
+    }
 
     /**
      * Save one news item to local storage as have read
      *
      * @param newsItem
      */
-    addStoredNews: function (newsItem) {
+    addStoredNews(newsItem) {
         if (this.getStoredNews() == false) {
             localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(new Array(newsItem)));
         } else {
@@ -37,14 +46,14 @@ common.options = {
             arr.push(newsItem);
             localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(arr));
         }
-    },
+    }
 
     /**
      * Check if provided news item have already read and exist in local storage
      *
      * @param newsitem
      */
-    hasStoredNews: function (newsitem) {
+    hasStoredNews(newsitem) {
         let news = this.getStoredNews();
 
         if (news) {
@@ -52,87 +61,78 @@ common.options = {
         }
 
         return false;
-    },
+    }
 
-    setWindowWidth: function (value) {
+    setWindowWidth(value) {
         this.set(SettingTypes.WINDOW_WIDTH, value);
-    },
+    }
 
-    getWindowWidth: function () {
+    getWindowWidth() {
         return this.get(SettingTypes.WINDOW_WIDTH);
-    },
+    }
 
-    removeRSSChannel: function (id) {
-        rssChannels[id] = false;
-        console.log('removeRSSChannel', id, rssChannels);
-        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(rssChannels));
-    },
+    removeRSSChannel(id) {
+        this.rssChannels[id] = false;
+        console.log('removeRSSChannel', id, this.rssChannels);
+        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(this.rssChannels));
+    }
 
-    addRSSChannel: function (id) {
-        rssChannels[id] = true;
-        console.log('addRSSChannel', id, rssChannels);
-        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(rssChannels));
-    },
+    addRSSChannel(id) {
+        this.rssChannels[id] = true;
+        console.log('addRSSChannel', id, this.rssChannels);
+        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(this.rssChannels));
+    }
 
-    getRSSChannels: function () {
+    getRSSChannels() {
         let channels = this.get(SettingTypes.RSS_CHANNELS);
 
-        if(!channels)
-        {
-            rssChannels = {};
+        if (!channels) {
+            this.rssChannels = {};
 
-            Object.keys(common.newsSources).forEach(
+            Object.keys(this.newsSources).forEach(
                 function (key) {
-                    rssChannels[key] = true;
+                    this.rssChannels[key] = true;
                 }
             );
         }
 
-        if (rssChannels == undefined)
-            rssChannels = JSON.parse(channels);
+        if (this.rssChannels == undefined)
+            this.rssChannels = JSON.parse(channels);
 
-        return rssChannels;
-    },
+        return this.rssChannels;
+    }
 
-    setUpdatePeriod: function (value) {
+    setUpdatePeriod(value) {
         this.set(SettingTypes.UPDATE_PERIOD, value);
-    },
+    }
 
-    getUpdatePeriod: function () {
+    getUpdatePeriod() {
         return parseInt(this.get(SettingTypes.UPDATE_PERIOD));
-    },
+    }
 
-    setShowLastItems: function (value) {
+    setShowLastItems(value) {
         this.set(SettingTypes.NUM_LAST_ITEMS, value);
-    },
+    }
 
-    getShowLastItems: function () {
+    getShowLastItems() {
         return this.get(SettingTypes.NUM_LAST_ITEMS);
-    },
+    }
 
-    get: function (key) {
+    get(key) {
         if (localStorage.getItem(key)) {
             return localStorage.getItem(key);
         } else {
-            if (common.options.defaultValues.hasOwnProperty(key)) {
-                return common.options.defaultValues[key];
+            if (this.defaultValues.hasOwnProperty(key)) {
+                return this.defaultValues[key];
             }
             return null;
         }
-    },
+    }
 
-    set: function (key, value) {
+    set(key, value) {
         if (key && value) {
             localStorage.setItem(key, value);
-            browserAPI.sendMessage(key, value);
+            this.browserAPI.sendMessage(key, value);
         }
     }
 }
-
-common.options.defaultValues = {
-    window_width_config: 650,
-    background_period_config: 30,
-    show_last_items: 8
-}
-
-export default common;

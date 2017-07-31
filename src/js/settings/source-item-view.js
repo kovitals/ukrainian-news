@@ -1,7 +1,7 @@
 /**
  * Created by valeriyb on 6/27/2017.
  */
-class SourceItemView {
+export default class SourceItemView {
 
     constructor(key, name, url, imageUrl) {
 
@@ -63,5 +63,3 @@ class SourceItemView {
         container.appendChild(this.span);
     }
 }
-
-export default SourceItemView;

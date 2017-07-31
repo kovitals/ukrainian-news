@@ -1,27 +1,33 @@
-import common from './settings/settings-storage';
 import '../../vendor/materialize-src/js/bin/materialize';
 import SourceItemView from './settings/source-item-view'
+import SettingsStorage from "./settings/settings-storage";
 
 const SLIDER_ID_NUM_NEWS = 'num-news';
 const SLIDER_ID_UPDATE_DELAY = 'update-delay';
 const SLIDER_ID_APP_WIDTH = 'app-width';
 
-let sliderValuePostfixMap = {
+var sliderValuePostfixMap = {
     [SLIDER_ID_UPDATE_DELAY]: 'хвилин',
     [SLIDER_ID_APP_WIDTH]: 'пікселів'
 };
+
+var settingsStorage;
 
 $(document).ready(function () {
     initialize();
 });
 
 function initialize() {
-    let selectedChannels = common.options.getRSSChannels();
-    let channels = common.newsSources;
+    settingsStorage = new SettingsStorage();
+
+    let selectedChannels = settingsStorage.getRSSChannels();
+    let channels = settingsStorage.newsSources;
     let numRow = Math.ceil(Object.keys(channels).length / 2);
     let containers = [  document.getElementById('collection-l'),
                         document.getElementById('collection-r') ];
     let index = 0;
+
+    console.log(this, 'selectedChannels', selectedChannels);
 
     for (let key in channels) {
 
@@ -37,30 +43,30 @@ function initialize() {
 
     $('.tooltipped').tooltip({delay: 100});
 
-    initializeSlider(SLIDER_ID_NUM_NEWS, common.options.getShowLastItems());
-    initializeSlider(SLIDER_ID_UPDATE_DELAY, common.options.getUpdatePeriod());
-    initializeSlider(SLIDER_ID_APP_WIDTH, common.options.getWindowWidth());
+    initializeSlider(SLIDER_ID_NUM_NEWS, settingsStorage.getShowLastItems());
+    initializeSlider(SLIDER_ID_UPDATE_DELAY, settingsStorage.getUpdatePeriod());
+    initializeSlider(SLIDER_ID_APP_WIDTH, settingsStorage.getWindowWidth());
 }
 
 function checkboxChangeHandler(checkbox) {
     console.log(checkbox.id, checkbox.checked);
 
     if (checkbox.checked)
-        common.options.addRSSChannel(checkbox.id);
+        settingsStorage.addRSSChannel(checkbox.id);
     else
-        common.options.removeRSSChannel(checkbox.id);
+        settingsStorage.removeRSSChannel(checkbox.id);
 }
 
 function sliderChangeHandler(slider) {
     switch (slider.id) {
         case SLIDER_ID_NUM_NEWS:
-            common.options.setShowLastItems(slider.value);
+            settingsStorage.setShowLastItems(slider.value);
             break;
         case SLIDER_ID_UPDATE_DELAY:
-            common.options.setUpdatePeriod(slider.value);
+            settingsStorage.setUpdatePeriod(slider.value);
             break;
         case SLIDER_ID_APP_WIDTH:
-            common.options.setWindowWidth(slider.value);
+            settingsStorage.setWindowWidth(slider.value);
             break;
     }
     console.log(slider.id, slider.value);

@@ -1,9 +1,10 @@
-import common from './settings/settings-storage';
 import ga from './analytics/ga';
 import BrowserAPI from "./browser/browser-api";
 import MessageTypes from "./types/message-types";
+import SettingsStorage from "./settings/settings-storage";
 
 var browserAPI;
+var settingsStorage;
 
 // initialize Google Analytics;
 ga();
@@ -18,7 +19,7 @@ function markAsRead(url) {
         url = this.getAttribute('name');
     }
 
-    common.options.addStoredNews(url);
+    settingsStorage.addStoredNews(url);
 
     document.getElementsByName(url)[0].parentNode.remove();
 
@@ -38,7 +39,7 @@ function markAllAsRead() {
     for (var i = content.childElementCount; i >= 0; i--) {
 
         if (content.childNodes[i] && content.childNodes[i].childNodes[0]) {
-            common.options.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
+            settingsStorage.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
         }
 
     }
@@ -110,7 +111,7 @@ function showNews(news) {
     }
 
     var content = document.getElementById("content");
-    content.style.width = common.options.getWindowWidth() + 'px';
+    content.style.width = settingsStorage.getWindowWidth() + 'px';
     content.appendChild(newsFragment);
 }
 
@@ -127,6 +128,8 @@ function messageHandler(request, sender, sendResponse) {
 document.addEventListener('DOMContentLoaded', function () {
 
     console.log('DOMContentLoaded');
+
+    settingsStorage = new SettingsStorage();
 
     browserAPI = new BrowserAPI();
     browserAPI.listenMessage(messageHandler);

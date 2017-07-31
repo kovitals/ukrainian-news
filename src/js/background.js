@@ -1,17 +1,20 @@
-import common from './settings/settings-storage';
 import newsLoader from './news/news-loader';
 import BrowserAPI from "./browser/browser-api";
 import SettingTypes from "./types/setting-types";
 import AlarmTypes from "./types/alarm-types";
 import MessageTypes from "./types/message-types";
 import Utils from "./utils/utils";
+import SettingsStorage from "./settings/settings-storage";
 
 const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
 
 var browserAPI;
+var settingsStorage;
 
 function initialize() {
+    settingsStorage = new SettingsStorage();
+
     browserAPI = new BrowserAPI();
     browserAPI.listenAlarm(alarmHandler);
     browserAPI.listenMessage(messageHandler);
@@ -49,7 +52,7 @@ function messageHandler(request, sender, sendResponse) {
 }
 
 function createNewsUpdateAlarm() {
-    let updateTime = common.options.getUpdatePeriod();
+    let updateTime = settingsStorage.getUpdatePeriod();
     browserAPI.createAlarm(AlarmTypes.UPDATE_NEWS, updateTime, updateTime);
 }
 
