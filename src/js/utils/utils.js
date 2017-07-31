@@ -1,21 +1,20 @@
 /**
  * Created by valer on 30.07.2017.
  */
+export default class Utils {
 
-let _timerMap = new WeakMap();
+    static createTimeOut(name, delayInSeconds, callback) {
+        if (!Utils._timerIdMap)
+            Utils._timerIdMap = {};
 
-export default class Utils{
+        Utils.clearTimeOut(name);
 
-    static createTimeOut(name, callback, delayInSeconds){
-
-        if(_timerMap.has(name))
-        {
-            clearTimeout(_timerMap.get(name));
-        }
-
-        let timer = setTimeout(callback, delayInSeconds * 1000);
-        _timerMap.set(name, timer);
-
+        Utils._timerIdMap[name] = setTimeout(callback, delayInSeconds * 1000);
     }
 
+    static clearTimeOut(name) {
+        if (Utils._timerIdMap[name] != undefined) {
+            clearTimeout(Utils._timerIdMap[name]);
+        }
+    }
 }

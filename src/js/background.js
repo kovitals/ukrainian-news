@@ -1,14 +1,15 @@
-import common from './settings/common';
-import newsGenerator from './news/news-loader';
+import common from './settings/settings-storage';
+import newsLoader from './news/news-loader';
 import BrowserAPI from "./browser/browser-api";
 import SettingTypes from "./types/setting-types";
 import AlarmTypes from "./types/alarm-types";
 import MessageTypes from "./types/message-types";
-import {Utils} from "./utils/utils";
+import Utils from "./utils/utils";
+
+const postponeUpdateTime = 5;//sec
+const newsUpdateTimer = 'news_update_timer';
 
 var browserAPI;
-
-const postponeUpdateTime = 0.05;
 
 function initialize() {
     browserAPI = new BrowserAPI();
@@ -42,13 +43,9 @@ function messageHandler(request, sender, sendResponse) {
             createNewsUpdateAlarm();
             break;
         case SettingTypes.RSS_CHANNELS:
-            // Utils.createTimeOut(AlarmTypes.POSTPONE_UPDATE, postponeUpdateHandler, postponeUpdateTime);
+            Utils.createTimeOut(newsUpdateTimer, postponeUpdateTime, requestNews);
             break;
     }
-}
-
-function postponeUpdateHandler() {
-    console.log('postponeUpdateHandler');
 }
 
 function createNewsUpdateAlarm() {
@@ -57,7 +54,7 @@ function createNewsUpdateAlarm() {
 }
 
 function requestNews() {
-    let news = newsGenerator.requestNews();
+    let news = newsLoader.requestNews();
     browserAPI.displayBadge(news.length.toString());
     browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, news);
 }

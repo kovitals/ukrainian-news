@@ -1,7 +1,7 @@
-import common from '../settings/common';
+import common from '../settings/settings-storage';
 import NewsData from "./news-data";
 
-var newsGenerator = {
+var newsLoader = {
 
     /**
      * Sends an XHR GET request to grab last new from RSS feed of pravda.com.ua. The
@@ -71,4 +71,4 @@ var newsGenerator = {
     }
 };
 
-export default newsGenerator;
+export default newsLoader;

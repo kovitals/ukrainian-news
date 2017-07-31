@@ -1,6 +1,6 @@
-import common from './settings/common';
+import common from './settings/settings-storage';
 import '../../vendor/materialize-src/js/bin/materialize';
-import SourceItemView from './options/source-item-view'
+import SourceItemView from './settings/source-item-view'
 
 const SLIDER_ID_NUM_NEWS = 'num-news';
 const SLIDER_ID_UPDATE_DELAY = 'update-delay';

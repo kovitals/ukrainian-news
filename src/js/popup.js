@@ -1,4 +1,4 @@
-import common from './settings/common';
+import common from './settings/settings-storage';
 import ga from './analytics/ga';
 import BrowserAPI from "./browser/browser-api";
 import MessageTypes from "./types/message-types";
