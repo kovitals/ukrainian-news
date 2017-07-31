@@ -8,18 +8,18 @@ export default class SourceItemView {
         this.key = key;
         this.name = name;
 
-        this.span = document.createElement('p');
-        this.span.className = "s-channel";// col s6
+        this.p = document.createElement('p');
+        this.p.className = "s-channel";// col s6
 
         this.checkbox = document.createElement('input');
         this.checkbox.type = 'checkbox';
         this.checkbox.id = key;
         // this.checkbox.className = 'left-align';
-        this.span.appendChild(this.checkbox);
+        this.p.appendChild(this.checkbox);
 
         let label = document.createElement('label');
         label.setAttribute('for', key);
-        this.span.appendChild(label);
+        this.p.appendChild(label);
 
         this.a = document.createElement('a');
         this.a.className = 's-link';
@@ -29,7 +29,7 @@ export default class SourceItemView {
 
         let image = document.createElement('img');
         image.src = imageUrl;
-        image.className = 's-icon ';//circle
+        image.className = 's-icon circle';//circle
         label.appendChild(image);
         label.appendChild(this.a);
 
@@ -38,7 +38,7 @@ export default class SourceItemView {
 
     set lastItem(value){
         if(value){
-            this.span.style.marginBottom = 0;
+            this.p.style.marginBottom = 0;
         }
     }
 
@@ -60,6 +60,6 @@ export default class SourceItemView {
     }
 
     render(container) {
-        container.appendChild(this.span);
+        container.appendChild(this.p);
     }
 }
