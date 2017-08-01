@@ -4,9 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const nodeEnv = process.env.NODE_ENV;
-const isProduction = nodeEnv && (nodeEnv.trim() === 'production');
-const watch = nodeEnv && (nodeEnv.trim() === 'dev-watch');
+const nodeEnv = process.env.NODE_ENV || '';
+const isProduction = nodeEnv.trim() === 'production';
+const watch = nodeEnv.trim() === 'dev-watch';
 
 console.log('isProduction: ' + isProduction + "\nwatch:" + watch);
 
@@ -65,7 +65,7 @@ var options = {
             },
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg|ico|gif|otf)$/,
-                loader: 'url-loader?limit=100000'
+                loader: 'url-loader?limit=50000'
             }
         ]
     },
@@ -101,7 +101,10 @@ var options = {
         }),
 
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: !isProduction
+            sourceMap: !isProduction,
+            output:{
+                comments: !isProduction
+            }
         }),
 
         new ExtractTextPlugin({
