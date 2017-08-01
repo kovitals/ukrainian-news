@@ -1,65 +1,95 @@
-import common from './common';
+import '../../vendor/materialize-src/js/bin/materialize';
+import SourceItemView from './settings/source-item-view'
+import SettingsStorage from "./settings/settings-storage";
 
-// Saves selected rss chanel to local storage
-function save_options() {
-    var rss_channels_config = {};
-    var rss_channels = document.getElementsByTagName('input');
-    for (var i = 0; i < rss_channels.length; i++) {
-        if (rss_channels[i].checked == true) {
-            rss_channels_config[rss_channels[i].getAttribute('name').toString()] = rss_channels[i].checked.toString();
-        }
-    }
-    common.options.setRSSChannels(JSON.stringify(rss_channels_config));
-    if (document.getElementById(common.storageKey.updatePeriod).value) {
-        common.options.setUpdatePeriod(document.getElementById(common.storageKey.updatePeriod).value);
-        chrome.alarms.clear('ukrainian-news');
-        chrome.alarms.create('ukrainian-news', {
-            delayInMinutes: parseInt(common.options.getUpdatePeriod()),
-            periodInMinutes: parseInt(common.options.getUpdatePeriod())
-        });
-    }
-    common.options.setWindowWidth(document.getElementById(common.storageKey.windowWidth).value);
-    common.options.setShowLastItems(document.getElementById(common.storageKey.showLastItems).value);
-    alert("Налаштування збережені");
-}
+const SLIDER_ID_NUM_NEWS = 'num-news';
+const SLIDER_ID_UPDATE_DELAY = 'update-delay';
+const SLIDER_ID_APP_WIDTH = 'app-width';
 
-// Restores selected rss channels from local storage
-function restore_options() {
-    if (common.options.getRSSChannels()) {
-        var rss_channels_config = JSON.parse(common.options.getRSSChannels());
-        Object.keys(rss_channels_config).forEach(function (key) {
-            document.getElementById(key).checked = (rss_channels_config[key] === "true");
-        });
-    }
-    document.getElementById(common.storageKey.showLastItems).value = common.options.getShowLastItems();
-    document.getElementById(common.storageKey.updatePeriod).value = common.options.getUpdatePeriod();
-    document.getElementById(common.storageKey.windowWidth).value = common.options.getWindowWidth();
-}
+var sliderValuePostfixMap = {
+    [SLIDER_ID_UPDATE_DELAY]: 'хвилин',
+    [SLIDER_ID_APP_WIDTH]: 'пікселів'
+};
 
-document.addEventListener('DOMContentLoaded', restore_options);
-document.getElementById('save').addEventListener('click', save_options);
+var settingsStorage;
 
-// create elements for each news source
-Object.keys(common.newsSources).forEach(function (key) {
-    var newsSourceItem = document.createElement('li');
-    newsSourceItem.setAttribute("class", "newsSourcesElement");
-
-    var newsSourceCheckbox = document.createElement('input');
-    newsSourceCheckbox.setAttribute("type", "checkbox");
-    newsSourceCheckbox.setAttribute("name", key);
-    newsSourceCheckbox.setAttribute("id", key);
-
-    var newsSourceIcon = document.createElement('img');
-    newsSourceIcon.setAttribute("src", "img/" + key + "-icon.ico");
-
-    var newsSourceLink = document.createElement('a');
-    newsSourceLink.setAttribute("href", common.newsSources[key].http)
-    newsSourceLink.setAttribute("target", "_blank");
-    newsSourceLink.innerText = common.newsSources[key].name;
-
-    newsSourceItem.appendChild(newsSourceCheckbox);
-    newsSourceItem.appendChild(newsSourceIcon);
-    newsSourceItem.appendChild(newsSourceLink);
-
-    document.getElementsByClassName("newsSources")[0].appendChild(newsSourceItem);
+$(document).ready(function () {
+    initialize();
 });
+
+function initialize() {
+    settingsStorage = new SettingsStorage();
+
+    let selectedChannels = settingsStorage.getRSSChannels();
+    let channels = settingsStorage.newsSources;
+    let numRow = Math.ceil(Object.keys(channels).length / 2);
+    let containers = [  document.getElementById('collection-l'),
+                        document.getElementById('collection-r') ];
+    let index = 0;
+
+    console.log(this, 'selectedChannels', selectedChannels);
+
+    for (let key in channels) {
+
+        let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, `img/${key}-icon.ico`);
+        sourceItem.checked = selectedChannels[key];
+        sourceItem.displayTooltip('Відвідати сторінку');
+        sourceItem.registerChangeHandler(checkboxChangeHandler);
+        sourceItem.lastItem = ((index + 1) % numRow) == 0;
+        sourceItem.render( (index < numRow) ?  containers[0] : containers[1] );
+
+        index++;
+    }
+
+    $('.tooltipped').tooltip({delay: 100});
+
+    initializeSlider(SLIDER_ID_NUM_NEWS, settingsStorage.getShowLastItems());
+    initializeSlider(SLIDER_ID_UPDATE_DELAY, settingsStorage.getUpdatePeriod());
+    initializeSlider(SLIDER_ID_APP_WIDTH, settingsStorage.getWindowWidth());
+}
+
+function checkboxChangeHandler(checkbox) {
+    console.log(checkbox.id, checkbox.checked);
+
+    if (checkbox.checked)
+        settingsStorage.addRSSChannel(checkbox.id);
+    else
+        settingsStorage.removeRSSChannel(checkbox.id);
+}
+
+function sliderChangeHandler(slider) {
+    switch (slider.id) {
+        case SLIDER_ID_NUM_NEWS:
+            settingsStorage.setShowLastItems(slider.value);
+            break;
+        case SLIDER_ID_UPDATE_DELAY:
+            settingsStorage.setUpdatePeriod(slider.value);
+            break;
+        case SLIDER_ID_APP_WIDTH:
+            settingsStorage.setWindowWidth(slider.value);
+            break;
+    }
+    console.log(slider.id, slider.value);
+}
+
+function sliderInputHandler(slider) {
+    let postfixText = sliderValuePostfixMap[slider.id];
+
+    if (postfixText == undefined)
+        postfixText = '';
+
+    let valueField = document.getElementById(slider.id + '-value');
+    valueField.innerText = slider.value + ' ' + postfixText;
+}
+
+function initializeSlider(id, defaultValue) {
+    console.log(`default value for slider ${id} is ${defaultValue}`);
+
+    let slider = document.getElementById(id);
+    defaultValue = Math.min(defaultValue, slider.max);
+    defaultValue = Math.max(defaultValue, slider.min);
+    slider.value = defaultValue;
+    slider.oninput = () => sliderInputHandler(slider);
+    slider.onchange = () => sliderChangeHandler(slider);
+    slider.oninput();
+}

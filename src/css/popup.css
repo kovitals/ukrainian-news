@@ -1,6 +1,6 @@
 @font-face {
     font-family: titleFont;
-    src: url(fonts/Arsenal-Regular.otf);
+    src: url(../../static/fonts/Arsenal-Regular.otf);
 }
 
 body {
@@ -8,7 +8,8 @@ body {
     font-family: arial, helvetica, sans-serif;
     color: #6f6f6f;
     font-size: 15px;
-    padding: 5px;
+    margin-right: 0;
+    margin-bottom: 0;
 }
 
 a {
@@ -30,12 +31,14 @@ ul {
     padding: 0px;
     margin-top: 10px;
     display: inline-block;
-    overflow-y: hidden;
+    overflow: auto;
+    max-height: 505px;
+    margin-bottom: 0;
 }
 
 li {
     padding-top: 5px;
-    padding-bottom: 7px;
+    padding-bottom: 8px;
     border-top: 1px solid #d0d0d0;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -60,11 +63,11 @@ li > .logo {
 }
 
 li > .hideItem {
-    background: url("img/hide.gif") no-repeat 6px 3px
+    background: url("../../static/img/hide.gif") no-repeat 6px 3px
 }
 
 li > .newTab {
-    background: url("img/newtab.png") no-repeat 3px 3px
+    background: url("../../static/img/newtab.png") no-repeat 3px 3px
 }
 
 .time {
@@ -84,6 +87,8 @@ img#title {
 
 div#toolbar {
     float: right;
+    margin-right: 10px;
+    margin-bottom: 6px;
 }
 
 div#toolbar > a > img {

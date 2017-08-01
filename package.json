@@ -1,12 +1,13 @@
 {
   "name": "ukrainian-news",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів.",
   "main": "background.js",
   "scripts": {
+    "cleanup": "node utils/cleanup.dist.js ../dist",
     "build": "node utils/generate.manifest.js && webpack",
     "build-watch": "set NODE_ENV=dev-watch && npm run build",
-    "build-prod": "set NODE_ENV=production && node utils/cleanup.dist.js ../dist && npm run build && node utils/zip.build.js"
+    "build-prod": "set NODE_ENV=production && npm run cleanup && npm run build && node utils/zip.build.js"
   },
   "repository": {
     "type": "git",
@@ -25,11 +26,18 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "hammerjs": "^2.0.8",
     "html-webpack-plugin": "^2.28.0",
+    "jquery": "^3.2.1",
     "json-loader": "^0.5.4",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
     "style-loader": "^0.16.1",
     "uglify-js": "^2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.3",
+    "url-loader": "^0.5.8",
+    "velocity-animate": "^1.5.0",
     "webpack": "^2.3.2",
     "zip-dir": "^1.0.2"
   }

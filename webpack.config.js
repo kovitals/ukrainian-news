@@ -4,8 +4,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const isProduction = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'production');
-const watch = process.env.NODE_ENV && (process.env.NODE_ENV.trim() == 'dev-watch');
+const nodeEnv = process.env.NODE_ENV || '';
+const isProduction = nodeEnv.trim() === 'production';
+const watch = nodeEnv.trim() === 'dev-watch';
 
 console.log('isProduction: ' + isProduction + "\nwatch:" + watch);
 
@@ -13,19 +14,27 @@ var options = {
 
     entry: {
         background: path.join(__dirname, "src", "js", "background.js"),
-        options: path.join(__dirname, "src", "js", "options.js"),
-        popup: path.join(__dirname, "src", "js", "popup.js")
+
+        options: [  path.join(__dirname, "src", "js", "options.js"),
+                    path.join(__dirname, "src", "scss", "options.scss")],
+
+        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
     },
 
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: '[name].js',
-        sourceMapFilename: '[name].map'
+        filename: '[name].js'
     },
 
     devtool: isProduction ? '' : 'source-map',
 
     watch: watch,
+
+    watchOptions: {
+        aggregateTimeout: 300,
+        ignored: /node_modules/,
+        poll: 1000
+    },
 
     module: {
         rules: [
@@ -40,26 +49,44 @@ var options = {
                 }
             },
             {
-                test: /\.css$/,
+                test: /\.(scss|css)$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
-                    use: "css-loader"
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "sass-loader"
+                    }]
                 })
             },
             {
                 test: /\.json$/,
                 use: 'json-loader'
+            },
+            {
+                test: /\.(png|woff|woff2|eot|ttf|svg|ico|gif|otf)$/,
+                loader: 'url-loader?limit=50000'
             }
         ]
     },
 
     plugins: [
-        //TODO add CSS preprocessor and move *.css to src dir;
-        // new ExtractTextPlugin("css/options.css"),
 
-        new CopyWebpackPlugin([
-            {from: 'static'}
+        new CopyWebpackPlugin([{
+                from: path.join(__dirname, 'static', 'icons'),
+                to: 'icons'
+            },{
+                from: path.join(__dirname, 'static', 'img'),
+                to: 'img'
+            }
         ]),
+
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: 'jquery',
+            'window.$': 'jquery',
+            'window.jQuery': 'jquery'
+        }),
 
         new HtmlWebpackPlugin({
             template: path.join(__dirname, "src", "popup.html"),
@@ -74,7 +101,14 @@ var options = {
         }),
 
         new webpack.optimize.UglifyJsPlugin({
-            sourceMap: !isProduction
+            sourceMap: !isProduction,
+            output:{
+                comments: !isProduction
+            }
+        }),
+
+        new ExtractTextPlugin({
+            filename: "[name].css",
         })
     ]
 };

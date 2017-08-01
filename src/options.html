@@ -2,47 +2,52 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Українські новини - налаштування</title>
-    <link type="text/css" rel="stylesheet" href="options.css" media="all">
+    <title>Українські новини - Налаштування</title>
 </head>
 <body>
-<div class="logo">
-    <h2>Українські новини</h2>
-</div>
-<div class="option">
-    <h3>НАЛАШТУВАННЯ:</h3>
-    <div>
-        <h4>вибрати джерела новин</h4>
-        <ul class="newsSources">
-            <!--Items generates by JS in options.js -->
-        </ul>
-    </div>
-    <div>
-        <h4>показувати останніх новин з джерела</h4>
-        <div class="sub-block">
-            <label>кількість:</label><input type="number" min="1" name="show_last_items" id="show_last_items" size="2">
+    <div class="s-content">
+
+        <p class="s-title font-weight-500">Джерела новин</p>
+
+        <div class="card-panel row">
+            <div id="collection-l" class="s-collection col s6"></div>
+            <div id="collection-r" class="s-collection col s5 offset-s1"></div>
+        </div>
+
+        <p class="s-title font-weight-500">Налаштування</p>
+
+        <div class="card-panel">
+
+            <label for="num-news">Відображати новин з джерела: <span class="font-weight-500"
+                                                                                                     id="num-news-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="num-news" min="1" max="20"/>
+            </p>
+
+            <div class="s-divider"></div>
+
+            <label for="update-delay">Періодичність оновлення новин: <span class="font-weight-500"
+                                                                           id="update-delay-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="update-delay" min="5" max="120"/>
+            </p>
+
+            <div class="s-divider"></div>
+
+            <label for="app-width">Ширина вікна з новинами: <span class="font-weight-500"
+                                                                  id="app-width-value"></span></label>
+            <p class="range-field">
+                <input type="range" id="app-width" min="400" max="800"/>
+            </p>
+        </div>
+
+        <p class="s-title font-weight-500">Інформація</p>
+
+        <div class="card-panel">
+            <span class="s-copyright"><span class="font-weight-500">Українські новини</span>
+                це безкоштовний проект з відкритим сирцевим кодом, вихідні коди якого доступні, на веб-сервісі для спільної розробки,
+                за адресою <a href="https://github.com/kovitals/ukrainian-news" target="_blank">github.com/kovitals/ukrainian-news</a>.</span>
         </div>
     </div>
-    <div>
-        <h4>періодичність оновлення новин в фоновому режимі</h4>
-        <div class="sub-block">
-            <label>хвилини:</label><input type="number" min="5" name="background_period_config"
-                                          id="background_period_config" size="2">
-        </div>
-    </div>
-    <div>
-        <h4>ширина вікна з новинами</h4>
-        <div class="sub-block">
-            <label>пікселі:</label><input type="number" min="200" name="window_width_config" id="window_width_config"
-                                          size="3">
-        </div>
-    </div>
-    <div id="status"></div>
-    <br>
-    <div style="text-align: center">
-        <button id="save">Зберегти</button>
-    </div>
-</div>
-<div class="copyright">© Права на матеріали належать сайтам-джерелам новин</div>
 </body>
 </html>

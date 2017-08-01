@@ -1,6 +1,10 @@
-import newsGenerator from './news';
-import common from './common';
 import ga from './analytics/ga';
+import BrowserAPI from "./browser/browser-api";
+import MessageTypes from "./types/message-types";
+import SettingsStorage from "./settings/settings-storage";
+
+var browserAPI;
+var settingsStorage;
 
 // initialize Google Analytics;
 ga();
@@ -15,7 +19,7 @@ function markAsRead(url) {
         url = this.getAttribute('name');
     }
 
-    common.options.addStoredNews(url);
+    settingsStorage.addStoredNews(url);
 
     document.getElementsByName(url)[0].parentNode.remove();
 
@@ -35,7 +39,7 @@ function markAllAsRead() {
     for (var i = content.childElementCount; i >= 0; i--) {
 
         if (content.childNodes[i] && content.childNodes[i].childNodes[0]) {
-            common.options.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
+            settingsStorage.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
         }
 
     }
@@ -107,16 +111,30 @@ function showNews(news) {
     }
 
     var content = document.getElementById("content");
-    content.style.width = common.options.getWindowWidth() + 'px';
+    content.style.width = settingsStorage.getWindowWidth() + 'px';
     content.appendChild(newsFragment);
+}
 
-    chrome.browserAction.setBadgeText({text: (document.getElementById("content").childElementCount).toString()});
+function messageHandler(request, sender, sendResponse) {
+
+    switch (request.type) {
+        case MessageTypes.UPDATE_NEWS_COMPLETE:
+            showNews(request.message);
+            break;
+    }
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+
     console.log('DOMContentLoaded');
 
-    showNews( newsGenerator.requestNews() );
+    settingsStorage = new SettingsStorage();
+
+    browserAPI = new BrowserAPI();
+    browserAPI.listenMessage(messageHandler);
+    browserAPI.sendMessage(MessageTypes.REQUEST_NEWS, null);
 
     document.getElementById('readall').addEventListener('click', markAllAsRead);
+
 });

@@ -1,0 +1,78 @@
+@import '../../vendor/materialize-src/sass/components/color';
+
+$roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
+$secondary-color: color("light-blue", "darken-2");
+
+@import '../../vendor/materialize-src/sass/materialize';
+
+$title-color: #616161;
+$text-color: #210017;
+$background-color: #F1F1F1; //#F8F8F8;
+$font-size: 0.8rem;
+
+body {
+  background-color: $background-color;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  cursor: default;
+}
+
+.s-content {
+  width: 500px;
+  margin: 0 auto;
+  user-select: none;
+}
+
+.card-panel {
+  label {
+    color: $text-color;
+    font-size: $font-size;
+  }
+  span {
+    font-size: $font-size;
+  }
+}
+
+.s-title {
+  color: $title-color;
+  padding-top: 16px;
+}
+
+.row .col {
+  padding: 0;
+}
+
+.s-channel {
+  margin-top: 0px;
+
+  a {
+    color: $text-color;
+  }
+}
+
+.material-tooltip {
+  font-size: $font-size;
+  min-height: 0;
+  padding: 4px 8px;
+}
+
+.font-weight-500 {
+  font-weight: 500;
+}
+
+.s-icon {
+  margin-right: 8px;
+}
+
+.range-field {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.s-divider {
+  margin-bottom: 20px;
+}
+
+.s-channel .s-label:before {
+  margin-top: 0;
+}
