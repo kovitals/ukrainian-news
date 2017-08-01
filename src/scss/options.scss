@@ -69,15 +69,10 @@ body {
   margin-bottom: 0;
 }
 
-//
-//[type="checkbox"]:not(.filled-in) + label:after {
-//  margin-top: 0;
-//}
-
 .s-divider {
-  margin-bottom: 18px;;
+  margin-bottom: 20px;
 }
 
-.s-copyright {
-  //line-height: 2;
+.s-channel .s-label:before {
+  margin-top: 0;
 }

@@ -18,6 +18,7 @@ export default class SourceItemView {
         this.p.appendChild(this.checkbox);
 
         let label = document.createElement('label');
+        label.className = 's-label';
         label.setAttribute('for', key);
         this.p.appendChild(label);
 
