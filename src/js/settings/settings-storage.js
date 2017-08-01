@@ -86,13 +86,11 @@ export default class SettingsStorage {
     getRSSChannels() {
         let channels = this.get(SettingTypes.RSS_CHANNELS);
 
-        if (!channels) {
+        if (channels == undefined) {
             this.rssChannels = {};
 
             Object.keys(this.newsSources).forEach(
-                function (key) {
-                    this.rssChannels[key] = true;
-                }
+                key => {this.rssChannels[key] = true;}
             );
         }
 
