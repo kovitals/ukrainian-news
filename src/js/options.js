@@ -1,3 +1,5 @@
+import common from './common';
+
 // Saves selected rss chanel to local storage
 function save_options() {
     var rss_channels_config = {};
@@ -20,6 +22,7 @@ function save_options() {
     common.options.setShowLastItems(document.getElementById(common.storageKey.showLastItems).value);
     alert("Налаштування збережені");
 }
+
 // Restores selected rss channels from local storage
 function restore_options() {
     if (common.options.getRSSChannels()) {
@@ -32,6 +35,7 @@ function restore_options() {
     document.getElementById(common.storageKey.updatePeriod).value = common.options.getUpdatePeriod();
     document.getElementById(common.storageKey.windowWidth).value = common.options.getWindowWidth();
 }
+
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click', save_options);
 
@@ -41,16 +45,16 @@ Object.keys(common.newsSources).forEach(function (key) {
     newsSourceItem.setAttribute("class", "newsSourcesElement");
 
     var newsSourceCheckbox = document.createElement('input');
-    newsSourceCheckbox.setAttribute("type","checkbox");
-    newsSourceCheckbox.setAttribute("name",key);
-    newsSourceCheckbox.setAttribute("id",key);
+    newsSourceCheckbox.setAttribute("type", "checkbox");
+    newsSourceCheckbox.setAttribute("name", key);
+    newsSourceCheckbox.setAttribute("id", key);
 
     var newsSourceIcon = document.createElement('img');
-    newsSourceIcon.setAttribute("src","img/"+key+"-icon.ico");
+    newsSourceIcon.setAttribute("src", "img/" + key + "-icon.ico");
 
     var newsSourceLink = document.createElement('a');
     newsSourceLink.setAttribute("href", common.newsSources[key].http)
-    newsSourceLink.setAttribute("target","_blank");
+    newsSourceLink.setAttribute("target", "_blank");
     newsSourceLink.innerText = common.newsSources[key].name;
 
     newsSourceItem.appendChild(newsSourceCheckbox);

@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Українські новини",
+  "description": "",
+  "version": "",
+  "author": "Vitaliy Kovalev",
+  "options_page": "options.html",
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  },
+  "permissions": [
+    "storage",
+    "alarms"
+  ],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "img/icon48.png",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+  }
+}
