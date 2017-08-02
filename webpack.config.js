@@ -18,7 +18,8 @@ var options = {
         options: [  path.join(__dirname, "src", "js", "options.js"),
                     path.join(__dirname, "src", "scss", "options.scss")],
 
-        popup: [path.join(__dirname, "src", "js", "popup.js"), path.join(__dirname, "src", "css", "popup.css")]
+        popup: [path.join(__dirname, "src", "js", "popup.js"),
+                path.join(__dirname, "src", "scss", "popup.scss")]
     },
 
     output: {
@@ -32,7 +33,7 @@ var options = {
 
     watchOptions: {
         aggregateTimeout: 300,
-        ignored: /node_modules/,
+        ignored: /(node_modules|vendor)/,
         poll: 1000
     },
 

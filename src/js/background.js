@@ -11,6 +11,8 @@ const newsUpdateTimer = 'news_update_timer';
 
 var browserAPI;
 var settingsStorage;
+var newsData;
+var useMockData = true;
 
 function initialize() {
     settingsStorage = new SettingsStorage();
@@ -57,9 +59,9 @@ function createNewsUpdateAlarm() {
 }
 
 function requestNews() {
-    let news = newsLoader.requestNews();
-    browserAPI.displayBadge(news.length.toString());
-    browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, news);
+    newsData = (useMockData && newsData) ? newsData : newsLoader.requestNews();
+    browserAPI.displayBadge(newsData.length.toString());
+    browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsData);
 }
 
 initialize();
