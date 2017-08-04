@@ -1,14 +1,7 @@
 @import '../../vendor/materialize-src/sass/components/color';
-
-$roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
-$secondary-color: color("light-blue", "darken-2");
-
+@import "variables";
 @import '../../vendor/materialize-src/sass/materialize';
 
-$title-color: #616161;
-$text-color: #210017;
-$background-color: #F1F1F1; //#F8F8F8;
-$font-size: 0.8rem;
 
 body {
   background-color: $background-color;

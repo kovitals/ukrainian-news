@@ -1,11 +1,54 @@
-$roboto-font-path: "../../vendor/materialize-src/fonts/roboto/";
-
+@import "variables";
 @import "../../vendor/material-icons/icon.css";
 @import '../../vendor/materialize-src/sass/materialize';
 
+$left-margin: 16px;
+
 body {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
   width: 500px;
   height: 500px;
+}
+
+.p-nav {
+}
+
+.p-nav-wrapper {
+  background-color: #fafafa;
+}
+
+.material-icons {
+  color: $title-color;
+}
+
+nav .brand-logo {
+  color: $title-color;
+  user-select: none;
+  cursor: default;
+  margin-left: $left-margin;
+  //font-weight: 500;
+}
+
+nav .brand-logo.left {
+  left: 0rem;
+}
+
+.s-logo {
+}
+
+.p-content {
+  overflow: auto;
+  height: inherit;
+  width: inherit;
+  overflow-x: hidden;
+  padding-left: $left-margin;
+}
+
+.p-item-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .p-dropdown {

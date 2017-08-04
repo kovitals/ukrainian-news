@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<body class="p-content">
+<body id="p-body">
+    <ul id="p-dropdown-data" class="dropdown-content p-dropdown">
+        <li><a href="#!" id="d-update">Оновити</a></li>
+        <li><a href="#!" id="d-mark-all">Відмітити всі новини як прочитані</a></li>
+        <li class="divider"></li>
+        <li><a href="#!" id="d-settings">Налаштування</a></li>
+    </ul>
 
-<ul id="p-dropdown-data" class="dropdown-content p-dropdown">
-    <li><a href="#">Оновити</a></li>
-    <li><a href="#">Відмітити всі новини як прочитані</a></li>
-    <li class="divider"></li>
-    <li><a href="options.html" target="_blank">Налаштування</a></li>
-</ul>
-
-<nav>
-    <div class="nav-wrapper">
-        <a href="#!" class="brand-logo left">Українські новини</a>
-        <ul class="right">
-            <li><a class="dropdown-button" href="#" data-activates="p-dropdown-data"><i
-                    class="material-icons">more_vert</i></a></li>
-        </ul>
-        </ul>
+    <div class="navbar-fixed p-nav">
+        <nav>
+            <div class="nav-wrapper p-nav-wrapper">
+                <span class="brand-logo left s-logo">Українські новини</span>
+                <ul class="right">
+                    <li><a class="dropdown-button" href="#" data-activates="p-dropdown-data"><i
+                            class="material-icons">more_vert</i></a></li>
+                </ul>
+                </ul>
+            </div>
+        </nav>
     </div>
-</nav>
 
-<div class="p-news-list">
-    <div>
-        <span class="title">Title</span>
-        <p>First Line</p>
+    <div class="p-content">
+        <div id="p-news-list">
+        </div>
     </div>
-</div>
-
 </body>
 </html>

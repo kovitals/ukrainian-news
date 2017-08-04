@@ -3,43 +3,94 @@ import ga from './analytics/ga';
 import BrowserAPI from "./browser/browser-api";
 import MessageTypes from "./types/message-types";
 import SettingsStorage from "./settings/settings-storage";
-import NewsItem from "./news/news-item";
+import DropdownButtonType from "./types/dropdown-button-type";
+import NewsView from "./news/news-view";
 
 var browserAPI;
 var settingsStorage;
+var newsView;
 
 $(document).ready(function () {
     initialize();
 });
 
 function initialize() {
-
-    // initialize Google Analytics;
     ga();
 
+    newsView = new NewsView("p-news-list");
     settingsStorage = new SettingsStorage();
-
     browserAPI = new BrowserAPI();
     browserAPI.listenMessage(messageHandler);
-    browserAPI.sendMessage(MessageTypes.REQUEST_NEWS, null);
 
+    initDropDown();
+    updateSize();
+    requestNews();
+}
+
+function initDropDown() {
     $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'right'});
 
-    // let content = document.getElementsByClassName("p-content");
-    // content.style.width = settingsStorage.getWindowWidth() + 'px';
+    initButton(DropdownButtonType.UPDATE);
+    initButton(DropdownButtonType.MARK_ALL);
+    initButton(DropdownButtonType.SETTINGS);
+}
 
-    // document.getElementById('readall').addEventListener('click', markAllAsRead);
+function initButton(id) {
+    let button = document.getElementById(id);
+    button.onmouseup = () => buttonClickHandler(button);
+}
+
+function buttonClickHandler(button) {
+    switch (button.id){
+        case DropdownButtonType.UPDATE:
+            newsView.removeAll();
+            requestNews();
+            break;
+        case DropdownButtonType.SETTINGS:
+            browserAPI.openSettings();
+            break;
+        case DropdownButtonType.MARK_ALL:
+            newsView.removeAll();
+            break;
+    }
 }
 
 function messageHandler(request, sender, sendResponse) {
-
     switch (request.type) {
         case MessageTypes.UPDATE_NEWS_COMPLETE:
-            showNews(request.message);
+            newsView.removeAll();
+            newsView.displayNews(request.message);
             break;
     }
-
 }
+
+function updateSize() {
+    let body = document.getElementById('p-body');
+    body.style.width = settingsStorage.getWindowWidth() + 'px';
+}
+
+function requestNews() {
+    browserAPI.sendMessage(MessageTypes.REQUEST_NEWS);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -59,9 +110,6 @@ function markAsRead(url) {
     if (document.getElementById("content").childElementCount == 0) {
         window.close();
     }
-
-
-    chrome.browserAction.setBadgeText({text: (document.getElementById("content").childElementCount).toString()});
 }
 
 /**
@@ -85,18 +133,7 @@ function markAllAsRead() {
     window.close();
 }
 
-/**
- *
- * @param {ProgressEvent} e The XHR ProgressEvent.
- * @private
- */
-function showNews(news) {
 
-    let fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < news.length; i++) {
-        let newsItem = new NewsItem(news[i]);
-    }
 
     // for (var i = 0; i < news.length; i++) {
     //     var li = document.createElement('li');
@@ -144,11 +181,3 @@ function showNews(news) {
     //         chrome.tabs.create({url: this.getAttribute("href"), active: true});
     //     });
     //     li.appendChild(a);
-    //     // Add created news item to window
-    //     newsFragment.appendChild(li);
-    // }
-    //
-    // var content = document.getElementById("content");
-    // content.style.width = settingsStorage.getWindowWidth() + 'px';
-    // content.appendChild(newsFragment);
-}
