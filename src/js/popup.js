@@ -5,10 +5,12 @@ import MessageTypes from "./types/message-types";
 import SettingsStorage from "./settings/settings-storage";
 import DropdownButtonType from "./types/dropdown-button-type";
 import NewsView from "./news/news-view";
+import NavBarView from "./news/nav-bar-view";
 
 var browserAPI;
 var settingsStorage;
 var newsView;
+var navBarView;
 
 $(document).ready(function () {
     initialize();
@@ -18,39 +20,33 @@ function initialize() {
     ga();
 
     newsView = new NewsView("p-news-list");
+
+    navBarView = new NavBarView();
+    navBarView.registerMenuClickHandler(navBarMenuClickHandler);
+
     settingsStorage = new SettingsStorage();
+
     browserAPI = new BrowserAPI();
     browserAPI.listenMessage(messageHandler);
 
-    initDropDown();
     updateSize();
     requestNews();
 }
 
-function initDropDown() {
-    $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'right'});
-
-    initButton(DropdownButtonType.UPDATE);
-    initButton(DropdownButtonType.MARK_ALL);
-    initButton(DropdownButtonType.SETTINGS);
-}
-
-function initButton(id) {
-    let button = document.getElementById(id);
-    button.onmouseup = () => buttonClickHandler(button);
-}
-
-function buttonClickHandler(button) {
+function navBarMenuClickHandler(button) {
     switch (button.id){
         case DropdownButtonType.UPDATE:
             newsView.removeAll();
             requestNews();
             break;
         case DropdownButtonType.SETTINGS:
-            browserAPI.openSettings();
+            browserAPI.openSettingsPage();
             break;
         case DropdownButtonType.MARK_ALL:
             newsView.removeAll();
+            break;
+        case DropdownButtonType.RATE:
+            browserAPI.openReviewsPage();
             break;
     }
 }

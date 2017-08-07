@@ -25,7 +25,7 @@ export default class NewsView {
         this.content.appendChild(fragment);
     }
 
-    removeNews(){
+    removeNews(url){
 
     }
 

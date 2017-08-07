@@ -33,7 +33,7 @@ var options = {
 
     watchOptions: {
         aggregateTimeout: 300,
-        ignored: /(node_modules|vendor)/,
+        ignored: /node_modules/,
         poll: 1000
     },
 

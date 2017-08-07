@@ -48,7 +48,7 @@ var newsLoader = {
 
                                     let newsData = new NewsData();
                                     newsData.key = key;
-                                    newsData.title = result[i].querySelector('title').textContent;
+                                    newsData.title = decodeURI(result[i].querySelector('title').textContent);
                                     newsData.date = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
                                     newsData.link = result[i].querySelector('link').textContent;
 

@@ -40,9 +40,12 @@ export default class BrowserAPI {
         chrome.runtime.onMessage.addListener(callback);
     }
 
-    openSettings() {
-        let optionsUrl = chrome.extension.getURL('options.html');
-        this.createTab(optionsUrl);
+    openReviewsPage(){
+        this.createTab('https://chrome.google.com/webstore/detail/' + chrome.runtime.id + '/reviews');
+    }
+
+    openSettingsPage() {
+        chrome.runtime.openOptionsPage(null);
     }
 
     createTab(url, active = true) {
