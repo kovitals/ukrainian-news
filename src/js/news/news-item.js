@@ -15,6 +15,10 @@ export default class NewsItem{
 
     }
 
+    get element(){
+        return this.p;
+    }
+
     render(container){
         container.appendChild(this.p);
     }

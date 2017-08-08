@@ -36,14 +36,14 @@ function initialize() {
 function navBarMenuClickHandler(button) {
     switch (button.id){
         case DropdownButtonType.UPDATE:
-            newsView.removeAll();
+            newsView.removeAllItems();
             requestNews();
             break;
         case DropdownButtonType.SETTINGS:
             browserAPI.openSettingsPage();
             break;
         case DropdownButtonType.MARK_ALL:
-            newsView.removeAll();
+            newsView.removeAllItems();
             break;
         case DropdownButtonType.RATE:
             browserAPI.openReviewsPage();
@@ -54,7 +54,7 @@ function navBarMenuClickHandler(button) {
 function messageHandler(request, sender, sendResponse) {
     switch (request.type) {
         case MessageTypes.UPDATE_NEWS_COMPLETE:
-            newsView.removeAll();
+            newsView.removeAllItems();
             newsView.displayNews(request.message);
             break;
     }
