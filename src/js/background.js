@@ -1,23 +1,21 @@
-import newsLoader from './news/news-loader';
+// import newsLoader from './news/news-loader';
 import BrowserAPI from "./browser/browser-api";
 import SettingTypes from "./types/setting-types";
 import AlarmTypes from "./types/alarm-types";
 import MessageTypes from "./types/message-types";
 import Utils from "./utils/utils";
 import SettingsStorage from "./settings/settings-storage";
+import NewsLoader from "./news-loader";
 
 const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
 
-var browserAPI;
-var settingsStorage;
+var browserAPI = new BrowserAPI();
+var newsLoader = new NewsLoader();
+var settingsStorage = new SettingsStorage();
 var newsData;
-var useMockData = true;
 
 function initialize() {
-    settingsStorage = new SettingsStorage();
-
-    browserAPI = new BrowserAPI();
     browserAPI.listenAlarm(alarmHandler);
     browserAPI.listenMessage(messageHandler);
 
@@ -59,9 +57,19 @@ function createNewsUpdateAlarm() {
 }
 
 function requestNews() {
-    newsData = (useMockData && newsData) ? newsData : newsLoader.requestNews();
-    browserAPI.displayBadge(newsData.length.toString());
-    browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsData);
+//
+
+    newsLoader.requestNews().then(values => {
+            console.log('news1', values)
+        }
+        , reason => {
+            console.log(reason)
+        }
+    );
+
+    // newsData = (useMockData && newsData) ? newsData : newsLoader.requestNews();
+    // browserAPI.displayBadge(newsData.length.toString());
+    // browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsData);
 }
 
 initialize();
