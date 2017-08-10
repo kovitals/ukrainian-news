@@ -1,10 +1,13 @@
-import SettingsStorage from "../settings/settings-storage";
 import NewsData from "./news-data";
 
 export default class NewsLoader {
 
-    constructor() {
-        this.settingsStorage = new SettingsStorage();
+    /**
+     *
+     * @param {SettingsStorage} settingsStorage
+     */
+    constructor(settingsStorage) {
+        this.settingsStorage = settingsStorage;
     }
 
     requestNews() {

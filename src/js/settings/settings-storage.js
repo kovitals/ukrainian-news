@@ -8,6 +8,29 @@ export default class SettingsStorage {
         this.browserAPI = new BrowserAPI();
     }
 
+    /**
+     * @param {String} key
+     * @param {Object} value
+     */
+    save(key, value) {
+        this.browserAPI.storageSet(key, value);
+        this.browserAPI.sendMessage(key, value);
+    }
+
+    /**
+     *
+     * @param {String} key
+     * return {Promise}
+     */
+    load(key) {
+        return this.browserAPI.storageGet(key);
+    }
+
+
+
+
+
+
     // define news rss channels with an additional information
     get newsSources() {
         return channels;
@@ -90,7 +113,9 @@ export default class SettingsStorage {
             this.rssChannels = {};
 
             Object.keys(this.newsSources).forEach(
-                key => {this.rssChannels[key] = true;}
+                key => {
+                    this.rssChannels[key] = true;
+                }
             );
         }
 
@@ -104,6 +129,10 @@ export default class SettingsStorage {
         this.set(SettingTypes.UPDATE_PERIOD, value);
     }
 
+    /**
+     *
+     * @returns {Number}
+     */
     getUpdatePeriod() {
         return parseInt(this.get(SettingTypes.UPDATE_PERIOD));
     }

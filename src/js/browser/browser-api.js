@@ -57,4 +57,29 @@ export default class BrowserAPI {
             }
         });
     }
+
+    /**
+     *
+     * @param {String} key
+     * @param {Object} value
+     */
+    storageSet(key, value) {
+        chrome.storage.sync.set({[key]: value}, () => {
+        });
+    }
+
+    /**
+     *
+     * @param {String} key
+     * @returns {Promise}
+     */
+    storageGet(key) {
+        let p = new Promise((resolve, reject) => {
+            chrome.storage.sync.get(key, (items) => {
+                resolve(items[key]);
+            });
+        });
+
+        return p;
+    }
 }

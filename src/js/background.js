@@ -10,8 +10,8 @@ const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
 
 var browserAPI = new BrowserAPI();
-var newsLoader = new NewsLoader();
 var settingsStorage = new SettingsStorage();
+var newsLoader = new NewsLoader(settingsStorage);
 
 function initialize() {
     browserAPI.listenAlarm(alarmHandler);
@@ -62,6 +62,13 @@ function requestNews() {
  * @param {Array} data
  */
 function newsDataHandler(data) {
+
+    // for test;
+    // settingsStorage.save('test_key_33', {news: 'some33', kera: 'two33'});
+    // settingsStorage.load('test_key_33').then((value) => {
+    //     console.log(value);
+    // });
+
     console.log(data);
 
     let newsList = [];
@@ -75,7 +82,7 @@ function newsDataHandler(data) {
         return new Date(news2.date) - new Date(news1.date);
     });
 
-    console.log(newsList);
+    // console.log(newsList);
 
     browserAPI.displayBadge(newsList.length.toString());
     browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsList);
