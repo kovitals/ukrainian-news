@@ -1,11 +1,10 @@
-// import newsLoader from './news/news-loader';
 import BrowserAPI from "./browser/browser-api";
 import SettingTypes from "./types/setting-types";
 import AlarmTypes from "./types/alarm-types";
 import MessageTypes from "./types/message-types";
 import Utils from "./utils/utils";
 import SettingsStorage from "./settings/settings-storage";
-import NewsLoader from "./news-loader";
+import NewsLoader from "./news/news-loader";
 
 const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
@@ -13,7 +12,6 @@ const newsUpdateTimer = 'news_update_timer';
 var browserAPI = new BrowserAPI();
 var newsLoader = new NewsLoader();
 var settingsStorage = new SettingsStorage();
-var newsData;
 
 function initialize() {
     browserAPI.listenAlarm(alarmHandler);
@@ -57,19 +55,30 @@ function createNewsUpdateAlarm() {
 }
 
 function requestNews() {
-//
+    newsLoader.requestNews().then(newsDataHandler);
+}
 
-    newsLoader.requestNews().then(values => {
-            console.log('news1', values)
-        }
-        , reason => {
-            console.log(reason)
-        }
-    );
+/**
+ * @param {Array} data
+ */
+function newsDataHandler(data) {
+    console.log(data);
 
-    // newsData = (useMockData && newsData) ? newsData : newsLoader.requestNews();
-    // browserAPI.displayBadge(newsData.length.toString());
-    // browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsData);
+    let newsList = [];
+
+    data.forEach((element) => {
+        if (element && element.length > 0)
+            newsList = newsList.concat(element);
+    });
+
+    newsList.sort((news1, news2) => {
+        return new Date(news2.date) - new Date(news1.date);
+    });
+
+    console.log(newsList);
+
+    browserAPI.displayBadge(newsList.length.toString());
+    browserAPI.sendMessage(MessageTypes.UPDATE_NEWS_COMPLETE, newsList);
 }
 
 initialize();

@@ -1,5 +1,5 @@
-import SettingsStorage from "./settings/settings-storage";
-import NewsData from "./news/news-data";
+import SettingsStorage from "../settings/settings-storage";
+import NewsData from "./news-data";
 
 export default class NewsLoader {
 
@@ -38,6 +38,7 @@ export default class NewsLoader {
                 resolve(null);
                 console.log(xhr.statusText);
             };
+            xhr.timeout = 5000;
             xhr.send();
         });
     }
