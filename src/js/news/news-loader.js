@@ -10,9 +10,10 @@ export default class NewsLoader {
         this.settingsStorage = settingsStorage;
     }
 
-    requestNews() {
-        let channels = this.settingsStorage.getRSSChannels();
-        let sources = this.settingsStorage.newsSources;
+    requestNews(channels, numLastNews) {
+        this.numLastNews = numLastNews;
+
+        let sources = this.settingsStorage.getFeeds();
         let promises = [];
 
         for (let key in channels) {
@@ -55,17 +56,17 @@ export default class NewsLoader {
         // console.log(key, xmlData);
 
         let result = xmlData.querySelectorAll('item');
-        let length = Math.min(result.length, this.settingsStorage.getShowLastItems());
+        let length = Math.min(result.length, this.numLastNews);
         let newsList = [];
 
         for (var i = 0; i < length; i++) {
 
             let link = result[i].querySelector('link').textContent;
 
-            if (this.settingsStorage.hasStoredNews(link)) {
+            // if (this.settingsStorage.hasStoredNews(link)) {
                 // should be shown only unread news items;
-                continue;
-            }
+                // continue;
+            // }
 
             let newsData = new NewsData();
             newsData.key = key;

@@ -43,6 +43,16 @@ export default class SourceItemView {
         }
     }
 
+    /**
+     * @return {Boolean}
+     */
+    get checked(){
+        return this.checkbox.checked;
+    }
+
+    /**
+     * @param {Boolean} value
+     */
     set checked(value){
         if(value)
             this.checkbox.setAttribute('checked', '');

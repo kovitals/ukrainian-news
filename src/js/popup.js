@@ -8,6 +8,9 @@ import NewsView from "./news/news-view";
 import NavBarView from "./news/nav-bar-view";
 
 var browserAPI;
+/**
+ * @type SettingsStorage
+ */
 var settingsStorage;
 var newsView;
 var navBarView;
@@ -55,6 +58,10 @@ function messageHandler(request, sender, sendResponse) {
     switch (request.type) {
         case MessageTypes.UPDATE_NEWS_COMPLETE:
             newsView.removeAllItems();
+
+            // for test;
+            // settingsStorage.addMarkedNews(request.message[0].link, request.message[0].date);
+
             newsView.displayNews(request.message);
             break;
     }
@@ -62,7 +69,10 @@ function messageHandler(request, sender, sendResponse) {
 
 function updateSize() {
     let body = document.getElementById('p-body');
-    body.style.width = settingsStorage.getWindowWidth() + 'px';
+
+    settingsStorage.getWindowWidth().then((value)=>{
+        body.style.width = value + 'px';
+    });
 }
 
 function requestNews() {
@@ -99,7 +109,7 @@ function markAsRead(url) {
         url = this.getAttribute('name');
     }
 
-    settingsStorage.addStoredNews(url);
+    // settingsStorage.addStoredNews(url);
 
     document.getElementsByName(url)[0].parentNode.remove();
 
@@ -117,7 +127,7 @@ function markAllAsRead() {
     for (var i = content.childElementCount; i >= 0; i--) {
 
         if (content.childNodes[i] && content.childNodes[i].childNodes[0]) {
-            settingsStorage.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
+            // settingsStorage.addStoredNews(content.childNodes[i].childNodes[0].getAttribute('name'));
         }
 
     }

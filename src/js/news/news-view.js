@@ -42,7 +42,7 @@ export default class NewsView {
     }
 
     showPreloader(){
-        this.preloader.style.display = 'inline';
+        this.preloader.style.display = 'inline';inline
     }
 
     hidePreloader(){

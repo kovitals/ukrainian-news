@@ -11,7 +11,11 @@ var sliderValuePostfixMap = {
     [SLIDER_ID_APP_WIDTH]: 'пікселів'
 };
 
+/**
+ * @type SettingsStorage
+ */
 var settingsStorage;
+var sourceItems = [];
 
 $(document).ready(function () {
     initialize();
@@ -19,48 +23,67 @@ $(document).ready(function () {
 
 function initialize() {
     settingsStorage = new SettingsStorage();
+    settingsStorage.getRSSChannels().then(displayFeeds);
+    initializeSliders();
+}
 
-    let selectedChannels = settingsStorage.getRSSChannels();
-    let channels = settingsStorage.newsSources;
+/**
+ * @param {Array} selectedChannels
+ */
+function displayFeeds(selectedChannels) {
+    let channels = settingsStorage.getFeeds();
     let numRow = Math.ceil(Object.keys(channels).length / 2);
-    let containers = [  document.getElementById('collection-l'),
-                        document.getElementById('collection-r') ];
+    let containers = [document.getElementById('collection-l'),
+        document.getElementById('collection-r')];
     let index = 0;
 
     console.log(this, 'selectedChannels', selectedChannels);
 
     for (let key in channels) {
-
         let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, `img/${key}-icon.ico`);
-        sourceItem.checked = selectedChannels[key];
+        sourceItem.checked = selectedChannels.indexOf(key) != -1;
         sourceItem.displayTooltip('Відвідати сторінку');
         sourceItem.registerChangeHandler(checkboxChangeHandler);
         sourceItem.lastItem = ((index + 1) % numRow) == 0;
-        sourceItem.render( (index < numRow) ?  containers[0] : containers[1] );
+        sourceItem.render((index < numRow) ? containers[0] : containers[1]);
 
+        sourceItems[index] = sourceItem;
         index++;
     }
+}
 
+function initializeSliders() {
     $('.tooltipped').tooltip({delay: 100});
 
-    initializeSlider(SLIDER_ID_NUM_NEWS, settingsStorage.getShowLastItems());
-    initializeSlider(SLIDER_ID_UPDATE_DELAY, settingsStorage.getUpdatePeriod());
-    initializeSlider(SLIDER_ID_APP_WIDTH, settingsStorage.getWindowWidth());
+    settingsStorage.getUpdatePeriod().then((value) => {
+        initSlider(SLIDER_ID_UPDATE_DELAY, value);
+    });
+
+    settingsStorage.getWindowWidth().then((value) => {
+        initSlider(SLIDER_ID_APP_WIDTH, value);
+    });
+
+    settingsStorage.getNumLastNews().then((value) => {
+        initSlider(SLIDER_ID_NUM_NEWS, value);
+    });
 }
 
 function checkboxChangeHandler(checkbox) {
     console.log(checkbox.id, checkbox.checked);
 
-    if (checkbox.checked)
-        settingsStorage.addRSSChannel(checkbox.id);
-    else
-        settingsStorage.removeRSSChannel(checkbox.id);
+    let channels = [];
+    sourceItems.forEach((sourceItem) => {
+        if(sourceItem.checked)
+            channels.push(sourceItem.key);
+    });
+
+    settingsStorage.setRSSChannels(channels);
 }
 
 function sliderChangeHandler(slider) {
     switch (slider.id) {
         case SLIDER_ID_NUM_NEWS:
-            settingsStorage.setShowLastItems(slider.value);
+            settingsStorage.setNumLastNews(slider.value);
             break;
         case SLIDER_ID_UPDATE_DELAY:
             settingsStorage.setUpdatePeriod(slider.value);
@@ -82,7 +105,7 @@ function sliderInputHandler(slider) {
     valueField.innerText = slider.value + ' ' + postfixText;
 }
 
-function initializeSlider(id, defaultValue) {
+function initSlider(id, defaultValue) {
     console.log(`default value for slider ${id} is ${defaultValue}`);
 
     let slider = document.getElementById(id);

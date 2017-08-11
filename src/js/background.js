@@ -9,11 +9,13 @@ import NewsLoader from "./news/news-loader";
 const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
 
-var browserAPI = new BrowserAPI();
-var settingsStorage = new SettingsStorage();
-var newsLoader = new NewsLoader(settingsStorage);
+const browserAPI = new BrowserAPI();
+const settingsStorage = new SettingsStorage();
+const newsLoader = new NewsLoader(settingsStorage);
 
 function initialize() {
+    settingsStorage.cleanupMarkedNews();
+
     browserAPI.listenAlarm(alarmHandler);
     browserAPI.listenMessage(messageHandler);
 
@@ -36,11 +38,11 @@ function messageHandler(request, sender, sendResponse) {
     console.log('messageHandler(', request.type, request.message, ')');
 
     switch (request.type) {
-        case SettingTypes.NUM_LAST_ITEMS:
+        case SettingTypes.NUM_LAST_NEWS:
         case MessageTypes.REQUEST_NEWS:
             requestNews();
             break;
-        case SettingTypes.UPDATE_PERIOD:
+        case SettingTypes.NEWS_UPDATE_PERIOD:
             createNewsUpdateAlarm();
             break;
         case SettingTypes.RSS_CHANNELS:
@@ -50,12 +52,15 @@ function messageHandler(request, sender, sendResponse) {
 }
 
 function createNewsUpdateAlarm() {
-    let updateTime = settingsStorage.getUpdatePeriod();
-    browserAPI.createAlarm(AlarmTypes.UPDATE_NEWS, updateTime, updateTime);
+    settingsStorage.getUpdatePeriod().then((value) => {
+        browserAPI.createAlarm(AlarmTypes.UPDATE_NEWS, value, value);
+    });
 }
 
 function requestNews() {
-    newsLoader.requestNews().then(newsDataHandler);
+    Promise.all([settingsStorage.getRSSChannels(), settingsStorage.getNumLastNews()]).then((values) => {
+        newsLoader.requestNews.apply(values).then(newsDataHandler);
+    })
 }
 
 /**

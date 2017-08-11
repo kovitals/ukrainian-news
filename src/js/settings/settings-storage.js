@@ -5,6 +5,17 @@ import SettingTypes from "../types/setting-types";
 export default class SettingsStorage {
 
     constructor() {
+        this.defaultValues = {
+            [SettingTypes.WINDOW_WIDTH]: 650,
+            [SettingTypes.NEWS_UPDATE_PERIOD]: 30,
+            [SettingTypes.NUM_LAST_NEWS]: 8,
+            [SettingTypes.RSS_CHANNELS]: Object.keys(this.getFeeds()),
+            [SettingTypes.MARKED_NEWS]: [],
+            [SettingTypes.FAVORITE_NEWS]: []
+        };
+
+        console.log(this.defaultValues[SettingTypes.RSS_CHANNELS]);
+
         this.browserAPI = new BrowserAPI();
     }
 
@@ -18,148 +29,130 @@ export default class SettingsStorage {
     }
 
     /**
-     *
      * @param {String} key
      * return {Promise}
      */
     load(key) {
-        return this.browserAPI.storageGet(key);
+        let p = new Promise((resolve, reject) => {
+            this.browserAPI.storageGet(key).then((value) => {
+                console.log('load', key, value, this.defaultValues[key]);
+                if (value == undefined) {
+                    resolve(this.defaultValues[key]);
+                }
+                else {
+                    resolve(value);
+                }
+            })
+        });
+
+        return p;
     }
 
+    /**
+     * @param {Number} value
+     */
+    setUpdatePeriod(value) {
+        this.save(SettingTypes.NEWS_UPDATE_PERIOD, value);
+    }
 
+    /**
+     * @returns {Promise}
+     */
+    getUpdatePeriod() {
+        return this.load(SettingTypes.NEWS_UPDATE_PERIOD);
+    }
 
+    /**
+     * @param {Number} value
+     */
+    setWindowWidth(value) {
+        this.save(SettingTypes.WINDOW_WIDTH, value);
+    }
 
+    /**
+     * @returns {Promise}
+     */
+    getWindowWidth() {
+        return this.load(SettingTypes.WINDOW_WIDTH);
+    }
 
+    /**
+     * @param {Number} value
+     */
+    setNumLastNews(value) {
+        this.save(SettingTypes.NUM_LAST_NEWS, value);
+    }
 
-    // define news rss channels with an additional information
-    get newsSources() {
+    /**
+     * @returns {Promise}
+     */
+    getNumLastNews() {
+        return this.load(SettingTypes.NUM_LAST_NEWS);
+    }
+
+    /**
+     * return all available rss feeds;
+     * @return {Object}
+     */
+    getFeeds() {
         return channels;
     }
 
-    get defaultValues() {
-        return {
-            window_width_config: 650,
-            background_period_config: 30,
-            show_last_items: 8
-        }
-    }
-
     /**
-     * Load from local storage have read news items
-     *
-     * @returns {*}
+     * @return {Promise}
      */
-    getStoredNews() {
-        if (localStorage.getItem(SettingTypes.STORED_NEWS)) {
-            return JSON.parse(localStorage.getItem(SettingTypes.STORED_NEWS));
-        }
-        return false;
-    }
-
-    /**
-     * Save one news item to local storage as have read
-     *
-     * @param newsItem
-     */
-    addStoredNews(newsItem) {
-        if (this.getStoredNews() == false) {
-            localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(new Array(newsItem)));
-        } else {
-            let arr = this.getStoredNews();
-            arr.push(newsItem);
-            localStorage.setItem(SettingTypes.STORED_NEWS, JSON.stringify(arr));
-        }
-    }
-
-    /**
-     * Check if provided news item have already read and exist in local storage
-     *
-     * @param newsitem
-     */
-    hasStoredNews(newsitem) {
-        let news = this.getStoredNews();
-
-        if (news) {
-            return (news.indexOf(newsitem) > -1);
-        }
-
-        return false;
-    }
-
-    setWindowWidth(value) {
-        this.set(SettingTypes.WINDOW_WIDTH, value);
-    }
-
-    getWindowWidth() {
-        return this.get(SettingTypes.WINDOW_WIDTH);
-    }
-
-    removeRSSChannel(id) {
-        this.rssChannels[id] = false;
-        console.log('removeRSSChannel', id, this.rssChannels);
-        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(this.rssChannels));
-    }
-
-    addRSSChannel(id) {
-        this.rssChannels[id] = true;
-        console.log('addRSSChannel', id, this.rssChannels);
-        this.set(SettingTypes.RSS_CHANNELS, JSON.stringify(this.rssChannels));
-    }
-
     getRSSChannels() {
-        let channels = this.get(SettingTypes.RSS_CHANNELS);
-
-        if (channels == undefined) {
-            this.rssChannels = {};
-
-            Object.keys(this.newsSources).forEach(
-                key => {
-                    this.rssChannels[key] = true;
-                }
-            );
-        }
-
-        if (this.rssChannels == undefined)
-            this.rssChannels = JSON.parse(channels);
-
-        return this.rssChannels;
-    }
-
-    setUpdatePeriod(value) {
-        this.set(SettingTypes.UPDATE_PERIOD, value);
+        return this.load(SettingTypes.RSS_CHANNELS);
     }
 
     /**
-     *
-     * @returns {Number}
+     * @param {Array} value
      */
-    getUpdatePeriod() {
-        return parseInt(this.get(SettingTypes.UPDATE_PERIOD));
+    setRSSChannels(value) {
+        console.log('setRSSChannels', value);
+        this.save(SettingTypes.RSS_CHANNELS, value);
     }
 
-    setShowLastItems(value) {
-        this.set(SettingTypes.NUM_LAST_ITEMS, value);
+    cleanupMarkedNews() {
+        this.getMarkedNews().then((newsList) => {
+            console.log('cleanupMarkedNews', newsList);
+            newsList = newsList.filter((news) => {
+                console.log('cleanupMarkedNews', new Date() - news.date, news.url);
+                return true;
+            });
+            this.save(SettingTypes.MARKED_NEWS, newsList);
+        });
     }
 
-    getShowLastItems() {
-        return this.get(SettingTypes.NUM_LAST_ITEMS);
+    addMarkedNews(url, date) {
+        let news = {date, url};
+        this.getMarkedNews().then((markedNews) => {
+            markedNews.push(news);
+            this.save(SettingTypes.MARKED_NEWS, markedNews);
+        });
     }
 
-    get(key) {
-        if (localStorage.getItem(key)) {
-            return localStorage.getItem(key);
-        } else {
-            if (this.defaultValues.hasOwnProperty(key)) {
-                return this.defaultValues[key];
-            }
-            return null;
-        }
+    /**
+     * @return {Promise}
+     */
+    getMarkedNews() {
+        return this.load(SettingTypes.MARKED_NEWS);
     }
 
-    set(key, value) {
-        if (key && value) {
-            localStorage.setItem(key, value);
-            this.browserAPI.sendMessage(key, value);
-        }
+    /**
+     * @param {NewsData} newsData
+     */
+    addFavoriteNews(newsData) {
+        this.getFavoriteNews().then((favoriteNews) => {
+            favoriteNews.push(newsData);
+            this.save(SettingTypes.FAVORITE_NEWS, favoriteNews);
+        });
+    }
+
+    /**
+     * @return {Promise}
+     */
+    getFavoriteNews() {
+        return this.load(SettingTypes.FAVORITE_NEWS);
     }
 }
