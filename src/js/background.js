@@ -58,8 +58,11 @@ function createNewsUpdateAlarm() {
 }
 
 function requestNews() {
-    Promise.all([settingsStorage.getRSSChannels(), settingsStorage.getNumLastNews()]).then((values) => {
-        newsLoader.requestNews.apply(values).then(newsDataHandler);
+    let channels = settingsStorage.getRSSChannels();
+    let numLastNews = settingsStorage.getNumLastNews();
+
+    Promise.all([channels, numLastNews]).then((values) => {
+        newsLoader.requestNews.apply(newsLoader, values).then(newsDataHandler);
     })
 }
 
@@ -67,14 +70,7 @@ function requestNews() {
  * @param {Array} data
  */
 function newsDataHandler(data) {
-
-    // for test;
-    // settingsStorage.save('test_key_33', {news: 'some33', kera: 'two33'});
-    // settingsStorage.load('test_key_33').then((value) => {
-    //     console.log(value);
-    // });
-
-    console.log(data);
+    // console.log(data);
 
     let newsList = [];
 

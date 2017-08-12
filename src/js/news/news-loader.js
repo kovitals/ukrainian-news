@@ -3,25 +3,26 @@ import NewsData from "./news-data";
 export default class NewsLoader {
 
     /**
-     *
      * @param {SettingsStorage} settingsStorage
      */
     constructor(settingsStorage) {
         this.settingsStorage = settingsStorage;
     }
 
+    /**
+     * @param channels - list of news' key that should be loaded;
+     * @param numLastNews - number of news that should be gotten from each feed;
+     * @returns {Promise.<*>}
+     */
     requestNews(channels, numLastNews) {
         this.numLastNews = numLastNews;
 
         let sources = this.settingsStorage.getFeeds();
         let promises = [];
 
-        for (let key in channels) {
-            if (channels[key]) {
-                let sourceData = sources[key];
-                promises.push(this.load(key, sourceData.rss));
-            }
-        }
+        channels.forEach((key) => {
+            promises.push(this.load(key, sources[key].rss));
+        });
 
         return Promise.all(promises);
     }
@@ -43,6 +44,9 @@ export default class NewsLoader {
                 console.log(xhr.statusText);
             };
             xhr.timeout = 5000;
+            xhr.ontimeout = () => {
+                resolve(null);
+            };
             xhr.send();
         });
     }
@@ -53,8 +57,6 @@ export default class NewsLoader {
             xmlData = new DOMParser().parseFromString(xmlData, "text/xml");
         }
 
-        // console.log(key, xmlData);
-
         let result = xmlData.querySelectorAll('item');
         let length = Math.min(result.length, this.numLastNews);
         let newsList = [];
@@ -63,9 +65,10 @@ export default class NewsLoader {
 
             let link = result[i].querySelector('link').textContent;
 
+            // TODO have to implemented;
             // if (this.settingsStorage.hasStoredNews(link)) {
-                // should be shown only unread news items;
-                // continue;
+            // should be shown only unread news items;
+            // continue;
             // }
 
             let newsData = new NewsData();

@@ -6,7 +6,7 @@ export default class SettingsStorage {
 
     constructor() {
         this.defaultValues = {
-            [SettingTypes.WINDOW_WIDTH]: 650,
+            [SettingTypes.WINDOW_WIDTH]: 500,
             [SettingTypes.NEWS_UPDATE_PERIOD]: 30,
             [SettingTypes.NUM_LAST_NEWS]: 8,
             [SettingTypes.RSS_CHANNELS]: Object.keys(this.getFeeds()),
