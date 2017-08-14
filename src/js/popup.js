@@ -22,7 +22,10 @@ $(document).ready(function () {
 function initialize() {
     ga();
 
-    newsView = new NewsView("p-news-list");
+    /**
+     * @type {NewsView}
+     */
+    newsView = new NewsView("p-content");
 
     navBarView = new NavBarView();
     navBarView.registerMenuClickHandler(navBarMenuClickHandler);
@@ -58,10 +61,7 @@ function messageHandler(request, sender, sendResponse) {
     switch (request.type) {
         case MessageTypes.UPDATE_NEWS_COMPLETE:
             newsView.removeAllItems();
-
-            // for test;
-            // settingsStorage.addMarkedNews(request.message[0].link, request.message[0].date);
-
+            newsView.hidePreloader();
             newsView.displayNews(request.message);
             break;
     }
@@ -76,6 +76,7 @@ function updateSize() {
 }
 
 function requestNews() {
+    newsView.showPreloader();
     browserAPI.sendMessage(MessageTypes.REQUEST_NEWS);
 }
 

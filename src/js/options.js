@@ -40,6 +40,9 @@ function displayFeeds(selectedChannels) {
     console.log(this, 'selectedChannels', selectedChannels);
 
     for (let key in channels) {
+
+        // TODO use https://www.google.com/s2/favicons?domain= favicons;
+
         let sourceItem = new SourceItemView(key, channels[key].name, channels[key].http, `img/${key}-icon.ico`);
         sourceItem.checked = selectedChannels.indexOf(key) != -1;
         sourceItem.displayTooltip('Відвідати сторінку');

@@ -1,51 +1,46 @@
 /**
  * Created by valer on 04.08.2017.
  */
-import NewsItem from "./news-item";
+import List from "list.js";
 
 export default class NewsView {
 
     constructor(containerId) {
-        this.content = document.getElementById(containerId);
+        this.options = {
+            valueNames: ['title', {name: 'link', attr: 'href'}],
+            item: '<li><a href="#" target="_blank" class="p-item-title title link"></a></li>'
+        };
+
         this.preloader = document.getElementById('p-preloader');
+
+        /**
+         * @type List
+         */
+        this.list = new List(containerId, this.options);
     }
 
+    /**
+     * @param {Array} news
+     */
     displayNews(news) {
-        this.newsItemMap = new Map();
-
-        let fragment = document.createDocumentFragment();
-
-        for (var i = 0; i < news.length; i++) {
-            /** @type NewsData **/
-            let newsData = news[i];
-
-            let newsItem = new NewsItem(newsData);
-            newsItem.render(fragment);
-
-            this.newsItemMap.set(newsData.link, newsItem);
-        }
-
-        this.content.appendChild(fragment);
-    }
-
-    removeNewsItem(url){
-        console.log( this.newsItemMap.get(url) )
-        // this.content.removeChild()
+        console.log(news.length, news[news.length - 1].title);
+        this.list.add(news);
     }
 
     removeAllItems() {
-        let child = this.content.firstChild;
-        while (child) {
-            this.content.removeChild(child);
-            child = this.content.firstChild;
-        }
+        this.list.clear();
     }
 
-    showPreloader(){
-        this.preloader.style.display = 'inline';inline
+    removeNewsItem(url) {
+        // console.log(this.newsItemMap.get(url))
+        // this.content.removeChild()
     }
 
-    hidePreloader(){
+    showPreloader() {
+        this.preloader.style.display = 'inline';
+    }
+
+    hidePreloader() {
         this.preloader.style.display = 'none';
     }
 }
