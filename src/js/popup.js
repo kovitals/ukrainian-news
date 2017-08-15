@@ -23,12 +23,13 @@ function initialize() {
     ga();
 
     /**
-     * @type {NewsView}
+     * @type NewsView
      */
     newsView = new NewsView("p-content");
 
     navBarView = new NavBarView();
     navBarView.registerMenuClickHandler(navBarMenuClickHandler);
+    navBarView.registerSearchTextHandler(searchTextHandler);
 
     settingsStorage = new SettingsStorage();
 
@@ -39,8 +40,15 @@ function initialize() {
     requestNews();
 }
 
+/**
+ * @param {String} text
+ */
+function searchTextHandler(text) {
+    newsView.search(text);
+}
+
 function navBarMenuClickHandler(button) {
-    switch (button.id){
+    switch (button.id) {
         case DropdownButtonType.UPDATE:
             newsView.removeAllItems();
             requestNews();
@@ -70,7 +78,7 @@ function messageHandler(request, sender, sendResponse) {
 function updateSize() {
     let body = document.getElementById('p-body');
 
-    settingsStorage.getWindowWidth().then((value)=>{
+    settingsStorage.getWindowWidth().then((value) => {
         body.style.width = value + 'px';
     });
 }
@@ -79,25 +87,6 @@ function requestNews() {
     newsView.showPreloader();
     browserAPI.sendMessage(MessageTypes.REQUEST_NEWS);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /**
@@ -141,50 +130,49 @@ function markAllAsRead() {
 }
 
 
-
-    // for (var i = 0; i < news.length; i++) {
-    //     var li = document.createElement('li');
-    //     // Create element with link to hide element
-    //     var hideItemLink = document.createElement('a');
-    //     hideItemLink.setAttribute('class', 'logo hideItem');
-    //     hideItemLink.setAttribute('href', '#');
-    //     hideItemLink.setAttribute('title', 'Відмітити як прочитане');
-    //     hideItemLink.setAttribute('name', news[i]['link']);
-    //     hideItemLink.addEventListener('click', markAsRead);
-    //     li.appendChild(hideItemLink);
-    //     // Create element with link to open in background
-    //     var newTabLink = document.createElement('a');
-    //     newTabLink.setAttribute('class', 'logo newTab');
-    //     newTabLink.setAttribute("href", news[i]['link']);
-    //     newTabLink.setAttribute('title', 'Прочитати пізніше');
-    //     newTabLink.addEventListener('click', function () {
-    //         chrome.tabs.create({url: this.getAttribute("href"), active: false});
-    //         markAsRead(this.getAttribute("href"));
-    //     });
-    //     li.appendChild(newTabLink);
-    //     // Create block for show time of news
-    //     var spn = document.createElement('span');
-    //     spn.setAttribute('class', 'time');
-    //     //fix for broken rss format date
-    //     var newsdate = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
-    //     if (newsdate && newsdate[0].length == 4) {
-    //         newsdate[0] = '0' + newsdate[0];
-    //     }
-    //     //end dirty fix
-    //     spn.innerText = newsdate[0];
-    //     li.appendChild(spn);
-    //     // Create element with logo of news site
-    //     var logo = document.createElement('span');
-    //     logo.setAttribute('class', 'logo');
-    //     logo.setAttribute('style', 'background: url("img/' + news[i]['key'] + '-icon.ico") no-repeat 4px 0px;');
-    //     li.appendChild(logo);
-    //     // Create link element with a direct URL to news
-    //     var a = document.createElement('a');
-    //     a.innerHTML = news[i]['title'];
-    //     a.setAttribute("href", news[i]['link']);
-    //     a.setAttribute("title", news[i]['title']);
-    //     a.addEventListener('click', function () {
-    //         markAsRead(this.getAttribute("href"));
-    //         chrome.tabs.create({url: this.getAttribute("href"), active: true});
-    //     });
-    //     li.appendChild(a);
+// for (var i = 0; i < news.length; i++) {
+//     var li = document.createElement('li');
+//     // Create element with link to hide element
+//     var hideItemLink = document.createElement('a');
+//     hideItemLink.setAttribute('class', 'logo hideItem');
+//     hideItemLink.setAttribute('href', '#');
+//     hideItemLink.setAttribute('title', 'Відмітити як прочитане');
+//     hideItemLink.setAttribute('name', news[i]['link']);
+//     hideItemLink.addEventListener('click', markAsRead);
+//     li.appendChild(hideItemLink);
+//     // Create element with link to open in background
+//     var newTabLink = document.createElement('a');
+//     newTabLink.setAttribute('class', 'logo newTab');
+//     newTabLink.setAttribute("href", news[i]['link']);
+//     newTabLink.setAttribute('title', 'Прочитати пізніше');
+//     newTabLink.addEventListener('click', function () {
+//         chrome.tabs.create({url: this.getAttribute("href"), active: false});
+//         markAsRead(this.getAttribute("href"));
+//     });
+//     li.appendChild(newTabLink);
+//     // Create block for show time of news
+//     var spn = document.createElement('span');
+//     spn.setAttribute('class', 'time');
+//     //fix for broken rss format date
+//     var newsdate = news[i]['date'].match('[0-9]{1,2}:[0-9]{2}');
+//     if (newsdate && newsdate[0].length == 4) {
+//         newsdate[0] = '0' + newsdate[0];
+//     }
+//     //end dirty fix
+//     spn.innerText = newsdate[0];
+//     li.appendChild(spn);
+//     // Create element with logo of news site
+//     var logo = document.createElement('span');
+//     logo.setAttribute('class', 'logo');
+//     logo.setAttribute('style', 'background: url("img/' + news[i]['key'] + '-icon.ico") no-repeat 4px 0px;');
+//     li.appendChild(logo);
+//     // Create link element with a direct URL to news
+//     var a = document.createElement('a');
+//     a.innerHTML = news[i]['title'];
+//     a.setAttribute("href", news[i]['link']);
+//     a.setAttribute("title", news[i]['title']);
+//     a.addEventListener('click', function () {
+//         markAsRead(this.getAttribute("href"));
+//         chrome.tabs.create({url: this.getAttribute("href"), active: true});
+//     });
+//     li.appendChild(a);

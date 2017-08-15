@@ -4,41 +4,48 @@
     <meta charset="UTF-8">
 </head>
 <body id="p-body">
-    <ul id="p-dropdown-data" class="dropdown-content p-dropdown">
-        <li><a href="#!" id="d-update">Оновити</a></li>
-        <li><a href="#!" id="d-mark-all">Відмітити всі як прочитані</a></li>
-        <li><a href="#!" id="d-rate">Оцінити додаток</a></li>
-        <li class="divider"></li>
-        <li><a href="#!" id="d-settings">Налаштування</a></li>
-    </ul>
+<ul id="p-dropdown-data" class="dropdown-content p-dropdown">
+    <li><a href="#!" id="d-update">Оновити</a></li>
+    <li><a href="#!" id="d-mark-all">Відмітити всі як прочитані</a></li>
+    <li><a href="#!" id="d-rate">Оцінити додаток</a></li>
+    <li class="divider"></li>
+    <li><a href="#!" id="d-settings">Налаштування</a></li>
+</ul>
 
-    <div class="navbar-fixed p-nav">
-        <nav>
-            <div class="nav-wrapper p-nav-wrapper">
-                <span class="brand-logo left s-logo">Українські новини</span>
-                <ul class="right">
-                    <li><a class="dropdown-button" href="#" data-activates="p-dropdown-data"><i
-                            class="material-icons">more_vert</i></a></li>
-                </ul>
-                </ul>
+<div class="navbar-fixed p-nav">
+    <nav>
+        <div class="nav-wrapper p-nav-wrapper">
+            <span class="brand-logo left s-logo">Українські новини</span>
+            <div class="input-field">
+                <input id="search" type="search" required>
+                <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
             </div>
-        </nav>
-    </div>
+            <ul class="right">
+                <!--<li><a href="#"><i class="material-icons">search</i></a></li>-->
+                <li><a class="dropdown-button" href="#" data-activates="p-dropdown-data"><i class="material-icons">more_vert</i></a></li>
+            </ul>
+            </ul>
+        </div>
+    </nav>
+</div>
 
-    <div id="p-preloader" class="preloader-wrapper small active p-preloader">
-        <div class="spinner-layer spinner-blue-only">
-            <div class="circle-clipper left">
-                <div class="circle"></div>
-            </div><div class="gap-patch">
-            <div class="circle"></div>
-        </div><div class="circle-clipper right">
+<div id="p-preloader" class="preloader-wrapper small active p-preloader">
+    <div class="spinner-layer spinner-blue-only">
+        <div class="circle-clipper left">
             <div class="circle"></div>
         </div>
+        <div class="gap-patch">
+            <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+            <div class="circle"></div>
         </div>
     </div>
+</div>
 
-    <div id="p-content" class="p-content">
-        <ul class="p-news-list list"></ul>
-    </div>
+<div id="p-content" class="p-content">
+    <ul class="p-news-list list"></ul>
+</div>
 </body>
 </html>

@@ -20,6 +20,13 @@ export default class NewsView {
     }
 
     /**
+     * @param {String} text
+     */
+    search(text){
+        this.list.search(text);
+    }
+
+    /**
      * @param {Array} news
      */
     displayNews(news) {

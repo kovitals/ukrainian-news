@@ -4,6 +4,9 @@ export default class NavBarView {
 
     constructor() {
 
+        this.search = document.getElementById('search');
+        this.search.oninput = () => this.searchTextHandler(this.search.value);
+
         $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'right'});
 
         this.initButton(DropdownButtonType.UPDATE);
@@ -11,6 +14,10 @@ export default class NavBarView {
         this.initButton(DropdownButtonType.RATE);
         this.initButton(DropdownButtonType.SETTINGS);
 
+    }
+
+    registerSearchTextHandler(callback) {
+        this.searchTextHandler = callback;
     }
 
     registerMenuClickHandler(callback) {
