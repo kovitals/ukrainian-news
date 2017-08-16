@@ -4,14 +4,14 @@ import AlarmTypes from "./types/alarm-types";
 import MessageTypes from "./types/message-types";
 import Utils from "./utils/utils";
 import SettingsStorage from "./settings/settings-storage";
-import NewsLoader from "./news/news-loader";
+import NewsService from "./news/news-service";
 
 const postponeUpdateTime = 5;//sec
 const newsUpdateTimer = 'news_update_timer';
 
 const browserAPI = new BrowserAPI();
 const settingsStorage = new SettingsStorage();
-const newsLoader = new NewsLoader(settingsStorage);
+const newsService = new NewsService(settingsStorage);
 
 function initialize() {
     settingsStorage.cleanupMarkedNews();
@@ -62,7 +62,7 @@ function requestNews() {
     let numLastNews = settingsStorage.getNumLastNews();
 
     Promise.all([channels, numLastNews]).then((values) => {
-        newsLoader.requestNews.apply(newsLoader, values).then(newsDataHandler);
+        newsService.requestNews.apply(newsService, values).then(newsDataHandler);
     })
 }
 
@@ -70,7 +70,7 @@ function requestNews() {
  * @param {Array} data
  */
 function newsDataHandler(data) {
-    // console.log(data);
+    console.log(data);
 
     let newsList = [];
 

@@ -5,17 +5,8 @@ export default class NewsData {
 
     constructor() {
         this.key = '';
-        this._title = '';
+        this.title = '';
         this.date = '';
         this.link = '';
     }
-
-    get title() {
-        return this._title.trim();
-    }
-
-    set title(value) {
-        this._title = value;
-    }
-
 }

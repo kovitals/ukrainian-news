@@ -20,6 +20,14 @@ export default class NewsView {
     }
 
     /**
+     * @param {String} valueName
+     * @param {String} order
+     */
+    sort(valueName, order){
+        this.list.sort(valueName, {order});
+    }
+
+    /**
      * @param {String} text
      */
     search(text){
@@ -30,7 +38,7 @@ export default class NewsView {
      * @param {Array} news
      */
     displayNews(news) {
-        console.log(news.length, news[news.length - 1].title);
+        console.log(news, news.length, news[news.length - 1].title);
         this.list.add(news);
     }
 

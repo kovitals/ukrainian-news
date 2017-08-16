@@ -1,6 +1,6 @@
 import NewsData from "./news-data";
 
-export default class NewsLoader {
+export default class NewsService {
 
     /**
      * @param {SettingsStorage} settingsStorage
@@ -73,7 +73,7 @@ export default class NewsLoader {
 
             let newsData = new NewsData();
             newsData.key = key;
-            newsData.title = result[i].querySelector('title').textContent;
+            newsData.title = result[i].querySelector('title').textContent.trim();
             newsData.date = result[i].querySelector('pubDate').textContent.match('[0-9]{2}:[0-9]{2}')['input'];
             newsData.link = link;
 

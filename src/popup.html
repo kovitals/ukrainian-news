@@ -5,24 +5,25 @@
 </head>
 <body id="p-body">
 <ul id="p-dropdown-data" class="dropdown-content p-dropdown">
-    <li><a href="#!" id="d-update">Оновити</a></li>
-    <li><a href="#!" id="d-mark-all">Відмітити всі як прочитані</a></li>
-    <li><a href="#!" id="d-rate">Оцінити додаток</a></li>
+    <li><a href="#!" id="d-update"><i class="material-icons">refresh</i>Оновити</a></li>
+    <li><a href="#!" id="d-sort"><i class="material-icons">import_export</i>Сортувати за датою</a></li>
+    <li><a href="#!" id="d-mark-all"><i class="material-icons">done_all</i>Відмітити всі як прочитані</a></li>
+    <li><a href="#!" id="d-rate"><i class="material-icons">thumb_up</i>Оцінити додаток</a></li>
     <li class="divider"></li>
-    <li><a href="#!" id="d-settings">Налаштування</a></li>
+    <li><a href="#!" id="d-settings"><i class="material-icons">settings</i>Налаштування</a></li>
 </ul>
 
 <div class="navbar-fixed p-nav">
     <nav>
         <div class="nav-wrapper p-nav-wrapper">
             <span class="brand-logo left s-logo">Українські новини</span>
-            <div class="input-field">
+            <div id="p-search" class="p-search input-field">
                 <input id="search" type="search" required>
                 <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                 <i class="material-icons">close</i>
             </div>
             <ul class="right">
-                <!--<li><a href="#"><i class="material-icons">search</i></a></li>-->
+                <li><a href="#"><i class="material-icons">search</i></a></li>
                 <li><a class="dropdown-button" href="#" data-activates="p-dropdown-data"><i class="material-icons">more_vert</i></a></li>
             </ul>
             </ul>

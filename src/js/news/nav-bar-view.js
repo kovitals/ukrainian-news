@@ -7,12 +7,21 @@ export default class NavBarView {
         this.search = document.getElementById('search');
         this.search.oninput = () => this.searchTextHandler(this.search.value);
 
-        $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'right'});
+        $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'left'});
 
         this.initButton(DropdownButtonType.UPDATE);
+        this.initButton(DropdownButtonType.SORT);
         this.initButton(DropdownButtonType.MARK_ALL);
         this.initButton(DropdownButtonType.RATE);
         this.initButton(DropdownButtonType.SETTINGS);
+
+    }
+
+    showSerchBar(){
+        // this.search
+    }
+
+    hideSerchBar(){
 
     }
 

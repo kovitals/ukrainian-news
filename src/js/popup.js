@@ -6,14 +6,19 @@ import SettingsStorage from "./settings/settings-storage";
 import DropdownButtonType from "./types/dropdown-button-type";
 import NewsView from "./news/news-view";
 import NavBarView from "./news/nav-bar-view";
+import SortTypes from "./types/sort-types";
 
 var browserAPI;
 /**
  * @type SettingsStorage
  */
 var settingsStorage;
+/**
+ * @type NewsView
+ */
 var newsView;
 var navBarView;
+var sortOrder = SortTypes.DESCENDING;
 
 $(document).ready(function () {
     initialize();
@@ -62,7 +67,15 @@ function navBarMenuClickHandler(button) {
         case DropdownButtonType.RATE:
             browserAPI.openReviewsPage();
             break;
+        case DropdownButtonType.SORT:
+            sortNews();
+            break;
     }
+}
+
+function sortNews() {
+    sortOrder = (sortOrder == SortTypes.ASCENDING) ? SortTypes.DESCENDING : SortTypes.ASCENDING;
+    newsView.sort('date', sortOrder);
 }
 
 function messageHandler(request, sender, sendResponse) {

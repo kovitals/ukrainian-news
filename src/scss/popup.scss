@@ -1,14 +1,23 @@
+$left-margin: 16px;
+$dropdown-item-height: 40px;
+$navbar-height: 45px;
+$navbar-height-mobile: $navbar-height;
+$navbar-brand-font-size: 1.6rem;
+
 @import "variables";
 @import "../../vendor/material-icons/icon.css";
 @import '../../vendor/materialize-src/sass/materialize';
-
-$left-margin: 16px;
 
 body {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   width: 500px;
   height: 500px;
+}
+
+.p-search{
+  //display: none;
+  position: absolute;
 }
 
 .p-preloader{
@@ -59,4 +68,5 @@ nav .brand-logo.left {
 }
 
 .p-dropdown {
+  left: 200px;
 }
