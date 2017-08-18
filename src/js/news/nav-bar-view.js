@@ -4,25 +4,44 @@ export default class NavBarView {
 
     constructor() {
 
-        this.search = document.getElementById('search');
-        this.search.oninput = () => this.searchTextHandler(this.search.value);
+        this.initSearchBar();
 
         $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'left'});
 
-        this.initButton(DropdownButtonType.UPDATE);
-        this.initButton(DropdownButtonType.SORT);
-        this.initButton(DropdownButtonType.MARK_ALL);
-        this.initButton(DropdownButtonType.RATE);
-        this.initButton(DropdownButtonType.SETTINGS);
-
+        this.initButton(DropdownButtonType.UPDATE, this.menuClickHandler);
+        this.initButton(DropdownButtonType.SORT, this.menuClickHandler);
+        this.initButton(DropdownButtonType.MARK_ALL, this.menuClickHandler);
+        this.initButton(DropdownButtonType.RATE, this.menuClickHandler);
+        this.initButton(DropdownButtonType.SETTINGS, this.menuClickHandler);
     }
 
-    showSerchBar(){
-        // this.search
+    initSearchBar() {
+        this.searchBar = document.getElementById('p-search');
+
+        this.searchField = document.getElementById('search');
+        this.searchField.oninput = () => this.searchTextHandler(this.searchField.value);
+        this.searchField.onblur = () => this.hideSearchBar();
+
+        this.hideSearchBar();
+
+        this.initButton('i-search', () => this.showSearchBar());
+        this.initButton('i-close', () => this.hideSearchBar());
     }
 
-    hideSerchBar(){
+    showSearchBar() {
+        this.searchBar.style.display = 'inline';
+        this.searchField.focus();
+    }
 
+    hideSearchBar() {
+        this.searchBar.style.display = 'none';
+    }
+
+    /**
+     * @return {boolean}
+     */
+    get isSearchBarVisible() {
+        return this.searchBar.style.display == 'inline';
     }
 
     registerSearchTextHandler(callback) {
@@ -33,8 +52,12 @@ export default class NavBarView {
         this.menuClickHandler = callback;
     }
 
-    initButton(id) {
+    /**
+     * @param {string} id
+     * @param {function} handler
+     */
+    initButton(id, handler) {
         let button = document.getElementById(id);
-        button.onmouseup = () => this.menuClickHandler(button);
+        button.onmouseup = () => handler(button);
     }
 }
