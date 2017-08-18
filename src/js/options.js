@@ -24,6 +24,12 @@ $(document).ready(function () {
 function initialize() {
     settingsStorage = new SettingsStorage();
     settingsStorage.getRSSChannels().then(displayFeeds);
+
+    $('.chips-placeholder').material_chip({
+        placeholder: 'Введіть слово',
+        secondaryPlaceholder: 'Введіть слово'// та натисніть клавішу Enter
+    });
+
     initializeSliders();
 }
 

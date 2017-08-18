@@ -6,13 +6,13 @@ export default class NavBarView {
 
         this.initSearchBar();
 
-        $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'left'});
+        $(".dropdown-button").dropdown({constrainWidth: false, alignment: 'left', outDuration: 125});
 
-        this.initButton(DropdownButtonType.UPDATE, this.menuClickHandler);
-        this.initButton(DropdownButtonType.SORT, this.menuClickHandler);
-        this.initButton(DropdownButtonType.MARK_ALL, this.menuClickHandler);
-        this.initButton(DropdownButtonType.RATE, this.menuClickHandler);
-        this.initButton(DropdownButtonType.SETTINGS, this.menuClickHandler);
+        this.initButton(DropdownButtonType.UPDATE, button => this.menuClickHandler(button));
+        this.initButton(DropdownButtonType.SORT, button => this.menuClickHandler(button));
+        this.initButton(DropdownButtonType.MARK_ALL, button => this.menuClickHandler(button));
+        this.initButton(DropdownButtonType.RATE, button => this.menuClickHandler(button));
+        this.initButton(DropdownButtonType.SETTINGS, button => this.menuClickHandler(button));
     }
 
     initSearchBar() {
@@ -35,6 +35,7 @@ export default class NavBarView {
 
     hideSearchBar() {
         this.searchBar.style.display = 'none';
+        // this.searchField.value = '';
     }
 
     /**

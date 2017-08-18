@@ -5,49 +5,55 @@
     <title>Українські новини - Налаштування</title>
 </head>
 <body>
-    <div class="s-content">
+<div class="s-content">
 
-        <p class="s-title font-weight-500">Джерела новин</p>
+    <p class="s-title font-weight-500">Джерела новин</p>
 
-        <div class="card-panel row">
-            <div id="collection-l" class="s-collection col s6"></div>
-            <div id="collection-r" class="s-collection col s5 offset-s1"></div>
-        </div>
+    <div class="card-panel row">
+        <div id="collection-l" class="s-collection col s6"></div>
+        <div id="collection-r" class="s-collection col s5 offset-s1"></div>
+    </div>
 
-        <p class="s-title font-weight-500">Налаштування</p>
+    <p class="s-title font-weight-500">Налаштування</p>
 
-        <div class="card-panel">
-
+    <div class="card-panel s-settings-card">
+        <div class="s-item">
             <label for="num-news">Відображати новин з джерела: <span class="font-weight-500"
-                                                                                                     id="num-news-value"></span></label>
+                                                                     id="num-news-value"></span></label>
             <p class="range-field">
                 <input type="range" id="num-news" min="1" max="20"/>
             </p>
-
-            <div class="s-divider"></div>
-
+        </div>
+        <div class="divider"></div>
+        <div class="s-item">
             <label for="update-delay">Періодичність оновлення новин: <span class="font-weight-500"
                                                                            id="update-delay-value"></span></label>
             <p class="range-field">
                 <input type="range" id="update-delay" min="5" max="120"/>
             </p>
-
-            <div class="s-divider"></div>
-
+        </div>
+        <div class="divider"></div>
+        <div class="s-item">
             <label for="app-width">Ширина вікна з новинами: <span class="font-weight-500"
                                                                   id="app-width-value"></span></label>
             <p class="range-field">
                 <input type="range" id="app-width" min="400" max="800"/>
             </p>
         </div>
+        <div class="divider"></div>
+        <div class="s-item">
+            <label for="s-chips">Виділяти новини в яких є слова:</label>
+            <div id="s-chips" class="chips-placeholder"></div>
+        </div>
+    </div>
 
-        <p class="s-title font-weight-500">Інформація</p>
+    <p class="s-title font-weight-500">Інформація</p>
 
-        <div class="card-panel">
+    <div class="card-panel">
             <span class="s-copyright"><span class="font-weight-500">Українські новини</span>
                 це безкоштовний проект з відкритим сирцевим кодом, вихідні коди якого доступні, на веб-сервісі для спільної розробки,
                 за адресою <a href="https://github.com/kovitals/ukrainian-news" target="_blank">github.com/kovitals/ukrainian-news</a>.</span>
-        </div>
     </div>
+</div>
 </body>
 </html>

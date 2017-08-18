@@ -1,13 +1,21 @@
 @import '../../vendor/materialize-src/sass/components/color';
 @import "variables";
+@import "../../vendor/material-icons/icon.css";
 @import '../../vendor/materialize-src/sass/materialize';
-
 
 body {
   background-color: $background-color;
   font-family: "Roboto", sans-serif;
   font-size: 12px;
   cursor: default;
+}
+
+.s-item {
+  padding: 24px;
+}
+
+.s-settings-card {
+  padding: 0;
 }
 
 .s-content {
