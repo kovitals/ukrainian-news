@@ -1,6 +1,7 @@
 import '../../vendor/materialize-src/js/bin/materialize';
 import SourceItemView from './settings/source-item-view'
 import SettingsStorage from "./settings/settings-storage";
+import ChipsView from "./settings/chips-view";
 
 const SLIDER_ID_NUM_NEWS = 'num-news';
 const SLIDER_ID_UPDATE_DELAY = 'update-delay';
@@ -16,6 +17,10 @@ var sliderValuePostfixMap = {
  */
 var settingsStorage;
 var sourceItems = [];
+/**
+ * @type {ChipsView}
+ */
+var chipsView;
 
 $(document).ready(function () {
     initialize();
@@ -25,10 +30,7 @@ function initialize() {
     settingsStorage = new SettingsStorage();
     settingsStorage.getRSSChannels().then(displayFeeds);
 
-    $('.chips-placeholder').material_chip({
-        placeholder: 'Введіть слово',
-        secondaryPlaceholder: 'Введіть слово'// та натисніть клавішу Enter
-    });
+    chipsView = new ChipsView(settingsStorage);
 
     initializeSliders();
 }

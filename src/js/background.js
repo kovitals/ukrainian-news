@@ -74,6 +74,7 @@ function newsDataHandler(data) {
 
     let newsList = [];
 
+    // TODO use .reduce
     data.forEach((element) => {
         if (element && element.length > 0)
             newsList = newsList.concat(element);

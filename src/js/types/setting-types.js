@@ -6,5 +6,6 @@ export default class SettingTypes {
     static get RSS_CHANNELS() { return 'rss_channels'; }
     static get MARKED_NEWS() { return 'marked_news'; }
     static get FAVORITE_NEWS() { return 'favorite_news'; }
+    static get TAGS() { return 'tags'; }
 
 }

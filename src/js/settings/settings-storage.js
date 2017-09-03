@@ -11,10 +11,11 @@ export default class SettingsStorage {
             [SettingTypes.NUM_LAST_NEWS]: 8,
             [SettingTypes.RSS_CHANNELS]: Object.keys(this.getFeeds()),
             [SettingTypes.MARKED_NEWS]: [],
-            [SettingTypes.FAVORITE_NEWS]: []
+            [SettingTypes.FAVORITE_NEWS]: [],
+            [SettingTypes.TAGS]: []
         };
 
-        console.log(this.defaultValues[SettingTypes.RSS_CHANNELS]);
+        // console.log(this.defaultValues[SettingTypes.RSS_CHANNELS]);
 
         this.browserAPI = new BrowserAPI();
     }
@@ -121,6 +122,29 @@ export default class SettingsStorage {
                 return true;
             });
             this.save(SettingTypes.MARKED_NEWS, newsList);
+        });
+    }
+
+    /**
+     * @return {Promise}
+     */
+    getTags() {
+        return this.load(SettingTypes.TAGS);
+    }
+
+    removeTag(chip) {
+        this.getTags().then((chips) => {
+            chips = chips.filter((value) => {
+                return value.tag != chip.tag;
+            });
+            this.save(SettingTypes.TAGS, chips);
+        });
+    }
+
+    addTag(chip) {
+        this.getTags().then((chips) => {
+            chips.push(chip);
+            this.save(SettingTypes.TAGS, chips);
         });
     }
 
