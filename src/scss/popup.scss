@@ -1,4 +1,4 @@
-$left-margin: 16px;
+$left-margin: 10px;
 $dropdown-item-height: 40px;
 $navbar-height: 45px;
 $navbar-height-mobile: $navbar-height;
@@ -13,6 +13,7 @@ body {
   font-size: 12px;
   width: 500px;
   height: 500px;
+  overflow: hidden;
 }
 
 .p-search{
@@ -64,7 +65,12 @@ nav .brand-logo.left {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  margin-bottom: 25px;
+  padding-bottom: 5px;
+
+  a {
+    color: $title-color;
+    //background-color: #888888;
+  }
 }
 
 .p-dropdown {

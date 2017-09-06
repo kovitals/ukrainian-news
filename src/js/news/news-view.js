@@ -8,7 +8,7 @@ export default class NewsView {
     constructor(containerId) {
         this.options = {
             valueNames: ['title', {name: 'link', attr: 'href'}],
-            item: '<li><a href="#" target="_blank" class="p-item-title title link"></a></li>'
+            item: '<li class="p-item-title"><a href="#" target="_blank" class="title link"></a></li>'
         };
 
         this.preloader = document.getElementById('p-preloader');

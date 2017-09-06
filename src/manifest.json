@@ -5,6 +5,10 @@
   "version": "",
   "author": "Vitaliy Kovalev",
   "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "background": {
     "scripts": [
       "background.js"
