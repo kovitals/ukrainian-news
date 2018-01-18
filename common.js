@@ -3,8 +3,8 @@ var common = {};
 // define news rss channels with an additional information
 common.newsSources = {
     up: {
-        "rss": "http://www.pravda.com.ua/rss/view_news/",
-        "http": "http://www.pravda.com.ua",
+        "rss": "https://www.pravda.com.ua/rss/view_news/",
+        "http": "https://www.pravda.com.ua",
         "name": "Українська Правда"
     },
     lb: {
@@ -23,23 +23,23 @@ common.newsSources = {
         "name": "Агенція УНІАН"
     },
     cn: {
-        "rss": "http://censor.net.ua/includes/news_ru.xml",
-        "http": "http://censor.net.ua",
+        "rss": "https://ua.censor.net.ua/includes/news_uk.xml",
+        "http": "https://censor.net.ua",
         "name": "Цензор.НЕТ"
     },
     zn: {
-        "rss": "http://dt.ua/rss",
-        "http": "http://dt.ua",
+        "rss": "https://dt.ua/rss",
+        "http": "https://dt.ua",
         "name": "Дзеркало Тижня"
     },
     fn: {
-        "rss": "http://news.finance.ua/ua/rss",
-        "http": "http://finance.ua",
+        "rss": "https://news.finance.ua/ua/rss",
+        "http": "https://finance.ua",
         "name": "Finance.ua"
     },
     nv: {
-        "rss": "http://nv.ua/ukr/xml/rss.html",
-        "http": "http://nv.ua",
+        "rss": "https://nv.ua/ukr/xml/rss.html",
+        "http": "https://nv.ua",
         "name": "Новий Час"
     },
     ix: {
@@ -63,18 +63,18 @@ common.newsSources = {
         "name": "Gazeta.ua"
     },
     ht: {
-        "rss": "http://ua.112.ua/rss/index.rss",
-        "http": "http://112.ua",
+        "rss": "https://ua.112.ua/rss/index.rss",
+        "http": "https://112.ua",
         "name": "112 Канал"
     },
     es: {
-        "rss": "http://espreso.tv/rss",
-        "http": "http://espreso.tv",
+        "rss": "https://espreso.tv/rss",
+        "http": "https://espreso.tv",
         "name": "Еспресо"
     },
     gd: {
-        "rss": "http://gordonua.com/xml/rss.html",
-        "http": "http://gordonua.com",
+        "rss": "https://gordonua.com/xml/rss.html",
+        "http": "https://gordonua.com",
         "name": "Гордон"
     }
 }
