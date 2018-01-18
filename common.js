@@ -63,7 +63,7 @@ common.newsSources = {
         "name": "Gazeta.ua"
     },
     ht: {
-        "rss": "https://ua.112.ua/rss/index.rss",
+        "rss": "https://112.ua/rss/index.rss",
         "http": "https://112.ua",
         "name": "112 Канал"
     },
