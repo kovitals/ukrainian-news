@@ -13,8 +13,8 @@ common.newsSources = {
         "name": "Лівий Берег"
     },
     lg: {
-        "rss": "http://news.liga.net/news/rss.xml",
-        "http": "http://news.liga.net",
+        "rss": "http://www.liga.net/news/all/rss.xml",
+        "http": "http://www.liga.net/",
         "name": "Ліга Новини"
     },
     un: {
@@ -43,7 +43,7 @@ common.newsSources = {
         "name": "Новий Час"
     },
     ix: {
-        "rss": "http://ua.interfax.com.ua/news/last.rss",
+        "rss": "https://ua.interfax.com.ua/news/last.rss",
         "http": "http://interfax.com.ua",
         "name": "Інтерфакс"
     },
