@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Українські новини",
   "description": "Зручний перегляд заголовків останніх новин з найвідоміших українських сайтів",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "options_page": "options.html",
   "background": {
     "scripts": [
@@ -14,14 +14,14 @@
   "permissions": [
     "https://www.pravda.com.ua/rss/view_news/",
     "https://lb.ua/rss/ukr/rss.xml",
-    "http://news.liga.net/news/rss.xml",
+    "http://www.liga.net/news/all/rss.xml",
     "http://rss.unian.net/site/news_rus.rss",
     "https://ua.censor.net.ua/includes/news_uk.xml",
     "https://dt.ua/rss",
     "https://news.finance.ua/rss",
     "https://nv.ua/xml/rss.xml",
     "https://tsn.ua/rss",
-    "http://ua.interfax.com.ua/news/last.rss",
+    "https://ua.interfax.com.ua/news/last.rss",
     "http://k.img.com.ua/rss/ru/all_news2.0.xml",
     "https://gazeta.ua/rss",
     "https://112.ua/rss/index.rss",
