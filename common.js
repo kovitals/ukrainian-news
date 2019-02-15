@@ -13,17 +13,17 @@ common.newsSources = {
         "name": "Лівий Берег"
     },
     lg: {
-        "rss": "http://www.liga.net/news/all/rss.xml",
-        "http": "http://www.liga.net/",
+        "rss": "https://www.liga.net/newsua/all/rss.xml",
+        "http": "https://www.liga.net/",
         "name": "Ліга Новини"
     },
     un: {
-        "rss": "http://rss.unian.net/site/news_ukr.rss",
-        "http": "http://unian.net",
+        "rss": "https://rss.unian.net/site/news_ukr.rss",
+        "http": "https://www.unian.net",
         "name": "Агенція УНІАН"
     },
     cn: {
-        "rss": "https://ua.censor.net.ua/includes/news_uk.xml",
+        "rss": "https://censor.net.ua/includes/news_uk.xml",
         "http": "https://censor.net.ua",
         "name": "Цензор.НЕТ"
     },
@@ -38,13 +38,13 @@ common.newsSources = {
         "name": "Finance.ua"
     },
     nv: {
-        "rss": "https://nv.ua/ukr/xml/rss.html",
+        "rss": "https://nv.ua/ukr/rss/all.xml",
         "http": "https://nv.ua",
         "name": "Новий Час"
     },
     ix: {
         "rss": "https://ua.interfax.com.ua/news/last.rss",
-        "http": "http://interfax.com.ua",
+        "http": "https://interfax.com.ua",
         "name": "Інтерфакс"
     },
     tn: {
@@ -54,7 +54,7 @@ common.newsSources = {
     },
     kr: {
         "rss": "http://k.img.com.ua/rss/ua/all_news2.0.xml",
-        "http": "http://korrespondent.net",
+        "http": "https://korrespondent.net",
         "name": "Korrespondent.net"
     },
     gu: {
